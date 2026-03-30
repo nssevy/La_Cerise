@@ -97,9 +97,15 @@
   }
 
   small {
-    font-size: 0.8125rem;     /* 13px */
-    line-height: 1;
-    letter-spacing: -0.39px;
+    font-family: var(--font-sans);
+    overflow: hidden;
+    leading-trim: both;
+    text-edge: cap;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 150%; /* 1.21875rem */
+    letter-spacing: -0.00894rem;
   }
 }
 

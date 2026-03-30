@@ -1,6 +1,7 @@
 <?php
 $base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__DIR__)), '/\\');
 $pageTitle = $pageTitle ?? 'La Cerise';
+require_once __DIR__ . '/../includes/helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
