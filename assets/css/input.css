@@ -1,1 +1,217 @@
 @import "tailwindcss";
+
+/* =====================================================
+   DESIGN SYSTÈME — La Cerise
+   Source : maquette Figma "Cerise"
+   ===================================================== */
+
+/* ---------------------------------------------------
+   THÈME TAILWIND v4
+   Déclaration des tokens dans @theme pour
+   qu'ils génèrent des classes utilitaires Tailwind
+   --------------------------------------------------- */
+@theme {
+  /* === Palette noir → blanc === */
+  --color-cerise-01: #000000;
+  --color-cerise-02: #1f1f1f;
+  --color-cerise-03: #363636;
+  --color-cerise-04: #4f4f4f;
+  --color-cerise-05: #6a6a6a;
+  --color-cerise-06: #868686;
+  --color-cerise-07: #a3a3a3;
+  --color-cerise-08: #c1c1c1;
+  --color-cerise-09: #dfdfdf;
+  --color-cerise-10: #ffffff;
+
+  /* === Couleurs spéciales (rouge cerise) === */
+  --color-cerise-special:     #d01152;
+  --color-cerise-special-mid: #a91947;
+  --color-cerise-special-dark:#760c2f;
+
+  /* === Familles de polices === */
+  /* ⚠️  Les polices DejaVu doivent être importées via @font-face
+         ou hébergées dans assets/fonts/ (voir bloc @font-face ci-dessous) */
+  --font-sans:  "DejaVu Sans Condensed", "DejaVu Sans", sans-serif;
+  --font-serif: "DejaVu Serif Condensed", "DejaVu Serif", serif;
+}
+
+/* ---------------------------------------------------
+   VARIABLES CSS NOMMÉES (nomenclature maquette Figma)
+   Utilisées directement dans le HTML : var(--01) etc.
+   --------------------------------------------------- */
+@layer base {
+  :root {
+    /* Palette */
+    --01: #000000;
+    --02: #1f1f1f;
+    --03: #363636;
+    --04: #4f4f4f;
+    --05: #6a6a6a;
+    --06: #868686;
+    --07: #a3a3a3;
+    --08: #c1c1c1;
+    --09: #dfdfdf;
+    --10: #ffffff;
+
+    /* Couleurs spéciales */
+    --special:     #d01152;
+    --special-mid: #a91947;
+    --special-dark:#760c2f;
+    /* alias avec accent (compatibilité Figma) */
+    --spéciale:    #760c2f;
+  }
+
+  /* === Styles de base === */
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;          /* 16px — Corps */
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.48px;
+    color: var(--01);
+    background-color: var(--10);
+  }
+
+  h1 {
+    font-family: var(--font-sans);
+    font-size: 2rem;          /* 32px */
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  h2 {
+    font-family: var(--font-sans);
+    font-size: 1.625rem;      /* 26px */
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;       /* 20px */
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.22px;
+  }
+
+  small {
+    font-size: 0.8125rem;     /* 13px */
+    line-height: 1;
+    letter-spacing: -0.39px;
+  }
+}
+
+/* ---------------------------------------------------
+   CLASSES COMPOSANTS TYPOGRAPHIQUES
+   Usage : class="text-h1" / "text-h1-serif" etc.
+   --------------------------------------------------- */
+@layer components {
+  /* H1 — 32px */
+  .text-h1 {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .text-h1-serif {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  /* H2 — 26px */
+  .text-h2 {
+    font-family: var(--font-sans);
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .text-h2-serif {
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  /* H3 — 20px */
+  .text-h3 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.22px;
+  }
+  .text-h3-serif {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.22px;
+  }
+
+  /* Corps — 16px */
+  .text-body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.48px;
+  }
+  .text-body-serif {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.48px;
+  }
+
+  /* Surlignement — 16px souligné (variante serif) */
+  .text-surlignement {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.48px;
+    text-decoration: underline;
+  }
+
+  /* Small — 13px */
+  .text-small {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.39px;
+  }
+  .text-small-serif {
+    font-family: var(--font-serif);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.39px;
+  }
+}
+
+
+@font-face {
+  font-family: "DejaVu Sans Condensed";
+  src: url("../fonts/DejaVuSansCondensed.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DejaVu Serif Condensed";
+  src: url("../fonts/DejaVuSerifCondensed.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
