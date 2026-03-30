@@ -1,4 +1,5 @@
 .env
+.env.production
 vendor/
 node_modules/
 assets/css/output.css
