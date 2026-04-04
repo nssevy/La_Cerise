@@ -53,6 +53,10 @@
     --special-dark:#760c2f;
     --spéciale:    #760c2f;
   }
+  
+html {
+    scroll-behavior: smooth;
+}
 
   body {
     font-family: var(--font-sans);
@@ -77,7 +81,7 @@
 
   h2 {
     color: var(--01);
-    font-family: "DejaVu Sans";
+    font-family: "DejaVu Sans condensed";
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 400;

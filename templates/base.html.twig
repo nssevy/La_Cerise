@@ -22,13 +22,18 @@
 				<div class="flex items-center justify-between px-12 py-4">
 
 					<a href="/La_Cerise/public/">
-						<img src="/La_Cerise/assets/images/Logo.png" alt="La Cerise" class="h-8 w-auto">
+						<div class="relative h-8">
+							<img
+							{# flouté #} src="/La_Cerise/assets/images/Logo.png" alt="" class="h-8 w-auto absolute top-0 left-0 blur-md opacity-50">
+							{# pas flouté #}
+							<img src="/La_Cerise/assets/images/Logo.png" alt="La Cerise" class="h-8 w-auto relative">
+						</div>
 					</a>
 
 					<nav class="hidden md:flex items-center gap-5 text-body uppercase text-[var(--01)] whitespace-nowrap">
 						<a href="#" class="hover:text-[var(--special)] transition-colors">S'abonner</a>
 						<a href="#" class="hover:text-[var(--special)] transition-colors">Articles</a>
-						<a href="#" class="hover:text-[var(--special)] transition-colors">Lexique</a>
+						<a href="/La_Cerise/public/lexique.php" class="hover:text-[var(--special)] transition-colors">Lexique</a>
 					</nav>
 
 					<div class="flex items-center gap-4">
@@ -46,7 +51,7 @@
 				<nav id="mobile-menu" class="hidden md:hidden flex-col gap-4 px-12 pb-6 pt-2 border-t border-[var(--09)] bg-white">
 					<a href="#" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">S'abonner</a>
 					<a href="#" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">Articles</a>
-					<a href="#" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">Lexique</a>
+					<a href="/La_Cerise/public/lexique.php" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">Lexique</a>
 					<a href="#" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">Me contacter</a>
 				</nav>
 
@@ -62,7 +67,7 @@
 
 			</main>
 
-			<footer class="border-t border-[var(--09)] bg-white">
+			<footer>
 				<div class="px-12 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
 					<div class="flex flex-col justify-between h-48 md:h-60">
 						<p class="text-5xl md:text-[52px] font-light leading-none text-[var(--01)]">La cerise</p>

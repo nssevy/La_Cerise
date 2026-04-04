@@ -31,24 +31,27 @@
 	</article>
 
 	{% if suggeres %}
-		<section class="my-20 flex flex-col gap-10">
+		<div class="h-screen flex flex-col justify-center-safe">
 
-			<div class="flex flex-row items-center gap-5">
-				<hr class="flex-1 border-t border-[var(--09)]">
-				<h2 class="text-h2-serif whitespace-nowrap">Poursuivre la lecture</h2>
-				<hr class="flex-1 border-t border-[var(--09)]">
-			</div>
+			<section class="my-20 flex flex-col gap-15">
 
-			<div class="grid grid-cols-1 gap-10
-																									    {% if suggeres|length == 1 %}md:grid-cols-1
-																									    {% elseif suggeres|length == 2 %}md:grid-cols-2
-																									    {% else %}md:grid-cols-3
-																									    {% endif %}">
-				{% for suggere in suggeres %}
-					{% include 'components/card.html.twig' with {'card': suggere} %}
-				{% endfor %}
-			</div>
-		</section>
+				<div class="flex flex-row items-center gap-5">
+					<hr class="flex-1 border-t border-[var(--09)]">
+					<h2 class="text-h2-serif whitespace-nowrap">Poursuivre la lecture</h2>
+					<hr class="flex-1 border-t border-[var(--09)]">
+				</div>
+
+				<div class="grid grid-cols-1 gap-10
+																																																													    {% if suggeres|length == 1 %}md:grid-cols-1
+																																																													    {% elseif suggeres|length == 2 %}md:grid-cols-2
+																																																													    {% else %}md:grid-cols-3
+																																																													    {% endif %}">
+					{% for suggere in suggeres %}
+						{% include 'components/card.html.twig' with {'card': suggere} %}
+					{% endfor %}
+				</div>
+			</section>
+		</div>
 	{% endif %}
 
 {% endblock %}
