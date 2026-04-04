@@ -1,0 +1,15 @@
+<nav class="flex flex-wrap items-center gap-2 text-small-serif text-[var(--06)]">
+	<a href="/La_Cerise/public/" class="hover:text-[var(--01)] transition-colors">
+		Accueil
+	</a>
+	{% for item in breadcrumb %}
+		<span>/</span>
+		{% if item.url %}
+			<a href="{{ item.url }}" class="hover:text-[var(--01)] transition-colors">
+				{{ item.label }}
+			</a>
+		{% else %}
+			<span class="text-[var(--01)] truncate ">{{ item.label }}</span>
+		{% endif %}
+	{% endfor %}
+</nav>
