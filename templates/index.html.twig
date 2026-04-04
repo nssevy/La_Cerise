@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}La Cerise
+{% endblock %}
+
+{% block content %}
+	<section class="h-screen mt-20">
+
+		<article>
+			<a href="/La_Cerise/public/article.php?slug={{ hero.slug }}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50">
+
+				<div class="flex flex-col justify-between gap-10 lg:gap-0">
+					<div class="flex flex-col gap-5">
+						<h1>{{ hero.titre }}</h1>
+						<img src="/La_Cerise/assets/images/{{ hero.image_principale }}" class="w-full h-full object-cover aspect-3/2 overflow-hidden md:hidden" alt="{{ hero.titre }}">
+						<small>{{ hero.chapeau }}</small>
+					</div>
+
+					<div class="flex justify-between">
+						<small>{{ formatDateFr(hero.date_publication) }}</small>
+						<small class="text-neutral-400">{{ hero.rubrique }}</small>
+					</div>
+				</div>
+
+				<div class="hidden lg:flex flex-col gap-5">
+					<img src="/La_Cerise/assets/images/{{ hero.image_principale }}" class="w-full h-full object-cover aspect-square overflow-hidden" alt="{{ hero.titre }}">
+					<small class="text-neutral-400">{{ hero.credit_photo }}</small>
+				</div>
+
+			</a>
+		</article>
+
+		<div>
+			<article></article>
+			<article></article>
+		</div>
+
+	</section>
+{% endblock %}
