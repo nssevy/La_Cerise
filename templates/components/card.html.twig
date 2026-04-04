@@ -1,5 +1,5 @@
 <article class="flex flex-col gap-5">
-	<a href="{{ base }}/public/article.php?slug={{ card.slug }}" class="flex flex-col gap-5">
+	<a href="{{ base }}/article.php?slug={{ card.slug }}" class="flex flex-col gap-5">
 		{% if card.image_principale is not empty %}
 			<img src="{{ base }}/assets/images/{{ card.image_principale }}" alt="{{ card.titre }}" class="w-full object-cover aspect-3/2">
 		{% endif %}

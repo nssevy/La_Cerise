@@ -1,11 +1,11 @@
 <?php
-require_once dirname(__DIR__) . '/config/db.php';
-require_once dirname(__DIR__) . '/config/twig.php';
+require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/config/twig.php';
 
 $slug = $_GET['slug'] ?? null;
 
 if (!$slug) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/public/');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/');
     exit;
 }
 
