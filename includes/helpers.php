@@ -1,7 +1,10 @@
 <?php
 
-function formatDateFr(string $date): string
+function formatDateFr(?string $date): string
 {
+    if (!$date)
+        return 'Date non renseignée';
+
     $mois = [
         1 => 'janvier',
         'février',

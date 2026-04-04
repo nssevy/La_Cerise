@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-	<section class="h-screen mt-20">
+	<section class="flex flex-col gap-10 my-20">
 
 		<article>
 			<a href="/La_Cerise/public/article.php?slug={{ hero.slug }}" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50">
@@ -30,9 +30,21 @@
 			</a>
 		</article>
 
-		<div>
-			<article></article>
-			<article></article>
+		<div class="flex flex-col gap-10 md:grid grid-cols-2 grid-rows-1 gap-4">
+			{% for card in cards %}
+				<article class="flex flex-col gap-5 h-full">
+					<a href="/La_Cerise/public/article.php?slug={{ card.slug }}" class="flex flex-col justify-between h-full gap-10">
+						<div class="flex flex-col gap-5">
+							<h2>{{ card.titre }}</h2>
+							<small>{{ card.chapeau }}</small>
+						</div>
+						<div class="flex justify-between">
+							<small>{{ formatDateFr(card.date_publication) }}</small>
+							<small class="text-neutral-400">{{ card.rubrique }}</small>
+						</div>
+					</a>
+				</article>
+			{% endfor %}
 		</div>
 
 	</section>

@@ -7,8 +7,6 @@
 
 /* ---------------------------------------------------
    THÈME TAILWIND v4
-   Déclaration des tokens dans @theme pour
-   qu'ils génèrent des classes utilitaires Tailwind
    --------------------------------------------------- */
 @theme {
   /* === Palette noir → blanc === */
@@ -29,19 +27,15 @@
   --color-cerise-special-dark:#760c2f;
 
   /* === Familles de polices === */
-  /* ⚠️  Les polices DejaVu doivent être importées via @font-face
-         ou hébergées dans assets/fonts/ (voir bloc @font-face ci-dessous) */
   --font-sans:  "DejaVu Sans Condensed", "DejaVu Sans", sans-serif;
   --font-serif: "DejaVu Serif Condensed", "DejaVu Serif", serif;
 }
 
 /* ---------------------------------------------------
-   VARIABLES CSS NOMMÉES (nomenclature maquette Figma)
-   Utilisées directement dans le HTML : var(--01) etc.
+   VARIABLES CSS NOMMÉES
    --------------------------------------------------- */
 @layer base {
   :root {
-    /* Palette */
     --01: #000000;
     --02: #1f1f1f;
     --03: #363636;
@@ -53,18 +47,15 @@
     --09: #dfdfdf;
     --10: #ffffff;
 
-    /* Couleurs spéciales */
     --special:     #d01152;
     --special-mid: #a91947;
     --special-dark:#760c2f;
-    /* alias avec accent (compatibilité Figma) */
     --spéciale:    #760c2f;
   }
 
-  /* === Styles de base === */
   body {
     font-family: var(--font-sans);
-    font-size: 1rem;          /* 16px — Corps */
+    font-size: 1rem;
     font-weight: 400;
     line-height: 27px;
     letter-spacing: -0.48px;
@@ -73,48 +64,48 @@
   }
 
   h1 {
-    font-family: var(--font-sans);
-    font-size: 2rem;          /* 32px */
+    color: var(--01);
+    font-family: "DejaVu Sans";
+    font-size: 2.5rem;
+    font-style: normal;
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 2.5rem;
+    letter-spacing: -0.0275rem;
   }
 
   h2 {
-    font-family: var(--font-sans);
-    font-size: 1.625rem;      /* 26px */
+    color: var(--01);
+    font-family: "DejaVu Sans";
+    font-size: 1.25rem;
+    font-style: normal;
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 150%;
+    letter-spacing: -0.01375rem;
   }
 
   h3 {
     font-family: var(--font-sans);
-    font-size: 1.25rem;       /* 20px */
+    font-size: 1.25rem;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.22px;
   }
 
   small {
-    font-family: var(--font-sans);
-    overflow: hidden;
-    leading-trim: both;
-    text-edge: cap;
+    color: var(--01);
+    font-family: "Inter", sans-serif;
     font-size: 0.8125rem;
     font-style: normal;
     font-weight: 300;
-    line-height: 150%; /* 1.21875rem */
+    line-height: 150%;
     letter-spacing: -0.00894rem;
   }
 }
 
 /* ---------------------------------------------------
    CLASSES COMPOSANTS TYPOGRAPHIQUES
-   Usage : class="text-h1" / "text-h1-serif" etc.
    --------------------------------------------------- */
 @layer components {
-  /* H1 — 32px */
   .text-h1 {
     font-family: var(--font-sans);
     font-size: 2rem;
@@ -130,7 +121,6 @@
     letter-spacing: 0;
   }
 
-  /* H2 — 26px */
   .text-h2 {
     font-family: var(--font-sans);
     font-size: 1.625rem;
@@ -146,7 +136,6 @@
     letter-spacing: 0;
   }
 
-  /* H3 — 20px */
   .text-h3 {
     font-family: var(--font-sans);
     font-size: 1.25rem;
@@ -162,7 +151,6 @@
     letter-spacing: -0.22px;
   }
 
-  /* Corps — 16px */
   .text-body {
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -178,7 +166,6 @@
     letter-spacing: -0.48px;
   }
 
-  /* Surlignement — 16px souligné (variante serif) */
   .text-surlignement {
     font-family: var(--font-serif);
     font-size: 1rem;
@@ -188,7 +175,6 @@
     text-decoration: underline;
   }
 
-  /* Small — 13px */
   .text-small {
     font-family: var(--font-sans);
     font-size: 0.8125rem;
@@ -205,6 +191,16 @@
   }
 }
 
+/* ---------------------------------------------------
+   FONT FACES
+   --------------------------------------------------- */
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url("../fonts/DejaVuSans.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "DejaVu Sans Condensed";
