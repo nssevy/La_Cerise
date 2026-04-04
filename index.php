@@ -57,7 +57,7 @@ $lexique = $pdo->query("SELECT terme, categorie FROM lexique ORDER BY terme ASC"
                     </div>
                 </div>
 
-                <div class="hidden lg:block flex flex-col gap-5">
+                <div class="hidden lg:flex flex flex-col gap-5">
                     <img src="<?= $base ?>/assets/images/<?= $hero['image_principale'] ?>"
                         class="w-full h-full object-cover aspect-square overflow-hidden">
                     <small class="text-neutral-400"><?= $hero['credit_photo'] ?></small>

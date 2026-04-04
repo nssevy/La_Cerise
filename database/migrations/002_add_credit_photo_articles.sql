@@ -1,0 +1,1 @@
+ALTER TABLE articles ADD COLUMN credit_photo VARCHAR(255) NULL AFTER image_principale;
