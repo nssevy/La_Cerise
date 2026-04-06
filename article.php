@@ -22,7 +22,7 @@ $stmt->execute([':slug' => $slug]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$article) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/public/');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/');
     exit;
 }
 
