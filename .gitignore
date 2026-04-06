@@ -6,3 +6,5 @@ assets/css/output.css
 .claude
 cache/
 .DS_Store
+.DS_Store
+**/.DS_Store
