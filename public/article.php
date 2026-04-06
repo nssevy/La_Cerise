@@ -5,7 +5,7 @@ require_once dirname(__DIR__) . '/config/twig.php';
 $slug = $_GET['slug'] ?? null;
 
 if (!$slug) {
-    header('Location: /La_Cerise/public/');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/public/');
     exit;
 }
 
@@ -22,7 +22,7 @@ $stmt->execute([':slug' => $slug]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$article) {
-    header('Location: /La_Cerise/public/');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/public/');
     exit;
 }
 
