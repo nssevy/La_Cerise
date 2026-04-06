@@ -20,8 +20,9 @@
 	{# Navigation alphabétique #}
 	<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-wrap gap-2 justify-center pb-4 z-40 w-full backdrop-blur-[5px]">
 		{% for lettre, termes in termesParLettre %}
-			<a href="#lettre-{{ lettre }}" class="flex items-center justify-center w-10 h-10 border border-[var(--09)] text-[var(--10)] font-serif text-[15px] hover:bg-[var(--10)] hover:text-[var(--01)] transition-colors  bg-cerise-01">
-				{{ lettre }}
+			<a href="#lettre-{{ lettre }}" class="group relative flex items-center justify-center w-10 h-10 overflow-hidden border border-[var(--09)] text-[var(--10)] font-serif text-[15px] bg-cerise-01 transition-colors">
+				<span class="inline-flex translate-y-0 items-center justify-center transition duration-300 group-hover:-translate-y-[150%]">{{ lettre }}</span>
+				<span class="absolute inline-flex w-full translate-y-[100%] items-center justify-center transition duration-300 group-hover:translate-y-0">{{ lettre }}</span>
 			</a>
 		{% endfor %}
 	</nav>
