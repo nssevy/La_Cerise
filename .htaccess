@@ -1,5 +1,20 @@
 RewriteEngine On
-RewriteCond %{REQUEST_URI} !^/public/
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ public/$1 [L]
+
+# Page d'accueil
+
+RewriteRule ^$ public/index.php [L]
+
+# Laisser passer les fichiers existants
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Laisser passer les dossiers existants sauf la racine
+
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Toutes les autres routes
+
+RewriteRule ^(.\*)$ public/index.php [L]
