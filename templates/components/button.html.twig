@@ -1,0 +1,6 @@
+{# Button au hover, text qui apparait du bas vers le haut #}
+
+<button type="{{ type ?? 'button' }}" class="text-body group relative inline-flex h-12 items-center justify-center overflow-hidden bg-cerise-01 text-cerise-10 cursor-pointer">
+	<div class="inline-flex h-12 translate-y-0 items-center justify-center px-6 transition duration-300 group-hover:-translate-y-[150%]">{{ label }}</div>
+	<div class="absolute inline-flex h-12 w-full translate-y-[100%] items-center justify-center px-6 transition duration-300 group-hover:translate-y-0">{{ label }}</div>
+</button>

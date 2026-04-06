@@ -253,3 +253,7 @@ html {
     padding-left: 1rem;
     color: var(--01);
 }
+
+.contenu h2 {
+    scroll-margin-top: 80px;
+}
