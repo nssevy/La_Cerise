@@ -9,6 +9,8 @@ $twig = new \Twig\Environment($loader, [
     'debug' => true,
 ]);
 
+$twig->addGlobal('base', $_ENV['BASE_URL'] ?? '');
+
 // La fonction helper
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);
