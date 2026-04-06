@@ -5,3 +5,4 @@ node_modules/
 assets/css/output.css
 .claude
 cache/
+.DS_Store
