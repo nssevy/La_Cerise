@@ -68,19 +68,38 @@
 
 			</main>
 
-			<footer>
-				<div class="px-12 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
-					<div class="flex flex-col justify-between h-48 md:h-60">
+			<footer class="py-12 flex flex-col  max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+				<hr class="w-full border-t border-[var(--09)]">
+				<div class="flex flex-col md:flex-row justify-between py-10">
+					<div class="">
 						<p class="text-5xl md:text-[52px] font-light leading-none text-[var(--01)]">La cerise</p>
 					</div>
+					<div class="grid grid-cols-2 grid-rows-1 gap-4 uppercase text-body pt-15 md:pt-0">
+						<section class="flex flex-col gap-5">
+							<h2 class="text-cerise-06 text-body">Nous suivre</h2>
+							<ul class="flex flex-col gap-3">
+								<li class="hover:text-[var(--special)] transition-colors whitespace-nowrap">
+									<a href="https://www.instagram.com/revue.cerise/" target="_blank" rel="noopener noreferrer">Instagram</a>
+								</li>
+							</ul>
+						</section>
+						<section class="flex flex-col gap-5">
+							<h2 class="text-cerise-06 text-body">Article</h2>
+							<ul class="flex flex-col gap-3">
+								<li>HUMANITAIRE ET CONFLITS</li>
+								<li>INDÉPENDANCE DES PEUPLES</li>
+								<li>JUSTICE SOCIALE, TRAVAIL ET DIGNITÉ HUMAINE</li>
+							</ul>
+						</section>
 
-					<div class="px-12 pb-8 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-xs text-[var(--01)] font-light">
-						<a href="#" class="hover:text-[var(--special)] transition-colors whitespace-nowrap">Mentions légales</a>
-						<p class="whitespace-nowrap">© 2026 La Cerise - Tous droits réservés.</p>
 					</div>
-				</footer>
-
+				</div>
+				<hr class="w-full border-t border-[var(--09)]">
+				<div class="flex flex-wrap justify-between py-10">
+					<p class="whitespace-nowrap">© 2026 La Cerise - Tous droits réservés.</p>
+					<a href="#" class="hover:text-[var(--special)] transition-colors whitespace-nowrap">Mentions légales</a>
+				</div>
 				{% block scripts %}{% endblock %}
-			</body>
+			</footer>
 		</body>
 	</html>
