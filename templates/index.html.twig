@@ -40,7 +40,7 @@
 
 		</section>
 
-		<section aria-labelledby="a-venir-titre" class=" flex flex-col gap-25 ">
+		<section aria-labelledby="a-venir-titre" class=" flex flex-col gap-25 md:pb-20">
 
 			<div class="flex flex-row items-center gap-5">
 				<hr class="flex-1 border-t border-[var(--09)]">
@@ -50,14 +50,20 @@
 
 			{% if articleAVenir %}
 				<div class="flex-1 flex items-center justify-center">
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50 cursor-default select-none">
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 cursor-default select-none">
+						<div class="overflow-hidden relative">
+							<img src="{{ base }}/assets/images/{{ articleAVenir.image_principale }}" class="w-full object-cover aspect-4/2 blur-xs" alt="{{ articleAVenir.titre }}" oncontextmenu="return false" draggable="false">
+							<div class="absolute bottom-0 left-0 flex flex-row gap-2 bg-cerise-special-mid w-fit ml-5 mb-5 px-3 py-1">
+								{% import 'macros/icons.twig' as icons %}
+								{{ icons.lock('text-cerise-10') }}
+								<small class="text-cerise-10">Bientot</small>
+							</div>
+						</div>
 
-						<img src="{{ base }}/assets/images/{{ articleAVenir.image_principale }}" class="w-full object-cover aspect-4/2 saturate-1" alt="{{ articleAVenir.titre }}">
-
-						<div class="flex flex-col justify-between">
+						<div class="flex flex-col gap-5 md:justify-between">
 							<div class="flex flex-col gap-5">
 								<h2>{{ articleAVenir.titre }}</h2>
-								<small>{{ articleAVenir.chapeau | striptags | slice(0, 150) }}...</small>
+								<small>{{ articleAVenir.chapeau | striptags | slice(0, 250) }}...</small>
 							</div>
 							<div>
 								<small>{{ articleAVenir.rubrique }}</small>
