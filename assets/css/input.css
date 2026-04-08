@@ -10,7 +10,7 @@
    THÈME TAILWIND v4
    --------------------------------------------------- */
 @theme {
-  /* === Palette noir → blanc === */
+  /* Palette de couleur du noir au blanc */
   --color-cerise-01: #000000;
   --color-cerise-02: #1f1f1f;
   --color-cerise-03: #363636;
@@ -22,12 +22,12 @@
   --color-cerise-09: #dfdfdf;
   --color-cerise-10: #ffffff;
 
-  /* === Couleurs spéciales (rouge cerise) === */
+  /* Couleur spécial */
   --color-cerise-special:     #d01152;
   --color-cerise-special-mid: #a91947;
   --color-cerise-special-dark:#760c2f;
 
-  /* === Familles de polices === */
+  /* Familles de polices */
   --font-sans:  "DejaVu Sans Condensed", "DejaVu Sans", sans-serif;
   --font-serif: "DejaVu Serif Condensed", "DejaVu Serif", serif;
 }
@@ -67,108 +67,90 @@ html {
     color: var(--01);
     background-color: var(--10);
   }
-
-  h1 {
-    color: var(--01);
-    font-family: "DejaVu Sans";
-    font-size: 2.5rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.5rem;
-    letter-spacing: -0.0275rem;
-        color: var(--01);
-  }
-
-  h2 {
-    color: var(--01);
-    font-family: "DejaVu Sans condensed";
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    letter-spacing: -0.01375rem;
-  }
-
-  h3 {
-    font-family: var(--font-sans);
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.22px;
-  }
-
-  small {
-    color: var(--01);
-    font-family: "Inter", sans-serif;
-    font-size: 0.8125rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 150%;
-    letter-spacing: -0.00894rem;
-  }
 }
 
 /* ---------------------------------------------------
    CLASSES COMPOSANTS TYPOGRAPHIQUES
    --------------------------------------------------- */
 @layer components {
+  /* ---------------------------------------------------
+     ÉCHELLE TYPOGRAPHIQUE — Mobile-first
+     Source : Figma "Cerise" node 84-249
+     Breakpoints : md = 768px / lg = 1024px
+     --------------------------------------------------- */
+
   .text-h1 {
     font-family: var(--font-sans);
-    font-size: 2rem;
+    font-size: 1.75rem;  
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
+
+    @media (min-width: 1024px) { font-size: 2rem;    }
   }
+  
   .text-h1-serif {
     font-family: var(--font-serif);
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
+
+    @media (min-width: 1024px) { font-size: 2rem;    }
   }
 
-  .text-h2 {
+  .text-h2-section {
     font-family: var(--font-sans);
-    font-size: 1.625rem;
+    font-size: 1.25rem;   
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 1.2;
+    letter-spacing: -0.45px;
+
+    @media (min-width: 768px)  { font-size: 1.375rem; } 
+    @media (min-width: 1024px) { font-size: 1.5rem;   } 
   }
-  .text-h2-serif {
+  .text-h2-section-serif {
     font-family: var(--font-serif);
-    font-size: 1.625rem;
+    font-size: 1.25rem;
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 1.2;
+    letter-spacing: -0.45px;
+
+    @media (min-width: 768px)  { font-size: 1.375rem; }
+    @media (min-width: 1024px) { font-size: 1.5rem;   }
   }
 
   .text-h3 {
     font-family: var(--font-sans);
-    font-size: 1.25rem;
+    font-size: 1.125rem;  
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.22px;
+
+    @media (min-width: 1024px) { font-size: 1.25rem; } 
   }
   .text-h3-serif {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.22px;
+
+    @media (min-width: 1024px) { font-size: 1.25rem; }
   }
 
   .text-body {
     font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 400;
-    line-height: 27px;
+    line-height: 1.6875; 
     letter-spacing: -0.48px;
   }
   .text-body-serif {
     font-family: var(--font-serif);
     font-size: 1rem;
     font-weight: 400;
-    line-height: 27px;
+    line-height: 1.6875;
     letter-spacing: -0.48px;
   }
 
@@ -176,24 +158,24 @@ html {
     font-family: var(--font-serif);
     font-size: 1rem;
     font-weight: 400;
-    line-height: 27px;
+    line-height: 1.6875;
     letter-spacing: -0.48px;
     text-decoration: underline;
   }
 
   .text-small {
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: 0.8125rem; 
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.39px;
+    line-height: 150%;      
+    letter-spacing: -0.00894rem;
   }
   .text-small-serif {
     font-family: var(--font-serif);
     font-size: 0.8125rem;
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.39px;
+    line-height: 150%;   
+    letter-spacing: -0.00894rem;
   }
 }
 
@@ -228,12 +210,14 @@ html {
 
 .prose h2 {
     font-family: var(--font-serif);
-    font-size: 1.625rem;
+    font-size: 1.25rem;  
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 1.2;
+    letter-spacing: -0.45px;
     color: var(--01);
 
+    @media (min-width: 768px)  { font-size: 1.375rem; }
+    @media (min-width: 1024px) { font-size: 1.5rem;   } 
 }
 
 .prose p {

@@ -8,7 +8,7 @@
 {% block content %}
 
 	<div
-		class="relative flex gap-10 mt-10">
+		class="relative flex gap-10 mt-10 mb-50">
 
 		{# Contenu article #}
 		<article class="w-full flex flex-col gap-10 lg:w-3/5 lg:mx-auto">
@@ -20,11 +20,11 @@
             } %}
 
 			<header class="flex flex-col gap-5">
-				<div class="flex flex-col gap-2 justify-between">
+				<div class="flex flex-col justify-between">
 					<small class="text-small-serif">{{ formatDateFr(article.date_publication) }}</small>
 					<small class="text-small-serif text-cerise-06">{{ article.rubrique_nom }}</small>
 				</div>
-				<h1 class="text-h1-serif">{{ article.titre }}</h1>
+				<h1 class="text-h1-serif bg-gradient-to-r from-cerise-01 via-cerise-special to-cerise-special-mid inline-block text-transparent bg-clip-text">{{ article.titre }}</h1>
 			</header>
 
 			<div class="contenu prose max-w-none w-full text-body-serif">
@@ -49,14 +49,14 @@
 			<section class="my-20 flex flex-col gap-15">
 				<div class="flex flex-row items-center gap-5">
 					<hr class="flex-1 border-t border-[var(--09)]">
-					<h2 class="text-h2-serif whitespace-nowrap">Poursuivre la lecture</h2>
+					<h2 class="text-h2-section-serif whitespace-nowrap">Poursuivre la lecture</h2>
 					<hr class="flex-1 border-t border-[var(--09)]">
 				</div>
 				<div class="grid grid-cols-1 gap-10
-																																																																																				                    {% if suggeres|length == 1 %}md:grid-cols-1
-																																																																																				                    {% elseif suggeres|length == 2 %}md:grid-cols-2
-																																																																																				                    {% else %}md:grid-cols-3
-																																																																																				                    {% endif %}">
+																																																																																																																																																																																										                    {% if suggeres|length == 1 %}md:grid-cols-1
+																																																																																																																																																																																										                    {% elseif suggeres|length == 2 %}md:grid-cols-2
+																																																																																																																																																																																										                    {% else %}md:grid-cols-3
+																																																																																																																																																																																										                    {% endif %}">
 					{% for suggere in suggeres %}
 						{% include 'components/card.html.twig' with {'card': suggere} %}
 					{% endfor %}
@@ -65,7 +65,7 @@
 		</div>
 	{% endif %}
 
-	<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex">
+	<div class="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
 		<a href="{{ base }}/public/">
 			{% include 'components/button.html.twig' with { label: "Retour" } %}
 		</a>
