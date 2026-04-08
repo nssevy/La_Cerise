@@ -68,131 +68,124 @@ html {
     background-color: var(--10);
   }
 
-  h1 {
-    color: var(--01);
-    font-family: "DejaVu Sans";
-    font-size: 2.5rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.5rem;
-    letter-spacing: -0.0275rem;
-        color: var(--01);
-  }
-
-  h2 {
-    color: var(--01);
-    font-family: "DejaVu Sans condensed";
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    letter-spacing: -0.01375rem;
-  }
-
-  h3 {
-    font-family: var(--font-sans);
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.22px;
-  }
-
-  small {
-    color: var(--01);
-    font-family: "Inter", sans-serif;
-    font-size: 0.8125rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 150%;
-    letter-spacing: -0.00894rem;
-  }
+  /* Les tailles de titres sont gérées par les classes composants (.text-h1-serif, etc.)
+     → une seule source de vérité, alignée sur Figma et mobile-first */
 }
 
 /* ---------------------------------------------------
    CLASSES COMPOSANTS TYPOGRAPHIQUES
    --------------------------------------------------- */
 @layer components {
+  /* ---------------------------------------------------
+     ÉCHELLE TYPOGRAPHIQUE — Mobile-first
+     Source : Figma "Cerise" node 84-249
+     Breakpoints : md = 768px / lg = 1024px
+     --------------------------------------------------- */
+
+  /* === H1 — Titre article (Figma : 32px serif) === */
   .text-h1 {
     font-family: var(--font-sans);
-    font-size: 2rem;
+    font-size: 1.5rem;      /* mobile  : 24px */
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
+
+    @media (min-width: 768px)  { font-size: 1.75rem; } /* tablet  : 28px */
+    @media (min-width: 1024px) { font-size: 2rem;    } /* desktop : 32px ✅ Figma */
   }
   .text-h1-serif {
     font-family: var(--font-serif);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
+
+    @media (min-width: 768px)  { font-size: 1.75rem; }
+    @media (min-width: 1024px) { font-size: 2rem;    }
   }
 
-  .text-h2 {
+  /* === H2 section — Sous-titre de section (Figma : ~24px) === */
+  .text-h2-section {
     font-family: var(--font-sans);
-    font-size: 1.625rem;
+    font-size: 1.25rem;      /* mobile  : 20px */
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 1.2;
+    letter-spacing: -0.45px;
+
+    @media (min-width: 768px)  { font-size: 1.375rem; } /* tablet  : 22px */
+    @media (min-width: 1024px) { font-size: 1.5rem;   } /* desktop : 24px ✅ Figma */
   }
-  .text-h2-serif {
+  .text-h2-section-serif {
     font-family: var(--font-serif);
-    font-size: 1.625rem;
+    font-size: 1.25rem;
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 1.2;
+    letter-spacing: -0.45px;
+
+    @media (min-width: 768px)  { font-size: 1.375rem; }
+    @media (min-width: 1024px) { font-size: 1.5rem;   }
   }
 
+  /* === H3 — Titre de card / navigation (Figma : 20px sans) === */
   .text-h3 {
     font-family: var(--font-sans);
-    font-size: 1.25rem;
+    font-size: 1.125rem;     /* mobile  : 18px */
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.22px;
+
+    @media (min-width: 1024px) { font-size: 1.25rem; } /* desktop : 20px ✅ Figma */
   }
   .text-h3-serif {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.22px;
+
+    @media (min-width: 1024px) { font-size: 1.25rem; }
   }
 
+  /* === Body — Texte courant (Figma : 16px serif) === */
   .text-body {
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 1rem;         /* 16px — identique sur tous les breakpoints */
     font-weight: 400;
-    line-height: 27px;
+    line-height: 1.6875;     /* 27px / 16px */
     letter-spacing: -0.48px;
   }
   .text-body-serif {
     font-family: var(--font-serif);
     font-size: 1rem;
     font-weight: 400;
-    line-height: 27px;
+    line-height: 1.6875;
     letter-spacing: -0.48px;
   }
 
+  /* === Surlignement — Lien dans le corps de texte === */
   .text-surlignement {
     font-family: var(--font-serif);
     font-size: 1rem;
     font-weight: 400;
-    line-height: 27px;
+    line-height: 1.6875;
     letter-spacing: -0.48px;
     text-decoration: underline;
   }
 
+  /* === Small — Légendes, crédits, navigation TDM (Figma : 13px) ===
+     WCAG 1.4.12 : line-height ≥ 1.5 sur texte fonctionnel */
   .text-small {
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: 0.8125rem;    /* 13px */
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.5;        /* ✅ WCAG 1.4.12 (était 1, corrigé) */
     letter-spacing: -0.39px;
   }
   .text-small-serif {
     font-family: var(--font-serif);
     font-size: 0.8125rem;
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.5;        /* ✅ WCAG 1.4.12 */
     letter-spacing: -0.39px;
   }
 }
@@ -228,12 +221,14 @@ html {
 
 .prose h2 {
     font-family: var(--font-serif);
-    font-size: 1.625rem;
+    font-size: 1.25rem;      /* mobile : 20px */
     font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    line-height: 1.2;
+    letter-spacing: -0.45px;
     color: var(--01);
 
+    @media (min-width: 768px)  { font-size: 1.375rem; }
+    @media (min-width: 1024px) { font-size: 1.5rem;   } /* desktop : 24px */
 }
 
 .prose p {
