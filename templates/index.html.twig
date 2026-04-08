@@ -15,7 +15,7 @@
 						<div class="flex flex-col gap-5">
 							<h1 class="text-h1-serif group-hover:text-cerise-special transition-colors duration-200">{{ hero.titre }}</h1>
 							<img src="{{ base }}/assets/images/{{ hero.image_principale }}" class="w-full h-full object-cover aspect-3/2 overflow-hidden md:hidden" alt="{{ hero.titre }}">
-							<small class="group-hover:text-cerise-01 transition-colors duration-300">{{ hero.chapeau }}</small>
+							<small class="group-hover:text-cerise-01 transition-colors duration-300">{{ hero.chapeau | striptags | slice(0, 250) }}</small>
 						</div>
 
 						<div class="flex justify-between">

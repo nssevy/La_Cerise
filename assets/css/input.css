@@ -93,6 +93,7 @@ html {
     @media (min-width: 768px)  { font-size: 1.75rem; } /* tablet  : 28px */
     @media (min-width: 1024px) { font-size: 2rem;    } /* desktop : 32px ✅ Figma */
   }
+  
   .text-h1-serif {
     font-family: var(--font-serif);
     font-size: 1.5rem;
