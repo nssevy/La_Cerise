@@ -10,7 +10,7 @@
    THÈME TAILWIND v4
    --------------------------------------------------- */
 @theme {
-  /* === Palette noir → blanc === */
+  /* Palette de couleur du noir au blanc */
   --color-cerise-01: #000000;
   --color-cerise-02: #1f1f1f;
   --color-cerise-03: #363636;
@@ -22,12 +22,12 @@
   --color-cerise-09: #dfdfdf;
   --color-cerise-10: #ffffff;
 
-  /* === Couleurs spéciales (rouge cerise) === */
+  /* Couleur spécial */
   --color-cerise-special:     #d01152;
   --color-cerise-special-mid: #a91947;
   --color-cerise-special-dark:#760c2f;
 
-  /* === Familles de polices === */
+  /* Familles de polices */
   --font-sans:  "DejaVu Sans Condensed", "DejaVu Sans", sans-serif;
   --font-serif: "DejaVu Serif Condensed", "DejaVu Serif", serif;
 }
@@ -67,9 +67,6 @@ html {
     color: var(--01);
     background-color: var(--10);
   }
-
-  /* Les tailles de titres sont gérées par les classes composants (.text-h1-serif, etc.)
-     → une seule source de vérité, alignée sur Figma et mobile-first */
 }
 
 /* ---------------------------------------------------
@@ -82,39 +79,35 @@ html {
      Breakpoints : md = 768px / lg = 1024px
      --------------------------------------------------- */
 
-  /* === H1 — Titre article (Figma : 32px serif) === */
   .text-h1 {
     font-family: var(--font-sans);
-    font-size: 1.5rem;      /* mobile  : 24px */
+    font-size: 1.75rem;  
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
 
-    @media (min-width: 768px)  { font-size: 1.75rem; } /* tablet  : 28px */
-    @media (min-width: 1024px) { font-size: 2rem;    } /* desktop : 32px ✅ Figma */
+    @media (min-width: 1024px) { font-size: 2rem;    }
   }
   
   .text-h1-serif {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0;
 
-    @media (min-width: 768px)  { font-size: 1.75rem; }
     @media (min-width: 1024px) { font-size: 2rem;    }
   }
 
-  /* === H2 section — Sous-titre de section (Figma : ~24px) === */
   .text-h2-section {
     font-family: var(--font-sans);
-    font-size: 1.25rem;      /* mobile  : 20px */
+    font-size: 1.25rem;   
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.45px;
 
-    @media (min-width: 768px)  { font-size: 1.375rem; } /* tablet  : 22px */
-    @media (min-width: 1024px) { font-size: 1.5rem;   } /* desktop : 24px ✅ Figma */
+    @media (min-width: 768px)  { font-size: 1.375rem; } 
+    @media (min-width: 1024px) { font-size: 1.5rem;   } 
   }
   .text-h2-section-serif {
     font-family: var(--font-serif);
@@ -127,15 +120,14 @@ html {
     @media (min-width: 1024px) { font-size: 1.5rem;   }
   }
 
-  /* === H3 — Titre de card / navigation (Figma : 20px sans) === */
   .text-h3 {
     font-family: var(--font-sans);
-    font-size: 1.125rem;     /* mobile  : 18px */
+    font-size: 1.125rem;  
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.22px;
 
-    @media (min-width: 1024px) { font-size: 1.25rem; } /* desktop : 20px ✅ Figma */
+    @media (min-width: 1024px) { font-size: 1.25rem; } 
   }
   .text-h3-serif {
     font-family: var(--font-serif);
@@ -147,12 +139,11 @@ html {
     @media (min-width: 1024px) { font-size: 1.25rem; }
   }
 
-  /* === Body — Texte courant (Figma : 16px serif) === */
   .text-body {
     font-family: var(--font-sans);
-    font-size: 1rem;         /* 16px — identique sur tous les breakpoints */
+    font-size: 1rem;
     font-weight: 400;
-    line-height: 1.6875;     /* 27px / 16px */
+    line-height: 1.6875; 
     letter-spacing: -0.48px;
   }
   .text-body-serif {
@@ -163,7 +154,6 @@ html {
     letter-spacing: -0.48px;
   }
 
-  /* === Surlignement — Lien dans le corps de texte === */
   .text-surlignement {
     font-family: var(--font-serif);
     font-size: 1rem;
@@ -173,21 +163,19 @@ html {
     text-decoration: underline;
   }
 
-  /* === Small — Légendes, crédits, navigation TDM (Figma : 13px) ===
-     WCAG 1.4.12 : line-height ≥ 1.5 sur texte fonctionnel */
   .text-small {
     font-family: var(--font-sans);
-    font-size: 0.8125rem;    /* 13px */
+    font-size: 0.8125rem; 
     font-weight: 400;
-    line-height: 1.5;        /* ✅ WCAG 1.4.12 (était 1, corrigé) */
-    letter-spacing: -0.39px;
+    line-height: 150%;      
+    letter-spacing: -0.00894rem;
   }
   .text-small-serif {
     font-family: var(--font-serif);
     font-size: 0.8125rem;
     font-weight: 400;
-    line-height: 1.5;        /* ✅ WCAG 1.4.12 */
-    letter-spacing: -0.39px;
+    line-height: 150%;   
+    letter-spacing: -0.00894rem;
   }
 }
 
@@ -222,14 +210,14 @@ html {
 
 .prose h2 {
     font-family: var(--font-serif);
-    font-size: 1.25rem;      /* mobile : 20px */
+    font-size: 1.25rem;  
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.45px;
     color: var(--01);
 
     @media (min-width: 768px)  { font-size: 1.375rem; }
-    @media (min-width: 1024px) { font-size: 1.5rem;   } /* desktop : 24px */
+    @media (min-width: 1024px) { font-size: 1.5rem;   } 
 }
 
 .prose p {

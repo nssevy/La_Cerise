@@ -13,14 +13,16 @@
 
 					<div class="flex flex-col justify-between gap-10 lg:gap-0">
 						<div class="flex flex-col gap-5">
-							<h1 class="text-h1-serif group-hover:text-cerise-special transition-colors duration-200">{{ hero.titre }}</h1>
+							<h1 class="text-3xl group-hover:text-cerise-special transition-colors duration-200">{{ hero.titre }}</h1>
 							<img src="{{ base }}/assets/images/{{ hero.image_principale }}" class="w-full h-full object-cover aspect-3/2 overflow-hidden md:hidden" alt="{{ hero.titre }}">
-							<small class="group-hover:text-cerise-01 transition-colors duration-300">{{ hero.chapeau | striptags | slice(0, 250) }}</small>
+							<small class="md:hidden group-hover:text-cerise-01 transition-colors duration-300 text-small">{{ hero.chapeau | striptags | slice(0, 250) | split(' ') | slice(0, -1) | join(' ') ~ '...' }}</small>
+							<small class="hidden md:inline group-hover:text-cerise-01 transition-colors duration-300 text-small">{{ hero.chapeau | striptags }}</small>
+
 						</div>
 
 						<div class="flex justify-between">
-							<small>{{ formatDateFr(hero.date_publication) }}</small>
-							<small class="text-neutral-400">{{ hero.rubrique }}</small>
+							<small class="text-small">{{ formatDateFr(hero.date_publication) }}</small>
+							<small class="text-neutral-400 text-small">{{ hero.rubrique }}</small>
 						</div>
 					</div>
 
@@ -44,7 +46,7 @@
 
 			<div class="flex flex-row items-center gap-5">
 				<hr class="flex-1 border-t border-[var(--09)]">
-				<h2 id="a-venir-titre" class="text-h2-section-serif whitespace-nowrap select-none">Article à venir</h2>
+				<h2 id="a-venir-titre" class="text-h1-serif whitespace-nowrap select-none">Article à venir</h2>
 				<hr class="flex-1 border-t border-[var(--09)]">
 			</div>
 
@@ -62,8 +64,8 @@
 
 						<div class="flex flex-col gap-5 md:justify-between">
 							<div class="flex flex-col gap-5">
-								<h2>{{ articleAVenir.titre }}</h2>
-								<small>{{ articleAVenir.chapeau | striptags | slice(0, 250) }}...</small>
+								<h2 class="text-h2-section">{{ articleAVenir.titre }}</h2>
+								<small class="text-small">{{ articleAVenir.chapeau | striptags | slice(0, 250) }}...</small>
 							</div>
 							<div>
 								<small>{{ articleAVenir.rubrique }}</small>
@@ -80,7 +82,7 @@
 			<div class="place-self-center flex flex-col gap-10 w-1/2">
 				<div class="flex flex-col gap-2 text-center">
 					<h2 id="newsletter-titre" class="text-h1">Newsletter</h2>
-					<small>Abonnez-vous à la newsletter de La Cerise et recevez nos articles en avant-première et toute l'actualité du site.</small>
+					<small class="text-small">Abonnez-vous à la newsletter de La Cerise et recevez nos articles en avant-première et toute l'actualité du site.</small>
 				</div>
 
 				<form action="" method="post" class="flex flex-col gap-7 justify-center items-center">
@@ -96,7 +98,7 @@
 					{% include 'components/button.html.twig' with { label: "S'inscrire", type: 'submit' } %}
 
 					{% if newsletterMessage %}
-						<p class="text-sm {% if newsletterMessage.type == 'succes' %}text-cerise-01{% else %}text-cerise-special{% endif %}">
+						<p class="text-small {% if newsletterMessage.type == 'succes' %}text-cerise-01{% else %}text-cerise-special{% endif %}">
 							{{ newsletterMessage.texte }}
 						</p>
 					{% endif %}
