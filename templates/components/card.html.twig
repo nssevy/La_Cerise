@@ -1,12 +1,12 @@
 {# Card pour la page d'accueil et à la fin des articles #}
 
 <article class="flex flex-col gap-5">
-	<a href="{{ base }}/public/article.php?slug={{ card.slug }}" class="flex flex-col gap-5">
+	<a href="{{ base }}/public/article.php?slug={{ card.slug }}" class="flex flex-col gap-5 group">
 		{% if card.image_principale is not empty %}
 			<img src="{{ base }}/assets/images/{{ card.image_principale }}" alt="{{ card.titre }}" class="w-full object-cover aspect-3/2">
 		{% endif %}
-		<h2>{{ card.titre }}</h2>
-		<small>{{ card.chapeau | striptags | slice(0, 150) }}...</small>
+		<h2 class="text-h2-section group-hover:text-cerise-special transition-colors duration-200">{{ card.titre }}</h2>
+		<small class="text-small">{{ card.chapeau | striptags | slice(0, 250) | split(' ') | slice(0, -1) | join(' ') ~ '...' }}</small>
 		<div class="flex justify-between">
 			<small>{{ formatDateFr(card.date_publication) }}</small>
 			<small class="text-cerise-06">{{ card.rubrique_nom ?? card.rubrique }}</small>
