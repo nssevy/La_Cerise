@@ -45,7 +45,7 @@
 	</div>
 
 	{% if suggeres %}
-		<div class="h-dvh flex flex-col justify-center-safe">
+		<div class="flex flex-col justify-center-safe lg:grid grid-cols-3 grid-rows-1 gap-4">
 			<section class="my-20 flex flex-col gap-15">
 				<div class="flex flex-row items-center gap-5">
 					<hr class="flex-1 border-t border-[var(--09)]">
@@ -53,10 +53,10 @@
 					<hr class="flex-1 border-t border-[var(--09)]">
 				</div>
 				<div class="grid grid-cols-1 gap-10
-																																																																																																																																																																																										                    {% if suggeres|length == 1 %}md:grid-cols-1
-																																																																																																																																																																																										                    {% elseif suggeres|length == 2 %}md:grid-cols-2
-																																																																																																																																																																																										                    {% else %}md:grid-cols-3
-																																																																																																																																																																																										                    {% endif %}">
+																																																																																																																																																																																																																		                    {% if suggeres|length == 1 %}md:grid-cols-1
+																																																																																																																																																																																																																		                    {% elseif suggeres|length == 2 %}md:grid-cols-2
+																																																																																																																																																																																																																		                    {% else %}md:grid-cols-3
+																																																																																																																																																																																																																		                    {% endif %}">
 					{% for suggere in suggeres %}
 						{% include 'components/card.html.twig' with {'card': suggere} %}
 					{% endfor %}
