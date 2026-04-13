@@ -79,4 +79,6 @@ echo $twig->render('article.html.twig', [
     'lecture' => $lecture,
     'suggeres' => $suggeres,
     'toc' => $toc,
+    'base' => $_ENV['BASE_URL'] ?? '',
+
 ]);

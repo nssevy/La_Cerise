@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Dashboard — Admin La Cerise</title>
+	</head>
+	<body>
+
+		<h1>Tableau de bord</h1>
+		<p>Connecté en tant que
+			{{ user_nom }}</p>
+		<a href="{{ base }}/admin/logout.php">Se déconnecter</a>
+
+		<a href="{{ base }}/admin/article_create.php">Nouvel article</a>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Rubrique</th>
+					<th>Statut</th>
+					<th>Date de publication</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for article in articles %}
+					<tr>
+						<td>{{ article.titre }}</td>
+						<td>{{ article.rubrique ?? 'Non classé' }}</td>
+						<td>{{ article.statut }}</td>
+						<td>{{ article.date_publication ? article.date_publication|date('d/m/Y') : '—' }}</td>
+						<td>
+							<a href="{{ base }}/admin/article_edit.php?id={{ article.id }}">Éditer</a>
+
+							<form method="POST" action="/La_Cerise/admin/article_delete.php" style="display:inline;">
+								<input type="hidden" name="id" value="{{ article.id }}">
+								<button type="submit" onclick="return confirm('Supprimer cet article ?')">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">Aucun article pour le moment.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</body>
+</html>

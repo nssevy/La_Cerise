@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Éditer —
+			{{ article.titre }}
+			— Admin La Cerise</title>
+		<script src="https://cdn.tiny.cloud/1/l5emzp4vl5hfv2tvrlmvuk4u9eji40glpnxuc559gkadzi4r/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+		<script>
+			tinymce.init({
+selector: '#contenu',
+language: 'fr_FR',
+plugins: 'lists link image code',
+toolbar: 'undo redo | bold italic | h2 h3 | bullist numlist | link image | code',
+menubar: false
+});
+		</script>
+	</head>
+	<body>
+
+		<h1>Éditer :
+			{{ article.titre }}</h1>
+		<a href="/La_Cerise/admin/dashboard.php">Retour au dashboard</a>
+
+		{% if errors %}
+			<ul>
+				{% for error in errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+
+		<form method="POST" action="">
+
+			<div>
+				<label for="titre">Titre *</label>
+				<input type="text" id="titre" name="titre" value="{{ article.titre }}" required>
+			</div>
+
+			<div>
+				<label for="chapeau">Chapeau</label>
+				<textarea id="chapeau" name="chapeau" rows="3">{{ article.chapeau }}</textarea>
+			</div>
+
+			<div>
+				<label for="contenu">Contenu *</label>
+				<textarea id="contenu" name="contenu" rows="20">{{ article.contenu }}</textarea>
+			</div>
+
+			<div>
+				<label for="rubrique_id">Rubrique</label>
+				<select id="rubrique_id" name="rubrique_id">
+					<option value="">— Choisir une rubrique —</option>
+					{% for rubrique in rubriques %}
+						<option value="{{ rubrique.id }}" {{ article.rubrique_id == rubrique.id ? 'selected' : '' }}>
+							{{ rubrique.nom }}
+						</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div>
+				<label for="auteur_id">Auteur</label>
+				<select id="auteur_id" name="auteur_id">
+					<option value="">— Choisir un auteur —</option>
+					{% for auteur in auteurs %}
+						<option value="{{ auteur.id }}" {{ article.auteur_id == auteur.id ? 'selected' : '' }}>
+							{{ auteur.nom }}
+						</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<div>
+				<label for="image_principale">Image principale (nom du fichier)</label>
+				<input type="text" id="image_principale" name="image_principale" value="{{ article.image_principale }}">
+			</div>
+
+			<div>
+				<label for="credit_photo">Crédit photo</label>
+				<input type="text" id="credit_photo" name="credit_photo" value="{{ article.credit_photo }}">
+			</div>
+
+			<div>
+				<label for="statut">Statut</label>
+				<select id="statut" name="statut">
+					<option value="brouillon" {{ article.statut == 'brouillon' ? 'selected' : '' }}>Brouillon</option>
+					<option value="publie" {{ article.statut == 'publie' ? 'selected' : '' }}>Publié</option>
+					<option value="a_venir" {{ article.statut == 'a_venir' ? 'selected' : '' }}>À venir</option>
+					<option value="archive" {{ article.statut == 'archive' ? 'selected' : '' }}>Archivé</option>
+				</select>
+			</div>
+
+			<div>
+				<label for="date_publication">Date de publication</label>
+				<input type="datetime-local" id="date_publication" name="date_publication" value="{{ article.date_publication ? article.date_publication|date('Y-m-d\\TH:i') : '' }}">
+			</div>
+
+			<button type="submit">Enregistrer les modifications</button>
+
+		</form>
+
+	</body>
+</html>

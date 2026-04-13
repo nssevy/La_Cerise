@@ -18,4 +18,6 @@ ksort($termesParLettre);
 
 echo $twig->render('lexique.html.twig', [
     'termesParLettre' => $termesParLettre,
+    'base' => $_ENV['BASE_URL'] ?? '',
+
 ]);

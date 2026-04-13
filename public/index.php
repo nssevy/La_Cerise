@@ -85,4 +85,6 @@ echo $twig->render('index.html.twig', [
     'articleAVenir' => $articleAVenir,
     'mediaNewsletter' => $mediaNewsletter,
     'newsletterMessage' => $newsletterMessage,
+    'base' => $_ENV['BASE_URL'] ?? '',
+
 ]);
