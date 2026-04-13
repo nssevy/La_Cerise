@@ -8,7 +8,7 @@
 
 ## Présentation
 
-La Cerise est un projet de presse en ligne développé de façon indépendante. Il combine une ambition éditoriale — produire des articles de fond accessibles sur des sujets complexes — et une ambition technique — construire une plateforme robuste sans CMS, from scratch.
+La Cerise est un projet de presse en ligne développé de façon indépendante.
 
 Le projet est développé en solo et sert également de vitrine dans le cadre d'une formation en développement web.
 
