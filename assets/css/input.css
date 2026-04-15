@@ -1,4 +1,10 @@
 @import "tailwindcss";
+
+@custom-variant hocus {
+    &:is(:hover, :focus-within) {
+        @slot;
+    }
+}
 @plugin "daisyui";
 @plugin "@tailwindcss/typography";
 
@@ -244,5 +250,11 @@ strong {
 
 .contenu h2 {
     scroll-margin-top: 80px;
+}
+
+/* État actif dans la table des matières */
+.toc-link.toc-active {
+    color: var(--01);
+    font-weight: bold;
 }
 

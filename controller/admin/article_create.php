@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__DIR__) . '/vendor/autoload.php';
-require_once dirname(__DIR__) . '/config/db.php';
-require_once dirname(__DIR__) . '/config/twig.php';
-require_once dirname(__DIR__) . '/includes/auth.php';
+require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
+require_once dirname(__DIR__, 2) . '/config/db.php';
+require_once dirname(__DIR__, 2) . '/config/twig.php';
+require_once dirname(__DIR__, 2) . '/includes/auth.php';
 
 requireLogin();
 
@@ -31,10 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Le contenu est obligatoire.';
 
     // Génération du slug
-    $slug = strtolower(trim($titre));
-    $slug = iconv('UTF-8', 'ASCII//TRANSLIT', $slug);
-    $slug = preg_replace('/[^a-z0-9]+/', '-', $slug);
-    $slug = trim($slug, '-');
+    $slug = slugify($titre);
 
     if (empty($errors)) {
         $stmt = $pdo->prepare('
@@ -56,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/admin/dashboard.php');
+        header('Location: ' . $base . '/controller/admin/dashboard.php');
         exit;
     }
 }

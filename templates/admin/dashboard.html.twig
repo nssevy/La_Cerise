@@ -10,9 +10,9 @@
 		<h1>Tableau de bord</h1>
 		<p>Connecté en tant que
 			{{ user_nom }}</p>
-		<a href="{{ base }}/admin/logout.php">Se déconnecter</a>
+		<a href="{{ base }}/controller/admin/logout.php">Se déconnecter</a>
 
-		<a href="{{ base }}/admin/article_create.php">Nouvel article</a>
+		<a href="{{ base }}/controller/admin/article_create.php">Nouvel article</a>
 
 		<a href="{{ base }}">Le site</a>
 
@@ -34,11 +34,11 @@
 						<td>{{ article.statut }}</td>
 						<td>{{ article.date_publication ? article.date_publication|date('d/m/Y') : '—' }}</td>
 						<td>
-							<a href="{{ base }}/admin/article_edit.php?id={{ article.id }}">Éditer</a>
+							<a href="{{ base }}/controller/admin/article_edit.php?id={{ article.id }}">Éditer</a>
 
-							<form method="POST" action="/La_Cerise/admin/article_delete.php" style="display:inline;">
+							<form method="POST" action="/La_Cerise/controller/admin/article_delete.php" style="display:inline;">
 								<input type="hidden" name="id" value="{{ article.id }}">
-								<button type="submit" onclick="return confirm('Supprimer cet article ?')">Supprimer</button>
+								<button type="submit" data-action="confirm-delete">Supprimer</button>
 							</form>
 						</td>
 					</tr>
@@ -49,6 +49,8 @@
 				{% endfor %}
 			</tbody>
 		</table>
+
+	<script src="/La_Cerise/assets/js/confirm.js" defer></script>
 
 	</body>
 </html>

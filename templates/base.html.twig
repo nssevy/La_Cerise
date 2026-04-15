@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 
 	<head>
 		<meta charset="UTF-8">
@@ -22,11 +22,11 @@
 
 				<nav
 					class="hidden md:flex items-center gap-5 text-body uppercase text-(--01) whitespace-nowrap">
-					{# <a href="#" class="hover:text-(--special) transition-colors">Articles</a> #}
-					<a href="{{ base }}/public/lexique.php" class="hover:text(--special) transition-colors">Lexique</a>
+					{# <a href="#" class="hocus:text-(--special) transition-colors">Articles</a> #}
+					<a href="{{ base }}/controller/lexique.php" class="hocus:text-(--special) transition-colors">Lexique</a>
 				</nav>
 
-				<a href="{{ base }}/public/">
+				<a href="{{ base }}/controller/">
 					<div class="relative h-8">
 						<img
 						{# flouté #} src="{{ base }}/assets/images/Logo.png" alt="" class="h-8 w-auto absolute top-0 left-0 blur-md opacity-50">
@@ -37,7 +37,7 @@
 
 
 				<div class="flex items-center gap-4">
-					<a class="hidden md:block text-body uppercase text-(--01) whitespace-nowrap hover:text-(--special) transition-colors" href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise">Me contacter</a>
+					<a class="hidden md:block text-body uppercase text-(--01) whitespace-nowrap hocus:text-(--special) transition-colors" href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise">Me contacter</a>
 					<button id="menu-btn" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false">
 						<div id="icon-open" class="icon-menu text-2xl"></div>
 						<div id="icon-close" class="icon-x text-2xl hidden"></div>
@@ -48,10 +48,10 @@
 
 			<nav
 				id="mobile-menu" class="hidden md:hidden flex-col gap-4 px-12 pb-6 pt-2 border-t border-(--09)bg-white">
-				{# <a href="#" class="block text-body uppercase text-(--01) py-2 hover:text-(--special) transition-colors">Articles</a> #}
-				<a href="{{ base }}/public/lexique.php" class="block text-body uppercase text-(--01) py-2 hover:text-(--special) transition-colors">Lexique</a>
+				{# <a href="#" class="block text-body uppercase text-(--01) py-2 hocus:text-(--special) transition-colors">Articles</a> #}
+				<a href="{{ base }}/controller/lexique.php" class="block text-body uppercase text-(--01) py-2 hocus:text-(--special) transition-colors">Lexique</a>
 
-				<a href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise" class="block text-body uppercase text-(--01) py-2 hover:text-(--special) transition-colors">Me contacter</a>
+				<a href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise" class="block text-body uppercase text-(--01) py-2 hocus:text-(--special) transition-colors">Me contacter</a>
 
 			</nav>
 
@@ -77,7 +77,7 @@
 					<section class="flex flex-col gap-5">
 						<h2 class="text-cerise-06 text-body">Nous suivre</h2>
 						<ul class="flex flex-col gap-3">
-							<li class="hover:text-(--special) transition-colors whitespace-nowrap">
+							<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
 								<a href="https://www.instagram.com/revue.cerise/" target="_blank" rel="noopener noreferrer">Instagram</a>
 							</li>
 						</ul>
@@ -96,8 +96,8 @@
 			<hr class="w-full border-t border-(--09)">
 			<div class="flex flex-wrap justify-between py-10">
 				<p class="whitespace-nowrap">© 2026 La Cerise - Tous droits réservés.</p>
-				<a href="{{ base }}/admin/login.php" class="hover:text-(--special) transition-colors whitespace-nowrap">Admin</a>
-				<a href="#" class="hover:text-(--special) transition-colors whitespace-nowrap">Mentions légales</a>
+				<a href="{{ base }}/controller/admin/login.php" class="hocus:text-(--special) transition-colors whitespace-nowrap">Admin</a>
+				<a href="#" class="hocus:text-(--special) transition-colors whitespace-nowrap">Mentions légales</a>
 			</div>
 			{% block scripts %}{% endblock %}
 		</footer>

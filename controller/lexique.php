@@ -2,7 +2,7 @@
 require_once dirname(__DIR__) . '/config/db.php';
 require_once dirname(__DIR__) . '/config/twig.php';
 
-$termes = $pdo->query("
+$listTermes = $pdo->query("
     SELECT terme, categorie, definition
     FROM lexique
     ORDER BY terme ASC
@@ -10,7 +10,7 @@ $termes = $pdo->query("
 
 // Grouper les termes par première lettre
 $termesParLettre = [];
-foreach ($termes as $terme) {
+foreach ($listTermes as $terme) {
     $lettre = mb_strtoupper(mb_substr($terme['terme'], 0, 1));
     $termesParLettre[$lettre][] = $terme;
 }
