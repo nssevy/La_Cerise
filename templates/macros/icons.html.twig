@@ -1,0 +1,7 @@
+{% macro icon(name, weight, class) %}
+	{% set weight = weight|default('regular') %}
+	{% set class = class|default('w-5 h-5') %}
+	<span class="{{ class }} inline-flex items-center justify-center">
+		{% include 'icons/' ~ weight ~ '/' ~ name ~ '-' ~ weight ~ '.svg' %}
+	</span>
+{% endmacro %}
