@@ -44,15 +44,14 @@
 
 		</section>
 
-		<section aria-labelledby="a-venir-titre" class=" flex flex-col gap-25 md:pb-20">
 
-			<div class="flex flex-row items-center gap-5">
-				<hr class="flex-1 border-t border-[var(--09)]">
-				<h2 id="a-venir-titre" class="text-h1-serif whitespace-nowrap select-none">Article à venir</h2>
-				<hr class="flex-1 border-t border-[var(--09)]">
-			</div>
-
-			{% if articleAVenir %}
+		{% if articleAVenir %}
+			<section aria-labelledby="a-venir-titre" class=" flex flex-col gap-25 md:pb-20">
+				<div class="flex flex-row items-center gap-5">
+					<hr class="flex-1 border-t border-[var(--09)]">
+					<h2 id="a-venir-titre" class="text-h1-serif whitespace-nowrap select-none">Article à venir</h2>
+					<hr class="flex-1 border-t border-[var(--09)]">
+				</div>
 				<div class="flex-1 flex items-center justify-center">
 					<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 cursor-default select-none">
 						<div class="overflow-hidden relative">
@@ -75,9 +74,9 @@
 
 					</div>
 				</div>
-			{% endif %}
+			</section>
+		{% endif %}
 
-		</section>
 
 		<section aria-labelledby="newsletter-titre" class="grid grid-cols-1 lg:grid-cols-2 lg:h-dvh my-20">
 			<div class="place-self-center flex flex-col gap-10 w-1/2">
