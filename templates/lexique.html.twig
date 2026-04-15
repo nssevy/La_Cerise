@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %}Le lexique - La Cerise
+{% block titre %}Le lexique
 {% endblock %}
 
 {% block content %}
@@ -20,9 +20,9 @@
 	{# Navigation alphabétique #}
 	<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-wrap gap-2 justify-center pb-4 z-40 w-full backdrop-blur-[5px]">
 		{% for lettre, termes in termesParLettre %}
-			<a href="#lettre-{{ lettre }}" class="group relative flex items-center justify-center w-10 h-10 overflow-hidden border border-[var(--09)] text-[var(--10)] font-serif text-[15px] bg-cerise-01 transition-colors">
+			<a href="#lettre-{{ lettre }}" class="group relative flex items-center justify-center w-10 h-10 overflow-hidden border border-(--09) text-(--10) font-serif text-[15px] bg-cerise-01 transition-colors">
 				<span class="inline-flex translate-y-0 items-center justify-center transition duration-300 group-hover:-translate-y-[150%]">{{ lettre }}</span>
-				<span class="absolute inline-flex w-full translate-y-[100%] items-center justify-center transition duration-300 group-hover:translate-y-0">{{ lettre }}</span>
+				<span class="absolute inline-flex w-full translate-y-full items-center justify-center transition duration-300 group-hover:translate-y-0">{{ lettre }}</span>
 			</a>
 		{% endfor %}
 	</nav>
@@ -33,7 +33,7 @@
 			<section id="lettre-{{ lettre }}" class="flex flex-col gap-16">
 
 				<div class="flex items-end gap-2 sticky top-20 py-4">
-					<span class="text-h1-serif text-[var(--01)] text-[32px]">{{ lettre }}</span>
+					<span class="text-h1-serif text-(--01) text-[32px]">{{ lettre }}</span>
 					<span class="text-small text-cerise-07">{{ termes|length }}</span>
 				</div>
 

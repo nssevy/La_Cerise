@@ -8,7 +8,7 @@ function requireLogin(): void
 
     if (empty($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
         $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/admin/login.php');
+        header('Location: ' . $base . '/controller/admin/login.php');
         exit;
     }
 }
@@ -21,6 +21,6 @@ function logout(): void
 
     session_destroy();
     $base = $_ENV['BASE_URL'] ?? '';
-    header('Location: ' . $base . '/admin/login.php');
+    header('Location: ' . $base . '/controller/admin/login.php');
     exit;
 }

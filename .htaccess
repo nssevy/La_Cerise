@@ -2,7 +2,7 @@ RewriteEngine On
 
 # Page d'accueil
 
-RewriteRule ^$ public/index.php [L]
+RewriteRule ^$ controller/index.php [L]
 
 # Laisser passer les fichiers existants
 
@@ -17,4 +17,4 @@ RewriteRule ^ - [L]
 
 # Toutes les autres routes
 
-RewriteRule ^(.\*)$ public/index.php [L]
+RewriteRule ^(.\*)$ controller/index.php [L]
