@@ -17,13 +17,13 @@
 
 	<body>
 
-		<header class="w-full sticky top-0 z-50 bg-white border-b border-[var(--09)]">
+		<header class="w-full sticky top-0 z-50 bg-white border-b border-(--09)">
 			<div class="flex items-center justify-between py-4 max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
 
 				<nav
-					class="hidden md:flex items-center gap-5 text-body uppercase text-[var(--01)] whitespace-nowrap">
-					{# <a href="#" class="hover:text-[var(--special)] transition-colors">Articles</a> #}
-					<a href="{{ base }}/public/lexique.php" class="hover:text-[var(--special)] transition-colors">Lexique</a>
+					class="hidden md:flex items-center gap-5 text-body uppercase text-(--01) whitespace-nowrap">
+					{# <a href="#" class="hover:text-(--special) transition-colors">Articles</a> #}
+					<a href="{{ base }}/public/lexique.php" class="hover:text(--special) transition-colors">Lexique</a>
 				</nav>
 
 				<a href="{{ base }}/public/">
@@ -37,7 +37,7 @@
 
 
 				<div class="flex items-center gap-4">
-					<a class="hidden md:block text-body uppercase text-[var(--01)] whitespace-nowrap hover:text-[var(--special)] transition-colors" href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise">Me contacter</a>
+					<a class="hidden md:block text-body uppercase text-(--01) whitespace-nowrap hover:text-(--special) transition-colors" href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise">Me contacter</a>
 					<button id="menu-btn" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false">
 						<div id="icon-open" class="icon-menu text-2xl"></div>
 						<div id="icon-close" class="icon-x text-2xl hidden"></div>
@@ -47,11 +47,11 @@
 			</div>
 
 			<nav
-				id="mobile-menu" class="hidden md:hidden flex-col gap-4 px-12 pb-6 pt-2 border-t border-[var(--09)] bg-white">
-				{# <a href="#" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">Articles</a> #}
-				<a href="{{ base }}/public/lexique.php" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">Lexique</a>
+				id="mobile-menu" class="hidden md:hidden flex-col gap-4 px-12 pb-6 pt-2 border-t border-(--09)bg-white">
+				{# <a href="#" class="block text-body uppercase text-(--01) py-2 hover:text-(--special) transition-colors">Articles</a> #}
+				<a href="{{ base }}/public/lexique.php" class="block text-body uppercase text-(--01) py-2 hover:text-(--special) transition-colors">Lexique</a>
 
-				<a href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise" class="block text-body uppercase text-[var(--01)] py-2 hover:text-[var(--special)] transition-colors">Me contacter</a>
+				<a href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise" class="block text-body uppercase text-(--01) py-2 hover:text-(--special) transition-colors">Me contacter</a>
 
 			</nav>
 
@@ -68,16 +68,16 @@
 		</main>
 
 		<footer class="py-12 flex flex-col  max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-			<hr class="w-full border-t border-[var(--09)]">
+			<hr class="w-full border-t border-(--09)">
 			<div class="flex flex-col md:flex-row justify-between py-10">
 				<div class="">
-					<p class="text-5xl md:text-[52px] font-light leading-none text-[var(--01)]">La cerise</p>
+					<p class="text-5xl md:text-[52px] font-light leading-none text-(--01)">La cerise</p>
 				</div>
 				<div class="grid grid-cols-2 grid-rows-1 gap-4 uppercase text-body pt-15 md:pt-0">
 					<section class="flex flex-col gap-5">
 						<h2 class="text-cerise-06 text-body">Nous suivre</h2>
 						<ul class="flex flex-col gap-3">
-							<li class="hover:text-[var(--special)] transition-colors whitespace-nowrap">
+							<li class="hover:text-(--special) transition-colors whitespace-nowrap">
 								<a href="https://www.instagram.com/revue.cerise/" target="_blank" rel="noopener noreferrer">Instagram</a>
 							</li>
 						</ul>
@@ -93,11 +93,11 @@
 
 				</div>
 			</div>
-			<hr class="w-full border-t border-[var(--09)]">
+			<hr class="w-full border-t border-(--09)">
 			<div class="flex flex-wrap justify-between py-10">
 				<p class="whitespace-nowrap">© 2026 La Cerise - Tous droits réservés.</p>
-				<a href="{{ base }}/admin/login.php" class="hover:text-[var(--special)] transition-colors whitespace-nowrap">Admin</a>
-				<a href="#" class="hover:text-[var(--special)] transition-colors whitespace-nowrap">Mentions légales</a>
+				<a href="{{ base }}/admin/login.php" class="hover:text-(--special) transition-colors whitespace-nowrap">Admin</a>
+				<a href="#" class="hover:text-(--special) transition-colors whitespace-nowrap">Mentions légales</a>
 			</div>
 			{% block scripts %}{% endblock %}
 		</footer>

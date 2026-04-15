@@ -52,13 +52,12 @@
     --special:     #d01152;
     --special-mid: #a91947;
     --special-dark:#760c2f;
-    --spéciale:    #760c2f;
   }
   
-html {
+  html {
     scroll-behavior: smooth;
-}
-
+  }
+  
   body {
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -68,6 +67,10 @@ html {
     color: var(--01);
     background-color: var(--10);
   }
+}
+strong {
+  font-weight: bold;
+  color: #760c2f;
 }
 
 /* ---------------------------------------------------
@@ -242,3 +245,4 @@ html {
 .contenu h2 {
     scroll-margin-top: 80px;
 }
+
