@@ -7,4 +7,5 @@ assets/css/output.css
 cache/
 .DS_Store
 .DS_Store
+generate_hash.php
 **/.DS_Store
