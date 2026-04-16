@@ -3,91 +3,97 @@
 {% block titre %}La Cerise
 {% endblock %}
 
-{% block content %}
-	{% import 'macros/icons.html.twig' as icons %}
+{% block main_class %}
+	<main class="overflow-x-hidden">
+	{% endblock %}
 
-	<div class="flex flex-col">
+	{% block content %}
+		{% import 'macros/icons.html.twig' as icons %}
 
-		<section aria-label="À la une" class="flex flex-col gap-10 my-20">
+		{% set carouselArticles = [hero] | merge(cards) %}
 
-			<article>
-				<a href="{{ base }}/controller/article.php?slug={{ hero.slug }}" class="group grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50">
-
-					<div class="flex flex-col justify-between gap-10 lg:gap-0">
-						<div class="flex flex-col gap-5">
-							<h1 class="text-3xl group-hover:text-cerise-special transition-colors duration-200">{{ hero.titre }}</h1>
-							<img src="{{ base }}/assets/images/{{ hero.image_principale }}" class="w-full h-full object-cover aspect-3/2 overflow-hidden md:hidden" alt="{{ hero.titre }}">
-							<small class="md:hidden group-hover:text-cerise-01 transition-colors duration-300 text-small">{{ hero.chapeau | striptags | slice(0, 250) | split(' ') | slice(0, -1) | join(' ') ~ '...' }}</small>
-							<small class="hidden md:inline group-hover:text-cerise-01 transition-colors duration-300 text-small">{{ hero.chapeau | striptags }}</small>
-
+		{# Carousel #}
+		<section class="carousel-section" aria-label="À la une">
+			<div class="carousel-track" id="carouselTrack">
+				{% for article in carouselArticles %}
+					<a href="{{ base }}/controller/article.php?slug={{ article.slug }}" class="carousel-card group{% if loop.first %} is-active{% endif %}">
+						<div class="carousel-card__image">
+							<img src="{{ base }}/assets/images/{{ article.image_principale }}" alt="{{ article.titre }}">
 						</div>
-
-						<div class="flex justify-between">
-							<small class="text-small">{{ formatDateFr(hero.date_publication) }}</small>
-							<small class="text-neutral-400 text-small">{{ hero.rubrique }}</small>
-						</div>
+						<div class="carousel-card__body">
+							<div class="flex flex-col">
+								<h1 class="font-serif text-2xl/7 text-gradient md:text-cerise-01 md:text-3xl line-clamp-2 lg:group-hover:text-gradient transition-colors">{{ article.titre }}<h1>
+										<p class="text-small-serif md:text-body line-clamp-3 mt-4">{{ article.chapeau | striptags }}</p>
+									</div>
+									<div class="flex justify-between text-small mt-5">
+										<span>{{ formatDateFr(article.date_publication) }}</span>
+										<span class="text-cerise-07">{{ article.rubrique }}</span>
+									</div>
+								</div>
+							</a>
+						{% endfor %}
 					</div>
 
-					<div class="hidden lg:flex flex-col gap-5">
-						<img src="{{ base }}/assets/images/{{ hero.image_principale }}" class="w-full h-full object-cover aspect-square overflow-hidden" alt="{{ hero.titre }}">
-						<small class="text-neutral-400">{{ hero.credit_photo }}</small>
+					<div class="carousel-nav">
+						{% include 'components/button.html.twig' with {
+				label: '←',
+				data_action: 'carousel-prev',
+				aria_label: 'Article précédent'
+			} %}
+						{% include 'components/button.html.twig' with {
+				label: '→',
+				data_action: 'carousel-next',
+				aria_label: 'Article suivant'
+			} %}
 					</div>
+				</section>
 
-				</a>
-			</article>
-
-			<div class="flex flex-col gap-10 md:grid grid-cols-2 grid-rows-1 md:gap-4" aria-label="Autres articles">
-				{% for card in cards %}
-					{% include 'components/card.html.twig' with {'card': card} %}
-				{% endfor %}
-			</div>
-
-		</section>
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 flex flex-col">
 
 
-		{% if articleAVenir %}
-			<section aria-labelledby="a-venir-titre" class=" flex flex-col gap-25 md:pb-20">
-				<div class="flex flex-row items-center gap-5">
-					<hr class="flex-1 border-t border-(--09)">
-					<h2 id="a-venir-titre" class="text-h1-serif whitespace-nowrap select-none">Article à venir</h2>
-					<hr class="flex-1 border-t border-(--09)">
-				</div>
-				<div class="flex-1 flex items-center justify-center">
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 cursor-default select-none">
-						<div class="overflow-hidden relative">
-							<img src="{{ base }}/assets/images/{{ articleAVenir.image_principale }}" class="w-full object-cover aspect-4/2 blur-xs" alt="{{ articleAVenir.titre }}" oncontextmenu="return false" draggable="false">
-							<div class="absolute bottom-0 left-0 flex flex-row gap-2 bg-linear-to-bl from-cerise-special to-cerise-01 w-fit ml-5 mb-5 px-3 py-1 items-center">
-								{{ icons.icon('file-lock', 'bold', 'w-4 h-4 text-white') }}
-								<small class="text-cerise-10">Bientôt</small>
+					{% if articleAVenir %}
+						<section aria-labelledby="a-venir-titre" class=" flex flex-col gap-25 md:pb-20 mt-30 ">
+							<div class="flex flex-row items-center gap-5">
+								<hr class="flex-1 border-t border-(--09)">
+								<h2 id="a-venir-titre" class="text-h1-serif whitespace-nowrap select-none">Article à venir</h2>
+								<hr class="flex-1 border-t border-(--09)">
 							</div>
-						</div>
+							<div class="flex-1 flex items-center justify-center">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 cursor-default select-none">
+									<div class="overflow-hidden relative">
+										<img src="{{ base }}/assets/images/{{ articleAVenir.image_principale }}" class="w-full object-cover aspect-4/2 blur-xs" alt="{{ articleAVenir.titre }}" oncontextmenu="return false" draggable="false">
+										<div class="absolute bottom-0 left-0 flex flex-row gap-2 bg-linear-to-bl from-cerise-special to-cerise-01 w-fit ml-5 mb-5 px-3 py-1 items-center">
+											{{ icons.icon('file-lock', 'bold', 'w-4 h-4 text-white') }}
+											<small class="text-cerise-10" data-stagger-text>Bientôt</small>
+										</div>
+									</div>
 
-						<div class="flex flex-col gap-5 md:justify-between">
-							<div class="flex flex-col gap-5">
-								<h2 class="text-h2-section">{{ articleAVenir.titre }}</h2>
-								<small class="text-small">{{ articleAVenir.chapeau | striptags | slice(0, 250) }}...</small>
+									<div class="flex flex-col gap-5 md:justify-between">
+										<div class="flex flex-col gap-5">
+											<h2 class="text-h2-section">{{ articleAVenir.titre }}</h2>
+											<small class="text-small">{{ articleAVenir.chapeau | striptags | slice(0, 250) }}...</small>
+										</div>
+										<div>
+											<small>{{ articleAVenir.rubrique }}</small>
+										</div>
+									</div>
+
+								</div>
 							</div>
-							<div>
-								<small>{{ articleAVenir.rubrique }}</small>
+						</section>
+					{% endif %}
+
+
+					<section aria-labelledby="newsletter-titre" class="grid grid-cols-1 lg:grid-cols-2 lg:h-dvh my-20">
+						<div class="place-self-center flex flex-col gap-10 w-1/2">
+							<div class="flex flex-col gap-2 text-center">
+								<h2 id="newsletter-titre" class="text-h1">Newsletter</h2>
+								<small class="text-small">Abonnez-vous à la newsletter de La Cerise et recevez nos articles en avant-première et toute l'actualité du site.</small>
 							</div>
-						</div>
 
-					</div>
-				</div>
-			</section>
-		{% endif %}
+							<form action="" method="post" class="flex flex-col gap-7 justify-center items-center">
 
-
-		<section aria-labelledby="newsletter-titre" class="grid grid-cols-1 lg:grid-cols-2 lg:h-dvh my-20">
-			<div class="place-self-center flex flex-col gap-10 w-1/2">
-				<div class="flex flex-col gap-2 text-center">
-					<h2 id="newsletter-titre" class="text-h1">Newsletter</h2>
-					<small class="text-small">Abonnez-vous à la newsletter de La Cerise et recevez nos articles en avant-première et toute l'actualité du site.</small>
-				</div>
-
-				<form action="" method="post" class="flex flex-col gap-7 justify-center items-center">
-
-					{% include 'components/input.html.twig' with { 
+								{% include 'components/input.html.twig' with { 
         type: 'email', 
         id: 'email', 
         name: 'email', 
@@ -95,21 +101,26 @@
         required: true
     } %}
 
-					{% include 'components/button.html.twig' with { label: "S'inscrire", type: 'submit' } %}
+								{% include 'components/button.html.twig' with { label: "S'inscrire", type: 'submit' } %}
 
-					{% if newsletterMessage %}
-						<p class="text-small {% if newsletterMessage.type == 'succes' %}text-cerise-01{% else %}text-cerise-special{% endif %}">
-							{{ newsletterMessage.texte }}
-						</p>
-					{% endif %}
+								{% if newsletterMessage %}
+									<p class="text-small {% if newsletterMessage.type == 'succes' %}text-cerise-01{% else %}text-cerise-special{% endif %}">
+										{{ newsletterMessage.texte }}
+									</p>
+								{% endif %}
 
-				</form>
-			</div>
+							</form>
+						</div>
 
-			{% if mediaNewsletter %}
-				<img src="{{ base }}/assets/images/{{ mediaNewsletter.fichier }}" alt="{{ mediaNewsletter.alt }}" class="place-self-center h-3/4 lg:h-1/2">
-			{% endif %}
-		</section>
+						{% if mediaNewsletter %}
+							<img src="{{ base }}/assets/images/{{ mediaNewsletter.fichier }}" alt="{{ mediaNewsletter.alt }}" class="place-self-center h-3/4 lg:h-1/2">
+						{% endif %}
+					</section>
 
-	</div>
-{% endblock %}
+				</div>
+
+				<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+				<script src="{{ base }}/assets/js/carousel.js" defer></script>
+				<script src="{{ base }}/assets/js/stagger.js" defer></script>
+
+			{% endblock %}

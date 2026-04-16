@@ -18,14 +18,14 @@ $hero = $stmtHero->fetch();
 $motsHero = $hero ? str_word_count(strip_tags($hero['contenu'])) : 0;
 $lectureHero = max(1, round($motsHero / 200));
 
-// 4 articles suivants pour les cards
+// 2 articles suivants pour les cards (3 au total avec le hero)
 $stmtCards = $pdo->prepare("
     SELECT a.*, r.nom AS rubrique
     FROM articles a
     LEFT JOIN rubriques r ON a.rubrique_id = r.id
     WHERE a.statut = 'publie' AND a.id != :id
     ORDER BY a.date_publication DESC
-    LIMIT 4
+    LIMIT 2
 ");
 $stmtCards->execute([':id' => $hero['id'] ?? 0]);
 $cards = $stmtCards->fetchAll();
