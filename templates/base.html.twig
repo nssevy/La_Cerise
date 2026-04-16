@@ -1,3 +1,4 @@
+{% import 'macros/icons.html.twig' as icons %}
 <!DOCTYPE html>
 <html lang="fr" data-theme="light">
 
@@ -39,8 +40,8 @@
 				<div class="flex items-center gap-4">
 					<a class="hidden md:block text-body uppercase text-(--01) whitespace-nowrap hocus:text-(--special) transition-colors" href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise">Me contacter</a>
 					<button id="menu-btn" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false">
-						<div id="icon-open" class="icon-menu text-2xl"></div>
-						<div id="icon-close" class="icon-x text-2xl hidden"></div>
+						<span id="icon-open">{{ icons.icon('list', 'bold', 'w-6 h-6') }}</span>
+						<span id="icon-close" class="hidden">{{ icons.icon('x', 'bold', 'w-6 h-6') }}</span>
 					</button>
 				</div>
 
@@ -65,7 +66,7 @@
 
 			{% block content %}{% endblock %}
 
-			</main>
+		</main>
 
 		<footer class="py-12 flex flex-col  max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
 			<hr class="w-full border-t border-(--09)">
