@@ -1,0 +1,109 @@
+/* =====================================================
+   CAROUSEL — Page d'accueil
+   ===================================================== */
+
+.carousel-section {
+    position: relative;
+    overflow-x: clip; /* coupe les cartes voisines sans bloquer le contenu vertical */
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    will-change: transform;
+    cursor: grab;
+    user-select: none; /* empêche la sélection de texte pendant le drag */
+}
+
+/* Carte individuelle */
+.carousel-card {
+    flex-shrink: 0;
+    width: 800px;
+    margin-right: 60px;
+    display: flex;
+    flex-direction: column;
+    color: var(--01);
+    text-decoration: none;
+}
+
+.carousel-card__image img {
+    width: 100%;
+    aspect-ratio: 800 / 450;
+    object-fit: cover;
+    display: block;
+}
+
+/* Le texte n'est visible que sur la carte active */
+.carousel-card__body {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 20px;
+    /* Hauteur fixe desktop : image = 450px, total carte = 674px → corps = 224px.
+       Garantit que les boutons restent toujours à la même position. */
+    height: 224px;
+    overflow: hidden;
+}
+
+.carousel-card.is-active .carousel-card__body {
+    display: flex;
+}
+
+/* Boutons de navigation — dans le flux, juste en dessous des cartes */
+.carousel-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 16px 0;
+    margin-right: 15px;
+}
+
+/* ---- Mobile (< 1024px) ---- */
+@media (max-width: 1023px) {
+    /* svh = "small viewport height" : toujours calculé avec la barre URL visible.
+       On soustrait ~65px pour la hauteur du header sticky. */
+    .carousel-section {
+        height: calc(100svh - 65px);
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        min-height: unset;
+    }
+
+    /* Le track prend tout l'espace restant au-dessus des boutons */
+    .carousel-track {
+        flex: 1;
+        min-height: 0; /* permet au flex item de rétrécir en dessous de son contenu */
+    }
+
+    .carousel-card {
+        /* 10px de peek + 10px de gap de chaque côté = 40px total retirés */
+        width: calc(100vw - 40px);
+        margin-right: 10px;
+        height: 100%; /* remplit la hauteur du track */
+    }
+
+    /* L'image prend 60% de la hauteur de l'écran */
+    .carousel-card__image img {
+        height: 60svh;
+        aspect-ratio: unset;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    /* Corps de la carte active : remplit l'espace restant sous l'image */
+    .carousel-card.is-active .carousel-card__body {
+        flex: 1;
+        overflow: hidden;
+        padding: 12px 16px 8px;
+    }
+
+    /* Boutons dans le flux normal — alignés à droite, toujours visibles */
+    .carousel-nav {
+        flex-shrink: 0;
+        padding: 8px 16px 12px;
+    }
+}

@@ -82,111 +82,115 @@ strong {
 /* ---------------------------------------------------
    CLASSES COMPOSANTS TYPOGRAPHIQUES
    --------------------------------------------------- */
-@layer components {
-  /* ---------------------------------------------------
-     ÉCHELLE TYPOGRAPHIQUE — Mobile-first
-     Source : Figma "Cerise" node 84-249
-     Breakpoints : md = 768px / lg = 1024px
-     --------------------------------------------------- */
+/* ---------------------------------------------------
+   ÉCHELLE TYPOGRAPHIQUE — Mobile-first
+   Définie avec @utility pour que les variantes responsives
+   (md:, lg:, hover:…) fonctionnent automatiquement.
+   Source : Figma "Cerise" node 84-249
+   Breakpoints : md = 768px / lg = 1024px
+   --------------------------------------------------- */
 
-  .text-h1 {
-    font-family: var(--font-sans);
-    font-size: 1.75rem;  
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+@utility text-h1 {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
 
-    @media (min-width: 1024px) { font-size: 2rem;    }
-  }
-  
-  .text-h1-serif {
-    font-family: var(--font-serif);
-    font-size: 1.75rem;
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+  @media (min-width: 1024px) { font-size: 2rem; }
+}
 
-    @media (min-width: 1024px) { font-size: 2rem;    }
-  }
+@utility text-h1-serif {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
 
-  .text-h2-section {
-    font-family: var(--font-sans);
-    font-size: 1.25rem;   
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.45px;
+  @media (min-width: 1024px) { font-size: 2rem; }
+}
 
-    @media (min-width: 768px)  { font-size: 1.375rem; } 
-    @media (min-width: 1024px) { font-size: 1.5rem;   } 
-  }
-  .text-h2-section-serif {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.45px;
+@utility text-h2-section {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.45px;
 
-    @media (min-width: 768px)  { font-size: 1.375rem; }
-    @media (min-width: 1024px) { font-size: 1.5rem;   }
-  }
+  @media (min-width: 768px)  { font-size: 1.375rem; }
+  @media (min-width: 1024px) { font-size: 1.5rem;   }
+}
 
-  .text-h3 {
-    font-family: var(--font-sans);
-    font-size: 1.125rem;  
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.22px;
+@utility text-h2-section-serif {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.45px;
 
-    @media (min-width: 1024px) { font-size: 1.25rem; } 
-  }
-  .text-h3-serif {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.22px;
+  @media (min-width: 768px)  { font-size: 1.375rem; }
+  @media (min-width: 1024px) { font-size: 1.5rem;   }
+}
 
-    @media (min-width: 1024px) { font-size: 1.25rem; }
-  }
+@utility text-h3 {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.22px;
 
-  .text-body {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.6875; 
-    letter-spacing: -0.48px;
-  }
-  .text-body-serif {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.6875;
-    letter-spacing: -0.48px;
-  }
+  @media (min-width: 1024px) { font-size: 1.25rem; }
+}
 
-  .text-surlignement {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.6875;
-    letter-spacing: -0.48px;
-    text-decoration: underline;
-  }
+@utility text-h3-serif {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.22px;
 
-  .text-small {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem; 
-    font-weight: 400;
-    line-height: 150%;      
-    letter-spacing: -0.00894rem;
-  }
-  .text-small-serif {
-    font-family: var(--font-serif);
-    font-size: 0.8125rem;
-    font-weight: 400;
-    line-height: 150%;   
-    letter-spacing: -0.00894rem;
-  }
+  @media (min-width: 1024px) { font-size: 1.25rem; }
+}
+
+@utility text-body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6875;
+  letter-spacing: -0.48px;
+}
+
+@utility text-body-serif {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6875;
+  letter-spacing: -0.48px;
+}
+
+@utility text-surlignement {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6875;
+  letter-spacing: -0.48px;
+  text-decoration: underline;
+}
+
+@utility text-small {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.00894rem;
+}
+
+@utility text-small-serif {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.00894rem;
 }
 
 /* ---------------------------------------------------
@@ -250,6 +254,16 @@ strong {
 
 .contenu h2 {
     scroll-margin-top: 80px;
+}
+
+@import "./carousel.css";
+
+@utility text-gradient {
+  background-image: linear-gradient(to right, var(--color-cerise-01), var(--color-cerise-special), var(--color-cerise-special-mid));
+  display: inline-block;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 /* État actif dans la table des matières */
