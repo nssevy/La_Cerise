@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Lexique — Admin La Cerise</title>
+	</head>
+	<body>
+
+		<h1>Lexique</h1>
+
+		<a href="{{ base }}/admin/logout">Se déconnecter</a>
+		<a href="{{ base }}/admin/lexique/create">Nouveau terme</a>
+		<a href="{{ base }}/admin/article/list">Articles</a>
+		<a href="{{ base }}">Le site</a>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Terme</th>
+					<th>Catégorie</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for terme in termes %}
+					<tr>
+						<td>{{ terme.terme }}</td>
+						<td>{{ terme.categorie ?? '—' }}</td>
+						<td>
+							<a href="{{ base }}/admin/lexique/edit?id={{ terme.id }}">Éditer</a>
+
+							<form method="POST" action="{{ base }}/admin/lexique/delete" style="display:inline;">
+								<input type="hidden" name="id" value="{{ terme.id }}">
+								<button type="submit">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3">Aucun terme pour le moment.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</body>
+</html>

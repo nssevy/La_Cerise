@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 2) . '/config/db.php';
-require_once dirname(__DIR__, 2) . '/config/twig.php';
-require_once dirname(__DIR__, 2) . '/includes/auth.php';
+require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+require_once dirname(__DIR__, 3) . '/config/db.php';
+require_once dirname(__DIR__, 3) . '/config/twig.php';
+require_once dirname(__DIR__, 3) . '/includes/auth.php';
 
 requireLogin();
 
@@ -10,7 +10,7 @@ $errors = [];
 $id = $_GET['id'] ?? null;
 
 if (!$id) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/dashboard');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/article/list');
     exit;
 }
 
@@ -20,7 +20,7 @@ $stmt->execute([$id]);
 $article = $stmt->fetch();
 
 if (!$article) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/dashboard');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/article/list');
     exit;
 }
 
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/admin/dashboard');
+        header('Location: ' . $base . '/admin/article/list');
         exit;
     }
 

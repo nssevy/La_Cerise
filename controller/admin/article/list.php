@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 2) . '/config/db.php';
-require_once dirname(__DIR__, 2) . '/config/twig.php';
-require_once dirname(__DIR__, 2) . '/includes/auth.php';
+require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+require_once dirname(__DIR__, 3) . '/config/db.php';
+require_once dirname(__DIR__, 3) . '/config/twig.php';
+require_once dirname(__DIR__, 3) . '/includes/auth.php';
 
 requireLogin();
 

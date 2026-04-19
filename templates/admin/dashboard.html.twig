@@ -7,13 +7,11 @@
 	</head>
 	<body>
 
-		<h1>Tableau de bord</h1>
-		<p>Connecté en tant que
-			{{ user_nom }}</p>
+		<h1>Salut
+			{{ user_nom }}</h1>
+
 		<a href="{{ base }}/admin/logout">Se déconnecter</a>
-
-		<a href="{{ base }}/admin/article_create">Nouvel article</a>
-
+		<a href="{{ base }}/admin/article/create">Nouvel article</a>
 		<a href="{{ base }}">Le site</a>
 
 		<table>
@@ -34,9 +32,9 @@
 						<td>{{ article.statut }}</td>
 						<td>{{ article.date_publication ? article.date_publication|date('d/m/Y') : '—' }}</td>
 						<td>
-							<a href="{{ base }}/admin/article_edit?id={{ article.id }}">Éditer</a>
+							<a href="{{ base }}/admin/article/edit?id={{ article.id }}">Éditer</a>
 
-							<form method="POST" action="{{ base }}/admin/article_delete" style="display:inline;">
+							<form method="POST" action="{{ base }}/admin/article/delete" style="display:inline;">
 								<input type="hidden" name="id" value="{{ article.id }}">
 								<button type="submit" data-action="confirm-delete">Supprimer</button>
 							</form>
@@ -50,7 +48,7 @@
 			</tbody>
 		</table>
 
-		<script src="/La_Cerise/assets/js/confirm.js" defer></script>
+		<script src="{{ base }}/assets/js/confirm.js" defer></script>
 
 	</body>
 </html>

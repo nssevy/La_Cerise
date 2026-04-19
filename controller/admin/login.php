@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if (!empty($_SESSION['user_id'])) {
     $base = $_ENV['BASE_URL'] ?? '';
-    header('Location: ' . $base . '/admin/dashboard');
+    header('Location: ' . $base . '/admin/article/list');
     exit;
 }
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_role'] = $user['role'];
 
             $base = $_ENV['BASE_URL'] ?? '';
-            header('Location: ' . $base . '/admin/dashboard');
+            header('Location: ' . $base . '/admin/article/list');
             exit;
         } else {
             $error = 'Email, Nom ou mot de passe incorrect.';
