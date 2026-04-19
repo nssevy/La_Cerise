@@ -1,7 +1,7 @@
 {# Card pour la page d'accueil et à la fin des articles #}
 
 <article class="flex flex-col gap-5">
-	<a href="{{ base }}/controller/article.php?slug={{ card.slug }}" class="flex flex-col gap-5 group">
+	<a href="{{ base }}/article/{{ card.slug }}" class="flex flex-col gap-5 group">
 		<div class="flex flex-col gap-2">
 			{% if card.image_principale is not empty %}
 				<img src="{{ base }}/assets/images/{{ card.image_principale }}" alt="{{ card.titre }}" class="w-full object-cover aspect-3/2">

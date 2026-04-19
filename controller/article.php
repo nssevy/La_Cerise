@@ -5,7 +5,7 @@ require_once dirname(__DIR__) . '/config/twig.php';
 $slug = $_GET['slug'] ?? null;
 
 if (!$slug) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/controller/');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/');
     exit;
 }
 
@@ -22,7 +22,7 @@ $stmt->execute([':slug' => $slug]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$article) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/controller/');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/');
     exit;
 }
 

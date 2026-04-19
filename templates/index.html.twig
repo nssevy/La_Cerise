@@ -16,7 +16,7 @@
 		<section class="carousel-section" aria-label="À la une">
 			<div class="carousel-track" id="carouselTrack">
 				{% for article in carouselArticles %}
-					<a href="{{ base }}/controller/article.php?slug={{ article.slug }}" class="carousel-card group{% if loop.first %} is-active{% endif %}">
+					<a href="{{ base }}/article/{{ article.slug }}" class="carousel-card group{% if loop.first %} is-active{% endif %}">
 						<div class="carousel-card__image">
 							<img src="{{ base }}/assets/images/{{ article.image_principale }}" alt="{{ article.titre }}">
 						</div>
