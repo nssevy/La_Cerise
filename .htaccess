@@ -1,10 +1,11 @@
 RewriteEngine On
+RewriteBase /La_Cerise/
 
 # Page d'accueil
 
 RewriteRule ^$ controller/index.php [L]
 
-# Laisser passer les fichiers existants
+# Laisser passer les fichiers existants (assets, images, css...)
 
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
@@ -15,6 +16,10 @@ RewriteCond %{REQUEST_URI} !^/$
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Toutes les autres routes
+# Route article : /article/mon-slug
 
-RewriteRule ^(.\*)$ controller/index.php [L]
+RewriteRule ^article/([^/]+)/?$ controller/article.php?slug=$1 [L,QSA]
+
+# Toutes les autres routes : /lexique → controller/lexique.php
+
+RewriteRule ^(.+?)(?:\.php)?$ controller/$1.php [L]

@@ -10,7 +10,7 @@ $errors = [];
 $id = $_GET['id'] ?? null;
 
 if (!$id) {
-    header('Location: /La_Cerise/controller/admin/dashboard.php');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/dashboard');
     exit;
 }
 
@@ -20,7 +20,7 @@ $stmt->execute([$id]);
 $article = $stmt->fetch();
 
 if (!$article) {
-    header('Location: /La_Cerise/controller/admin/dashboard.php');
+    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/dashboard');
     exit;
 }
 
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/controller/admin/dashboard.php');
+        header('Location: ' . $base . '/admin/dashboard');
         exit;
     }
 

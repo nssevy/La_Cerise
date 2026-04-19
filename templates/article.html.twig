@@ -53,10 +53,10 @@
 					<hr class="flex-1 border-t border-(--09)">
 				</div>
 				<div class="grid grid-cols-1 gap-10
-																																																																																																																																																																																																																																										                    {% if suggeres|length == 1 %}md:grid-cols-1
-																																																																																																																																																																																																																																										                    {% elseif suggeres|length == 2 %}md:grid-cols-2
-																																																																																																																																																																																																																																										                    {% else %}md:grid-cols-3
-																																																																																																																																																																																																																																										                    {% endif %}">
+																																																																																																																																																																																																																																																                    {% if suggeres|length == 1 %}md:grid-cols-1
+																																																																																																																																																																																																																																																                    {% elseif suggeres|length == 2 %}md:grid-cols-2
+																																																																																																																																																																																																																																																                    {% else %}md:grid-cols-3
+																																																																																																																																																																																																																																																                    {% endif %}">
 					{% for suggere in suggeres %}
 						{% include 'components/card.html.twig' with {'card': suggere} %}
 					{% endfor %}
@@ -66,7 +66,7 @@
 	{% endif %}
 
 	<div class="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-		<a href="{{ base }}/controller/">
+		<a href="{{ base }}/">
 			{% include 'components/button.html.twig' with { label: "Retour" } %}
 		</a>
 

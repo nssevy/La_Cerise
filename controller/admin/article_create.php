@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/controller/admin/dashboard.php');
+        header('Location: ' . $base . '/admin/dashboard');
         exit;
     }
 }
