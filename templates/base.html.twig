@@ -18,49 +18,8 @@
 
 	<body>
 
-		<header class="w-full sticky top-0 z-50 bg-white border-b border-(--09)">
-			<div class="flex items-center justify-between py-4 max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-
-				<nav
-					class="hidden md:flex items-center gap-5 text-body uppercase text-(--01) whitespace-nowrap">
-					{# <a href="#" class="hocus:text-(--special) transition-colors">Articles</a> #}
-					<a href="{{ base }}/lexique" class="hocus:text-(--special) transition-colors">Lexique</a>
-				</nav>
-
-				<a href="{{ base }}/">
-					<div class="relative h-8">
-						<img
-						{# flouté #} src="{{ base }}/assets/images/Logo.png" alt="" class="h-8 w-auto absolute top-0 left-0 blur-md opacity-50">
-						{# pas flouté #}
-						<img src="{{ base }}/assets/images/Logo.png" alt="La Cerise" class="h-8 w-auto relative">
-					</div>
-				</a>
-
-
-				<div class="flex items-center gap-4">
-					<a class="hidden md:block text-body uppercase text-(--01) whitespace-nowrap hocus:text-(--special) transition-colors" href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise">Me contacter</a>
-					<button id="menu-btn" class="md:hidden" aria-label="Ouvrir le menu" aria-expanded="false">
-						<span id="icon-open" class="w-6 h-6 inline-flex items-center justify-center">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="40" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
-						</span>
-						<span id="icon-close" class="hidden w-6 h-6 inline-flex items-center justify-center">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="200" y1="56" x2="56" y2="200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="200" y1="200" x2="56" y2="56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
-						</span>
-					</button>
-				</div>
-
-			</div>
-
-			<nav
-				id="mobile-menu" class="hidden md:hidden flex-col gap-4 px-12 pb-6 pt-2 border-t border-(--09)bg-white">
-				{# <a href="#" class="block text-body uppercase text-(--01) py-2 hocus:text-(--special) transition-colors">Articles</a> #}
-				<a href="{{ base }}/lexique" class="block text-body uppercase text-(--01) py-2 hocus:text-(--special) transition-colors">Lexique</a>
-
-				<a href="mailto:contact@lacerise.blog?subject=Contact%20La%20Cerise" class="block text-body uppercase text-(--01) py-2 hocus:text-(--special) transition-colors">Me contacter</a>
-
-			</nav>
-
-		</header>
+		{% include 'partials/header.html.twig' %}
+		{% include 'partials/nav-mobile.html.twig' %}
 
 		<script src="{{ base }}/assets/js/menu.js" defer></script>
 
@@ -72,39 +31,7 @@
 
 		</main>
 
-		<footer class="py-12 flex flex-col  max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-			<hr class="w-full border-t border-(--09)">
-			<div class="flex flex-col md:flex-row justify-between py-10">
-				<div class="">
-					<p class="text-5xl md:text-[52px] font-light leading-none text-(--01)">La cerise</p>
-				</div>
-				<div class="grid grid-cols-2 grid-rows-1 gap-4 uppercase text-body pt-15 md:pt-0">
-					<section class="flex flex-col gap-5">
-						<h2 class="text-cerise-06 text-body">Nous suivre</h2>
-						<ul class="flex flex-col gap-3">
-							<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-								<a href="https://www.instagram.com/revue.cerise/" target="_blank" rel="noopener noreferrer">Instagram</a>
-							</li>
-						</ul>
-					</section>
-					<section class="flex flex-col gap-5">
-						<h2 class="text-cerise-06 text-body">Article</h2>
-						<ul class="flex flex-col gap-3">
-							<li>HUMANITAIRE ET CONFLITS</li>
-							<li>INDÉPENDANCE DES PEUPLES</li>
-							<li>JUSTICE SOCIALE, TRAVAIL ET DIGNITÉ HUMAINE</li>
-						</ul>
-					</section>
+		{% include 'partials/footer.html.twig' %}
 
-				</div>
-			</div>
-			<hr class="w-full border-t border-(--09)">
-			<div class="flex flex-wrap justify-between py-10">
-				<p class="whitespace-nowrap">© 2026 La Cerise - Tous droits réservés.</p>
-				<a href="{{ base }}/admin/login.php" class="hocus:text-(--special) transition-colors whitespace-nowrap">Admin</a>
-				<a href="#" class="hocus:text-(--special) transition-colors whitespace-nowrap">Mentions légales</a>
-			</div>
-			{% block scripts %}{% endblock %}
-		</footer>
 	</body>
 </html>

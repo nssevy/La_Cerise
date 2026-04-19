@@ -1,18 +1,20 @@
-// Toggle menu mobile
-const menuBtn   = document.getElementById('menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const iconOpen  = document.getElementById('icon-open');
-const iconClose = document.getElementById('icon-close');
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+const iconOpen = document.getElementById("icon-open");
+const iconClose = document.getElementById("icon-close");
 
-menuBtn.addEventListener('click', function () {
-    const isOpen = !mobileMenu.classList.contains('hidden');
+menuBtn.addEventListener("click", function () {
+  const isOpen = !mobileMenu.classList.contains("-translate-y-full");
 
-    // Toggle menu
-    mobileMenu.classList.toggle('hidden');
-    mobileMenu.classList.toggle('flex');
-    menuBtn.setAttribute('aria-expanded', String(!isOpen));
+  mobileMenu.classList.toggle("-translate-y-full");
+  mobileMenu.classList.toggle("translate-y-0");
+  menuBtn.setAttribute("aria-expanded", String(!isOpen));
 
-    // Toggle icônes Lucide
-    iconOpen.classList.toggle('hidden');
-    iconClose.classList.toggle('hidden');
+  if (isOpen) {
+    iconOpen.style.display = "inline-flex";
+    iconClose.style.display = "none";
+  } else {
+    iconOpen.style.display = "none";
+    iconClose.style.display = "inline-flex";
+  }
 });

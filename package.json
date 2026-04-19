@@ -1,7 +1,9 @@
 {
   "scripts": {
     "build": "npx @tailwindcss/cli -i ./assets/css/input.css -o ./assets/css/output.css",
-    "dev": "npx @tailwindcss/cli -i ./assets/css/input.css -o ./assets/css/output.css --watch"
+    "dev": "npx @tailwindcss/cli -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+    "main": "git checkout main",
+    "develop": "git checkout develop"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.2.2",
