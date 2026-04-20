@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 require_once dirname(__DIR__, 3) . '/config/db.php';
-require_once dirname(__DIR__, 3) . '/includes/auth.php';
+require_once dirname(__DIR__, 3) . '/lib/auth.php';
 
 requireLogin();
 

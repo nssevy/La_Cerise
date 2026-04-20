@@ -1,6 +1,6 @@
 <?php
-require_once dirname(__DIR__) . '/config/db.php';
-require_once dirname(__DIR__) . '/config/twig.php';
+require_once dirname(__DIR__, 2) . '/config/db.php';
+require_once dirname(__DIR__, 2) . '/config/twig.php';
 
 $slug = $_GET['slug'] ?? null;
 
@@ -45,10 +45,6 @@ $stmtSuggeres->execute([':id' => $article['id']]);
 $suggeres = $stmtSuggeres->fetchAll(PDO::FETCH_ASSOC);
 
 // Génération automatique de la table des matières (TOC)
-// Parcourt le contenu HTML de l'article via DOMDocument,
-// extrait chaque balise <h2>, crée un slug (ancre) à partir de son texte,
-// injecte un attribut id="ancre" sur chaque <h2> dans le contenu,
-// et construit le tableau $toc utilisé par le template pour afficher les liens de navigation.
 $toc = [];
 if ($article['contenu']) {
     $dom = new DOMDocument();
@@ -78,7 +74,7 @@ if ($article['contenu']) {
     $article['contenu'] = $contenuAvecAncres;
 }
 
-echo $twig->render('article.html.twig', [
+echo $twig->render('public/article.html.twig', [
     'article' => $article,
     'lecture' => $lecture,
     'suggeres' => $suggeres,

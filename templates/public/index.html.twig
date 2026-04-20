@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'public/base.html.twig' %}
 
 {% block titre %}La Cerise
 {% endblock %}
@@ -93,13 +93,13 @@
 
 							<form action="" method="post" class="flex flex-col gap-7 justify-center items-center">
 
-								{% include 'components/input.html.twig' with { 
-        type: 'email', 
-        id: 'email', 
-        name: 'email', 
-        placeholder: 'Adresse e-mail',
-        required: true
-    } %}
+								{% include 'components/input.html.twig' with {
+	type: 'email',
+	id: 'email',
+	name: 'email',
+	placeholder: 'Adresse e-mail',
+	required: true
+} %}
 
 								{% include 'components/button.html.twig' with { label: "S'inscrire", type: 'submit' } %}
 

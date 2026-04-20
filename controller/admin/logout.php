@@ -5,6 +5,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 2));
 $dotenv->load();
 
 
-require_once dirname(__DIR__, 2) . '/includes/auth.php';
+require_once dirname(__DIR__, 2) . '/lib/auth.php';
 
 logout();

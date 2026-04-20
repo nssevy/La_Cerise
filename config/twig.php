@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__DIR__) . '/vendor/autoload.php';
-require_once dirname(__DIR__) . '/includes/helpers.php';
+require_once dirname(__DIR__) . '/lib/helpers.php';
 
 $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/templates');
 

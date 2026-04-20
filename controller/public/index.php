@@ -1,6 +1,6 @@
 <?php
-require_once dirname(__DIR__) . '/config/db.php';
-require_once dirname(__DIR__) . '/config/twig.php';
+require_once dirname(__DIR__, 2) . '/config/db.php';
+require_once dirname(__DIR__, 2) . '/config/twig.php';
 
 // Article hero (le plus récent)
 $stmtHero = $pdo->query("
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email'])) {
 
 // Le render
 
-echo $twig->render('index.html.twig', [
+echo $twig->render('public/index.html.twig', [
     'hero' => $hero,
     'cards' => $cards,
     'lexique' => $lexique,

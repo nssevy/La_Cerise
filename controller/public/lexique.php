@@ -1,6 +1,6 @@
 <?php
-require_once dirname(__DIR__) . '/config/db.php';
-require_once dirname(__DIR__) . '/config/twig.php';
+require_once dirname(__DIR__, 2) . '/config/db.php';
+require_once dirname(__DIR__, 2) . '/config/twig.php';
 
 $listTermes = $pdo->query("
     SELECT terme, categorie, definition
@@ -16,7 +16,7 @@ foreach ($listTermes as $terme) {
 }
 ksort($termesParLettre);
 
-echo $twig->render('lexique.html.twig', [
+echo $twig->render('public/lexique.html.twig', [
     'termesParLettre' => $termesParLettre,
     'base' => $_ENV['BASE_URL'] ?? '',
 
