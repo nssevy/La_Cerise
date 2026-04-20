@@ -1,54 +1,46 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Dashboard — Admin La Cerise</title>
-	</head>
-	<body>
+{% extends 'admin/base.html.twig' %}
 
-		<h1>Salut
-			{{ user_nom }}</h1>
+{% block titre %}La Cerise
+{% endblock %}
 
-		<a href="{{ base }}/admin/logout">Se déconnecter</a>
-		<a href="{{ base }}/admin/article/create">Nouvel article</a>
-		<a href="{{ base }}">Le site</a>
 
-		<table>
-			<thead>
-				<tr>
-					<th>Titre</th>
-					<th>Rubrique</th>
-					<th>Statut</th>
-					<th>Date de publication</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for article in articles %}
-					<tr>
-						<td>{{ article.titre }}</td>
-						<td>{{ article.rubrique ?? 'Non classé' }}</td>
-						<td>{{ article.statut }}</td>
-						<td>{{ article.date_publication ? article.date_publication|date('d/m/Y') : '—' }}</td>
-						<td>
-							<a href="{{ base }}/admin/article/edit?id={{ article.id }}">Éditer</a>
+{% import 'macros/icons.html.twig' as icons %}
+{# Statut #}
+{% block content %}
+	<div class="grid grid-cols-4 gap-4 my-8">
+		{% set labels = {
+    'publie': 'Publié',
+    'brouillon': 'Brouillons',
+    'a_venir': 'A venir',
+    'archive': 'Archives'
+} %}
 
-							<form method="POST" action="{{ base }}/admin/article/delete" style="display:inline;">
-								<input type="hidden" name="id" value="{{ article.id }}">
-								<button type="submit" data-action="confirm-delete">Supprimer</button>
-							</form>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="5">Aucun article pour le moment.</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		{% for statut, label in labels %}
+			{% include 'admin/partials/stat.html.twig' with {
+            label: label,
+            value: stats[statut] ?? null
+        } %}
+		{% endfor %}
+	</div>
 
-		<script src="{{ base }}/assets/js/confirm.js" defer></script>
+	{# Les articles #}
+	<ul class="flex flex-col gap-5">
+		{% for article in articles %}
+			<li>
+				{% include 'admin/partials/article-card.html.twig' %}
+			</li>
+		{% else %}
+			<li class="text-(--cerise-07) py-4">Aucun article pour le moment.</li>
+		{% endfor %}
+	</ul>
 
-	</body>
-</html>
+	<div class="fixed bottom-4 right-4">
+		{% include 'components/button.html.twig' with {
+    label: 'Nouvel article',
+    href: base ~ '/admin/article/create'
+} %}
+	</div>
+
+	<script src="{{ base }}/assets/js/confirm.js" defer></script>
+
+{% endblock %}

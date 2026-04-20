@@ -7,12 +7,15 @@
 	</head>
 	<body>
 
-		<h1>Lexique</h1>
+		<header>
+			<h1>Lexique</h1>
+			<a href="{{ base }}">Le site</a>
+			<a href="{{ base }}/admin/logout">Se déconnecter</a>
+		</header>
 
-		<a href="{{ base }}/admin/logout">Se déconnecter</a>
+		{% include 'admin/partials/nav.html.twig' %}
+
 		<a href="{{ base }}/admin/lexique/create">Nouveau terme</a>
-		<a href="{{ base }}/admin/article/list">Articles</a>
-		<a href="{{ base }}">Le site</a>
 
 		<table>
 			<thead>

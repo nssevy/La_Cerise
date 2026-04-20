@@ -12,5 +12,7 @@ $termes = $stmt->fetchAll();
 echo $twig->render('admin/lexique_list.html.twig', [
     'termes' => $termes,
     'user_nom' => $_SESSION['user_nom'],
-    'base' => $_ENV['BASE_URL'] ?? ''
+    'base' => $_ENV['BASE_URL'] ?? '',
+    'section' => 'Lexique'
+
 ]);
