@@ -1,11 +1,15 @@
-<nav class="max-w-5xl mx-auto px-4 md:px-8">
-	<h1 class="text-4xl mb-5">{{section}}</h1>
-	<div class="text-lg flex flex-rows gap-5">
-		<a href="{{ base }}/admin/article/list">Articles</a>
-		<a href="{{ base }}/admin/lexique/list">Lexique</a>
-		<a href="{{ base }}/admin/lexique/list">Newsletter</a>
-		<a href="{{ base }}/admin/lexique/list">Paramètre</a>
-	</div>
-	<hr class="flex-1 border-t border-(--09)">
-
-</nav>
+{% set links = [
+    { label: 'Articles', href: base ~ '/admin/article/list', section: 'articles' },
+    { label: 'Lexique', href: base ~ '/admin/lexique/list', section: 'lexique' },
+    { label: 'Newsletter', href: base ~ '/admin/newsletter/list', section: 'newsletter' },
+    { label: 'Paramètre', href: base ~ '/admin/parametre', section: 'parametre' },
+] %}
+<div class="flex justify-center">
+	<nav class="inline-flex items-center bg-cerise-10 rounded-full border border-cerise-05 p-1 gap-1">
+		{% for link in links %}
+			<a href="{{ link.href }}" class="{{ section == link.section ? 'bg-cerise-01 text-cerise-10' : 'text-cerise-01 hover:bg-cerise-01/10' }} px-5 py-2 rounded-full text-sm transition-colors">
+				{{ link.label }}
+			</a>
+		{% endfor %}
+	</nav>
+</div>
