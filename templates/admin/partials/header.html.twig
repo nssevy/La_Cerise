@@ -1,23 +1,7 @@
-{% set links = [
-    { label: 'Articles', href: base ~ '/admin/article/list', section: 'articles' },
-    { label: 'Lexique', href: base ~ '/admin/lexique/list', section: 'lexique' },
-    { label: 'Newsletter', href: base ~ '/admin/newsletter/list', section: 'newsletter' },
-    { label: 'Paramètre', href: base ~ '/admin/parametre', section: 'parametre' },
-] %}
-
-<header class="max-w-5xl mx-auto px-4 md:px-8 flex justify-between my-10 items-center">
-	<a href="{{ base }}/">
-		<div class="relative h-8">
-			<img src="{{ base }}/assets/images/Logo.png" alt="" class="h-8 w-auto absolute top-0 left-0 blur-md opacity-50">
-			<img src="{{ base }}/assets/images/Logo.png" alt="La Cerise" class="h-8 w-auto relative">
-		</div>
-	</a>
-	<nav class="inline-flex items-center bg-cerise-10 rounded-full border border-cerise-05 p-1 gap-1">
-		{% for link in links %}
-			<a href="{{ link.href }}" class="{{ section == link.section ? 'bg-cerise-01 text-cerise-10' : 'text-cerise-01 hover:bg-cerise-01/10' }} px-5 py-2 rounded-full text-sm transition-colors">
-				{{ link.label }}
-			</a>
-		{% endfor %}
-	</nav>
+<header class=" top-0 max-w-5xl mx-auto px-4 md:px-8 flex justify-between py-10 items-center">
+	<div class="relative h-8">
+		<img src="{{ base }}/assets/images/Logo.png" alt="" class="h-8 w-auto absolute top-0 left-0 blur-md opacity-50">
+		<img src="{{ base }}/assets/images/Logo.png" alt="La Cerise" class="h-8 w-auto relative">
+	</div>
 	<a href="{{ base }}/admin/logout">Se déconnecter</a>
 </header>

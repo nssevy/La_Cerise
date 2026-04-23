@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% import 'macros/icons.html.twig' as icons %}
 <html lang="fr" data-theme="light">
-
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +14,12 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="{{ base }}/assets/images/favicon/favicon-16x16.png">
 		<link rel="apple-touch-icon" sizes="180x180" href="{{ base }}/assets/images/favicon/apple-touch-icon.png">
 	</head>
-
-	<body>
+	<body class="h-8473">
 		{% include 'admin/partials/header.html.twig' %}
-		{# {% include 'admin/partials/nav.html.twig' %} #}
+		{% include 'admin/partials/nav.html.twig' %}
+
 		<main class="max-w-5xl mx-auto px-4 md:px-8"> {% block content %}{% endblock %}
 			</main>
+			<script src="{{ base }}/assets/js/autoHideNavbar.js" defer></script>
 		</body>
 	</html>
