@@ -12,7 +12,7 @@ require_once dirname(__DIR__, 3) . '/lib/auth.php';
 requireLogin();
 
 $stmt = $pdo->query(<<<SQL
-    SELECT a.id, a.titre, a.statut, a.date_publication, a.date_creation,
+    SELECT a.id, a.titre, a.statut, a.date_publication, a.date_creation, a.chapeau,
            a.image_principale,
            r.nom AS rubrique
     FROM articles a

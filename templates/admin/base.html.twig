@@ -14,11 +14,11 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="{{ base }}/assets/images/favicon/favicon-16x16.png">
 		<link rel="apple-touch-icon" sizes="180x180" href="{{ base }}/assets/images/favicon/apple-touch-icon.png">
 	</head>
-	<body class="h-8473">
+	<body class="bg-neutral-50">
 		{% include 'admin/partials/header.html.twig' %}
 		{% include 'admin/partials/nav.html.twig' %}
 
-		<main class="max-w-5xl mx-auto px-4 md:px-8"> {% block content %}{% endblock %}
+		<main class="max-w-5/6 mx-auto px-4 md:px-8 lg:px-0"> {% block content %}{% endblock %}
 			</main>
 			<script src="{{ base }}/assets/js/autoHideNavbar.js" defer></script>
 		</body>
