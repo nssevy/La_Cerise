@@ -1,90 +1,46 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Nouvel article — Admin La Cerise</title>
-		<script src="https://cdn.tiny.cloud/1/l5emzp4vl5hfv2tvrlmvuk4u9eji40glpnxuc559gkadzi4r/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-		<script src="{{ base }}/assets/js/tinymce-init.js"></script>
-	</head>
-	<body>
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
 
-		<h1>Nouvel article</h1>
-		<a href="{{ base }}/admin/article/list">Retour au dashboard</a>
+{% block titre %}Nouvel article
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://cdn.tiny.cloud/1/l5emzp4vl5hfv2tvrlmvuk4u9eji40glpnxuc559gkadzi4r/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="{{ base }}/assets/js/tinymce-init.js"></script>
+	<script src="{{ base }}/assets/js/dropzone.js" defer></script>
+{% endblock %}
+
+{% block content %}
+	<nav>
+		{% include 'components/breadcrumb.html.twig' with {
+      'breadcrumb': [
+        {'label': 'nouvel article', 'url': null}
+      ]
+    } %}
+	</nav>
+
+	<div class="mt-10 md:max-w-2xl md:mx-auto">
+
+		<div class="flex flex-col gap-2 mb-30">
+			<h1 class="text-3xl text-center">Nouvel article</h1>
+		</div>
 
 		{% if errors %}
-			<ul>
-				{% for error in errors %}
-					<li>{{ error }}</li>
-				{% endfor %}
-			</ul>
+			<aside role="alert">
+				<ul>
+					{% for error in errors %}
+						<li>{{ error }}</li>
+					{% endfor %}
+				</ul>
+			</aside>
 		{% endif %}
 
-		<form method="POST" action="">
+		{% include 'admin/partials/article-form.html.twig' with {
+      article: {},
+      rubriques: rubriques,
+      auteurs: auteurs,
+      submit_label: "Créer l'article"
+    } %}
 
-			<div>
-				<label for="titre">Titre *</label>
-				<input type="text" id="titre" name="titre" required>
-			</div>
-
-			<div>
-				<label for="chapeau">Chapeau</label>
-				<textarea id="chapeau" name="chapeau" rows="3"></textarea>
-			</div>
-
-			<div>
-				<label for="contenu">Contenu *</label>
-				<textarea id="contenu" name="contenu" rows="20"></textarea>
-			</div>
-
-			<div>
-				<label for="rubrique_id">Rubrique</label>
-				<select id="rubrique_id" name="rubrique_id">
-					<option value="">— Choisir une rubrique —</option>
-					{% for rubrique in rubriques %}
-						<option value="{{ rubrique.id }}">{{ rubrique.nom }}</option>
-					{% endfor %}
-				</select>
-			</div>
-
-			<div>
-				<label for="auteur_id">Auteur</label>
-				<select id="auteur_id" name="auteur_id">
-					<option value="">— Choisir un auteur —</option>
-					{% for auteur in auteurs %}
-						<option value="{{ auteur.id }}">{{ auteur.nom }}</option>
-					{% endfor %}
-				</select>
-			</div>
-
-			<div>
-				<label for="image_principale">Image principale (nom du fichier)</label>
-				<input type="text" id="image_principale" name="image_principale" placeholder="ex: mon-image.jpg">
-			</div>
-
-			<div>
-				<label for="credit_photo">Crédit photo</label>
-				<input type="text" id="credit_photo" name="credit_photo">
-			</div>
-
-			<div>
-				<label for="statut">Statut</label>
-				<select id="statut" name="statut">
-					<option value="brouillon">Brouillon</option>
-					<option value="publie">Publié</option>
-					<option value="a_venir">À venir</option>
-					<option value="archive">Archivé</option>
-				</select>
-			</div>
-
-			<div>
-				<label for="date_publication">Date de publication</label>
-				<input type="datetime-local" id="date_publication" name="date_publication">
-			</div>
-
-			<button type="submit">Créer l'article</button>
-
-		</form>
-
-	</body>
-</html>
+	</div>
+{% endblock %}
