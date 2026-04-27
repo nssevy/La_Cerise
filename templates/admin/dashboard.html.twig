@@ -5,40 +5,36 @@
 
 {% block content %}
 
-	<section class="grid grid-cols-1 grid-rows-1 md:grid-cols-2 lg:grid-cols-3">
+	<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 		{% for article in articles %}
-			<div class="flex flex-col px-10 py-10 border border-cerise-09 min-h-[60svh] justify-between">
+			<li class="flex flex-col p-7 md:p-10 justify-between hover:bg-cerise-10">
+
+				{% include "admin/partials/dropdown-actions.html.twig" %}
 
 				<a href="{{ base }}/admin/article/edit?id={{ article.id }}" class="flex flex-col gap-5 grow">
-					<p>{{ article.statut }}</p>
+					<div class="flex flex-row justify-between">
+						<div class="flex flex-row gap-3">
+							{% include "admin/partials/badge-statut.html.twig" with { statut: article.statut } only %}
+							<time datetime="{{ article.date_publication }}">
+								{{ formatDateFr(article.date_publication) }}
+							</time>
+						</div>
+					</div>
 					<h2 class="text-h2-section">{{ article.titre }}</h2>
-					<p>{{ article.chapeau | striptags | slice(0, 200) }}...</p>
+					<p class="text-cerise-04">{{ article.chapeau | striptags | slice(0, 200) }}...</p>
 				</a>
 
-				<div class="flex items-center justify-between mt-10">
-					<div class="flex flex-col gap-2">
-						<small>
+				<span class="mt-5">{{ article.rubrique ?? 'Non classé' }}</span>
 
-							{{ article.rubrique ?? 'Non classé' }}
-						</small>
-						<small>
-
-							{{ article.date_publication ? article.date_publication|date('d/m/Y') : '—' }}
-						</small>
-					</div>
-
-					{% include "admin/partials/dropdown-actions.html.twig" %}
-				</div>
-
-			</div>
+			</li>
 		{% else %}
-			<p>Aucun article pour le moment</p>
+			<li>Aucun article pour le moment</li>
 		{% endfor %}
-	</section>
+	</ul>
 
-	<div class="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+	<div class=" md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
 		<a href="{{ base }}/admin/article/create.php">
-			{% include 'components/button.html.twig' with { label: "Rediger un nouvel article" } %}
+			{% include 'components/button.html.twig' with { label: "Nouvel article" } %}
 		</a>
 	</div>
 

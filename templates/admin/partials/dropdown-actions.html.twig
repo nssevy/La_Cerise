@@ -1,7 +1,11 @@
 {% import 'macros/icons.html.twig' as icons %}
-<button popovertarget="actions-{{ article.id }}" style="anchor-name: --anchor-{{ article.id }}" class="btn btn-sm">
-	{{ icons.icon('dots-three-vertical', 'bold', 'w-4 h-4 text-cerise-01') }}
-</button>
+<div class="flex justify-end">
+	<div class="w-sm flex justify-end">
+		<button popovertarget="actions-{{ article.id }}" style="anchor-name: --anchor-{{ article.id }}" class="btn btn-sm">
+			{{ icons.icon('dots-three-vertical', 'bold', 'w-4 h-4 text-cerise-01') }}
+		</button>
+	</div>
+</div>
 <ul popover id="actions-{{ article.id }}" style="position-anchor: --anchor-{{ article.id }}" class="dropdown menu w-40 rounded-box bg-base-100 shadow-sm">
 	<li>
 		<a href="{{ base }}/admin/article/edit?id={{ article.id }}">Éditer</a>
