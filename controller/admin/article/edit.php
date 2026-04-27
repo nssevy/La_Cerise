@@ -95,6 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 echo $twig->render('admin/article_edit.html.twig', [
     'article' => $article,
+    'user_nom' => $_SESSION['user_nom'],
+
     'errors' => $errors,
     'rubriques' => $rubriques,
     'auteurs' => $auteurs,

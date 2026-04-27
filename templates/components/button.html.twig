@@ -1,10 +1,12 @@
 {% if href is defined %}
-	<a href="{{ href }}" class="text-body group relative inline-flex h-12 items-center justify-center overflow-hidden bg-cerise-01 text-cerise-10 cursor-pointer">
+	<a href="{{ href }}" class="text-body group relative inline-flex h-12 items-center justify-center overflow-hidden bg-cerise-01 text-cerise-10 cursor-pointer {{ class ?? '' }}">
 	{% else %}
-		<button type="{{ type ?? 'button' }}" {% if data_action is defined %} data-action="{{ data_action }}" {% endif %} {% if aria_label is defined %} aria-label="{{ aria_label }}" {% endif %} class="text-body group relative inline-flex h-12 items-center justify-center overflow-hidden bg-cerise-01 text-cerise-10 cursor-pointer">
+		<button type="{{ type ?? 'button' }}" {% if data_action is defined %} data-action="{{ data_action }}" {% endif %} {% if aria_label is defined %} aria-label="{{ aria_label }}" {% endif %} class="text-body group relative inline-flex h-12 items-center justify-center overflow-hidden bg-cerise-01 text-cerise-10 cursor-pointer {{ class ?? '' }}">
 		{% endif %}
+
 		<div class="inline-flex h-12 translate-y-0 items-center justify-center px-6 transition duration-300 group-hover:-translate-y-[150%]">{{ label }}</div>
 		<div class="absolute inline-flex h-12 w-full translate-y-full items-center justify-center px-6 transition duration-300 group-hover:translate-y-0">{{ label }}</div>
+
 		{% if href is defined %}
 		</a>
 {% else %}

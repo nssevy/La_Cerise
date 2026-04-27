@@ -62,6 +62,7 @@ echo $twig->render('admin/article_create.html.twig', [
     'errors' => $errors,
     'rubriques' => $rubriques,
     'auteurs' => $auteurs,
+    'user_nom' => $_SESSION['user_nom'],
     'base' => $_ENV['BASE_URL'] ?? ''
 
 ]);
