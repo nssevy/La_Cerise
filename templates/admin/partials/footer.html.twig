@@ -1,0 +1,30 @@
+<footer class="flex flex-col gap-20 min-h-[50svh] bg-cerise-01 text-cerise-10 px-8 md:px-60 lg:px-80 py-20 mt-50">
+	<section class="flex flex-col gap-10">
+		<h2 class="text-4xl text-center">Gérez votre contenu éditorial du site</h2>
+		<p class="text-base text-center">Rédigez, organisez et publiez vos articles en toute simplicité. La Cerise vous donne les outils pour produire un contenu sans friction.</p>
+		<div class="flex  justify-center">
+
+			<a class="bg-cerise-10 hover:bg-cerise-09 text-cerise-01 w-fit px-5 py-2 rounded-full" href="{{ base }}/">Consulter le site</a>
+		</div>
+	</section>
+
+	<hr class="border border-cerise-02/60">
+
+	<div class="grid grid-cols-3 gap-5 text-cerise-04">
+		<div>
+			<p>
+				© La Cerise 2026
+			</p>
+		</div>
+		<div>
+			<p>
+				Connecté en tant que
+				{{ user_nom }}</p>
+		</div>
+		<div>
+			<a href="{{ base }}/admin/logout">Se déconnecter</a>
+		</div>
+
+
+	</div>
+</footer>
