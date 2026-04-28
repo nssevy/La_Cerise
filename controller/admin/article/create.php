@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contenu = $_POST['contenu'] ?? '';
     $rubrique_id = $_POST['rubrique_id'] ?? null;
     $auteur_id = $_POST['auteur_id'] ?? null;
-    $image_principale = trim($_POST['image_principale'] ?? '');
     $credit_photo = trim($_POST['credit_photo'] ?? '');
     $statut = $_POST['statut'] ?? 'brouillon';
     $date_publication = $_POST['date_publication'] ?? null;
@@ -32,6 +31,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Génération du slug
     $slug = slugify($titre);
+
+    // Gestion de l'image uploadée
+    $image_principale = null;
+
+    if (!empty($_FILES['image_principale']['name'])) {
+        $file = $_FILES['image_principale'];
+        $allowed = ['image/jpeg', 'image/png'];
+
+        if (!in_array($file['type'], $allowed)) {
+            $errors[] = 'Format d\'image non supporté (JPEG ou PNG uniquement).';
+        } elseif ($file['size'] > 5 * 1024 * 1024) {
+            $errors[] = 'L\'image ne doit pas dépasser 5 Mo.';
+        } else {
+            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $filename = uniqid('img_') . '.' . $ext;
+            $uploadDir = dirname(__DIR__, 3) . '/assets/images/';
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+                $image_principale = $filename;
+            } else {
+                $errors[] = 'Erreur lors de l\'upload de l\'image.';
+            }
+        }
+    }
 
     if (empty($errors)) {
         $stmt = $pdo->prepare('
@@ -64,5 +91,4 @@ echo $twig->render('admin/article_create.html.twig', [
     'auteurs' => $auteurs,
     'user_nom' => $_SESSION['user_nom'],
     'base' => $_ENV['BASE_URL'] ?? ''
-
 ]);
