@@ -1,8 +1,12 @@
 <?php
-require_once dirname(__DIR__) . '/vendor/autoload.php';
-require_once dirname(__DIR__) . '/lib/helpers.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../lib/helpers.php';
 
-$loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/templates');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
 
 $twig = new \Twig\Environment($loader, [
     'cache' => false,
@@ -10,8 +14,8 @@ $twig = new \Twig\Environment($loader, [
 ]);
 
 $twig->addGlobal('base', $_ENV['BASE_URL'] ?? '');
+$twig->addGlobal('user_nom', $_SESSION['user_nom'] ?? '');
 
-// La fonction helper
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);
 }));
