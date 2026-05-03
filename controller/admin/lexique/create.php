@@ -1,8 +1,5 @@
 <?php
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 3) . '/config/db.php';
-require_once dirname(__DIR__, 3) . '/config/twig.php';
-require_once dirname(__DIR__, 3) . '/lib/auth.php';
+require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 
 requireLogin();
 
@@ -22,13 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare('INSERT INTO lexique (terme, definition, categorie) VALUES (?, ?, ?)');
         $stmt->execute([$terme, $definition, $categorie ?: null]);
 
-        $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/admin/lexique/list');
-        exit;
+        flash_success('Terme ajouté au lexique.');
+        redirect('/admin/lexique/list');
     }
 }
 
 echo $twig->render('admin/lexique_create.html.twig', [
     'errors' => $errors,
-    'base' => $_ENV['BASE_URL'] ?? ''
 ]);

@@ -1,30 +1,21 @@
 <?php
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 3) . '/config/db.php';
-require_once dirname(__DIR__, 3) . '/config/twig.php';
-require_once dirname(__DIR__, 3) . '/lib/auth.php';
+require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 
 requireLogin();
 
 $errors = [];
 $id = $_GET['id'] ?? null;
 
-if (!$id) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/article/list');
-    exit;
-}
+if (!$id)
+    redirect('/admin/article/list');
 
-// Récupérer l'article
 $stmt = $pdo->prepare('SELECT * FROM articles WHERE id = ?');
 $stmt->execute([$id]);
 $article = $stmt->fetch();
 
-if (!$article) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/article/list');
-    exit;
-}
+if (!$article)
+    redirect('/admin/article/list');
 
-// Récupérer les rubriques et auteurs pour les selects
 $rubriques = $pdo->query('SELECT id, nom FROM rubriques ORDER BY nom')->fetchAll();
 $auteurs = $pdo->query('SELECT id, nom FROM auteurs ORDER BY nom')->fetchAll();
 
@@ -38,21 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statut = $_POST['statut'] ?? 'brouillon';
     $date_publication = $_POST['date_publication'] ?? null;
 
-    // Validation
     if ($titre === '')
         $errors[] = 'Le titre est obligatoire.';
     if ($contenu === '')
         $errors[] = 'Le contenu est obligatoire.';
 
-    // Régénération du slug uniquement si le titre a changé
-    if ($titre !== $article['titre']) {
-        $slug = slugify($titre);
-    } else {
-        $slug = $article['slug'];
-    }
+    $slug = $titre !== $article['titre'] ? slugify($titre) : $article['slug'];
 
-    // Gestion de l'image uploadée
-    $image_principale = $article['image_principale']; // valeur existante par défaut
+    $image_principale = $article['image_principale'];
 
     if (!empty($_FILES['image_principale']['name'])) {
         $file = $_FILES['image_principale'];
@@ -67,9 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $filename = uniqid('img_') . '.' . $ext;
             $uploadDir = dirname(__DIR__, 3) . '/assets/images/';
 
-            if (!is_dir($uploadDir)) {
+            if (!is_dir($uploadDir))
                 mkdir($uploadDir, 0755, true);
-            }
 
             if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
                 $image_principale = $filename;
@@ -101,12 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id,
         ]);
 
-        $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/admin/article/list');
-        exit;
+        flash_success('Article mis à jour.');
+        redirect('/admin/article/list');
     }
 
-    // En cas d'erreur, on met à jour $article avec les valeurs soumises
     $article = array_merge($article, [
         'titre' => $titre,
         'chapeau' => $chapeau,
@@ -122,9 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 echo $twig->render('admin/article_edit.html.twig', [
     'article' => $article,
-    'user_nom' => $_SESSION['user_nom'],
     'errors' => $errors,
     'rubriques' => $rubriques,
     'auteurs' => $auteurs,
-    'base' => $_ENV['BASE_URL'] ?? ''
 ]);

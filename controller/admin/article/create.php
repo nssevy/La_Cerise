@@ -1,15 +1,10 @@
 <?php
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 3) . '/config/db.php';
-require_once dirname(__DIR__, 3) . '/config/twig.php';
-require_once dirname(__DIR__, 3) . '/lib/auth.php';
+require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 
 requireLogin();
 
 $errors = [];
-$success = false;
 
-// Récupérer les rubriques et auteurs pour les selects
 $rubriques = $pdo->query('SELECT id, nom FROM rubriques ORDER BY nom')->fetchAll();
 $auteurs = $pdo->query('SELECT id, nom FROM auteurs ORDER BY nom')->fetchAll();
 
@@ -23,16 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statut = $_POST['statut'] ?? 'brouillon';
     $date_publication = $_POST['date_publication'] ?? null;
 
-    // Validation
     if ($titre === '')
         $errors[] = 'Le titre est obligatoire.';
     if ($contenu === '')
         $errors[] = 'Le contenu est obligatoire.';
 
-    // Génération du slug
     $slug = slugify($titre);
 
-    // Gestion de l'image uploadée
     $image_principale = null;
 
     if (!empty($_FILES['image_principale']['name'])) {
@@ -79,9 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $auteur_id ?: null,
         ]);
 
-        $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/admin/article/list');
-        exit;
+        flash_success('Article créé avec succès.');
+        redirect('/admin/article/list');
     }
 }
 
@@ -89,6 +80,4 @@ echo $twig->render('admin/article_create.html.twig', [
     'errors' => $errors,
     'rubriques' => $rubriques,
     'auteurs' => $auteurs,
-    'user_nom' => $_SESSION['user_nom'],
-    'base' => $_ENV['BASE_URL'] ?? ''
 ]);

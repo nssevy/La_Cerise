@@ -1,27 +1,20 @@
 <?php
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 3) . '/config/db.php';
-require_once dirname(__DIR__, 3) . '/config/twig.php';
-require_once dirname(__DIR__, 3) . '/lib/auth.php';
+require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 
 requireLogin();
 
 $errors = [];
 $id = $_GET['id'] ?? null;
 
-if (!$id) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/lexique/list');
-    exit;
-}
+if (!$id)
+    redirect('/admin/lexique/list');
 
 $stmt = $pdo->prepare('SELECT * FROM lexique WHERE id = ?');
 $stmt->execute([$id]);
 $terme = $stmt->fetch();
 
-if (!$terme) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/lexique/list');
-    exit;
-}
+if (!$terme)
+    redirect('/admin/lexique/list');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $termeVal = trim($_POST['terme'] ?? '');
@@ -37,9 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare('UPDATE lexique SET terme = ?, definition = ?, categorie = ? WHERE id = ?');
         $stmt->execute([$termeVal, $definition, $categorie ?: null, $id]);
 
-        $base = $_ENV['BASE_URL'] ?? '';
-        header('Location: ' . $base . '/admin/lexique/list');
-        exit;
+        flash_success('Terme mis à jour.');
+        redirect('/admin/lexique/list');
     }
 
     $terme = array_merge($terme, [
@@ -52,5 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 echo $twig->render('admin/lexique_edit.html.twig', [
     'terme' => $terme,
     'errors' => $errors,
-    'base' => $_ENV['BASE_URL'] ?? ''
 ]);

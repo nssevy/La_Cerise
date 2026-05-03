@@ -5,9 +5,7 @@
 
 // C'est une convention présente dans beaucoup de langages (PHP, Bash, Ruby, etc.) pour embarquer proprement un bloc de texte long dans du code sans pollution syntaxique.
 require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 3) . '/config/db.php';
-require_once dirname(__DIR__, 3) . '/config/twig.php';
-require_once dirname(__DIR__, 3) . '/lib/auth.php';
+require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 
 requireLogin();
 
@@ -33,7 +31,6 @@ $stats = $stmtStats->fetchAll(PDO::FETCH_KEY_PAIR);
 echo $twig->render('admin/dashboard.html.twig', [
     'articles' => $articles,
     'stats' => $stats,
-    'user_nom' => $_SESSION['user_nom'],
-    'base' => $_ENV['BASE_URL'] ?? '',
-    'section' => 'articles'
+    'section' => 'articles',
+    ...get_flash(),
 ]);

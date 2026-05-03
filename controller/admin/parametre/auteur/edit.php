@@ -1,29 +1,21 @@
 <?php
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 4) . '/config/db.php';
-require_once dirname(__DIR__, 4) . '/config/twig.php';
-require_once dirname(__DIR__, 4) . '/lib/auth.php';
+require_once dirname(__DIR__, 4) . '/config/bootstrap.php';
 
 requireLogin();
 
 $id = $_GET['id'] ?? null;
 
-if (!$id) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/parametre');
-    exit;
-}
+if (!$id)
+    redirect('/admin/parametre');
 
 $stmt = $pdo->prepare('SELECT * FROM auteurs WHERE id = ?');
 $stmt->execute([$id]);
 $auteur = $stmt->fetch();
 
-if (!$auteur) {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/parametre');
-    exit;
-}
+if (!$auteur)
+    redirect('/admin/parametre');
 
 $errors = [];
-$success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom'] ?? '');
@@ -39,23 +31,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $stmt = $pdo->prepare('UPDATE auteurs SET nom = ?, bio = ?, email = ? WHERE id = ?');
         $stmt->execute([$nom, $bio ?: null, $email ?: null, $id]);
-        $success = true;
 
-        $stmt = $pdo->prepare('SELECT * FROM auteurs WHERE id = ?');
-        $stmt->execute([$id]);
-        $auteur = $stmt->fetch();
-    } else {
-        $auteur['nom'] = $nom;
-        $auteur['bio'] = $bio;
-        $auteur['email'] = $email;
+        flash_success('Auteur mis à jour.');
+        redirect('/admin/parametre');
     }
+
+    $auteur['nom'] = $nom;
+    $auteur['bio'] = $bio;
+    $auteur['email'] = $email;
 }
 
 echo $twig->render('admin/parametre/auteur_edit.html.twig', [
     'auteur' => $auteur,
     'errors' => $errors,
-    'success' => $success,
-    'base' => $_ENV['BASE_URL'] ?? '',
     'section' => 'parametre',
-    'user_nom' => $_SESSION['user_nom'],
 ]);

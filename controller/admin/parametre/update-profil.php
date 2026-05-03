@@ -1,19 +1,12 @@
 <?php
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 3) . '/config/db.php';
-require_once dirname(__DIR__, 3) . '/config/twig.php';
-require_once dirname(__DIR__, 3) . '/lib/auth.php';
+require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 
 requireLogin();
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/parametre');
-    exit;
-}
+if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+    redirect('/admin/parametre');
 
 $errors = [];
-$success = false;
-
 $nom = trim($_POST['nom'] ?? '');
 $email = trim($_POST['email'] ?? '');
 $mdp = $_POST['mot_de_passe'] ?? '';
@@ -42,24 +35,24 @@ if (empty($errors)) {
         $stmt->execute([$nom, $email, $_SESSION['user_id']]);
     }
 
-    // Mettre à jour la session
     $_SESSION['user_nom'] = $nom;
-    $success = true;
+    $twig->addGlobal('user_nom', $nom);
+
+    flash_success($mdp !== '' ? 'Mot de passe modifié.' : 'Profil mis à jour.');
+    redirect('/admin/parametre');
 }
 
-// Récupérer les données à jour pour réafficher le formulaire
 $stmt = $pdo->prepare('SELECT id, nom, email FROM users WHERE id = ?');
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
 
 $auteurs = $pdo->query('SELECT id, nom, bio, email FROM auteurs ORDER BY nom')->fetchAll();
+$pages_legales = $pdo->query('SELECT type, titre FROM pages_legales ORDER BY id')->fetchAll();
 
 echo $twig->render('admin/parametre/index.html.twig', [
     'user' => $user,
     'auteurs' => $auteurs,
+    'pages_legales' => $pages_legales,
     'errors' => $errors,
-    'success' => $success,
-    'base' => $_ENV['BASE_URL'] ?? '',
     'section' => 'parametre',
-    'user_nom' => $_SESSION['user_nom'],
 ]);

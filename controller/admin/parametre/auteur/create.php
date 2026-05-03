@@ -1,8 +1,5 @@
 <?php
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 4) . '/config/db.php';
-require_once dirname(__DIR__, 4) . '/config/twig.php';
-require_once dirname(__DIR__, 4) . '/lib/auth.php';
+require_once dirname(__DIR__, 4) . '/config/bootstrap.php';
 
 requireLogin();
 
@@ -24,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare('INSERT INTO auteurs (nom, bio, email) VALUES (?, ?, ?)');
         $stmt->execute([$nom, $bio ?: null, $email ?: null]);
 
-        header('Location: ' . ($_ENV['BASE_URL'] ?? '') . '/admin/parametre');
-        exit;
+        flash_success('Auteur ajouté.');
+        redirect('/admin/parametre');
     }
 
     $auteur = ['nom' => $nom, 'bio' => $bio, 'email' => $email];
@@ -34,7 +31,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 echo $twig->render('admin/parametre/auteur_create.html.twig', [
     'auteur' => $auteur,
     'errors' => $errors,
-    'base' => $_ENV['BASE_URL'] ?? '',
     'section' => 'parametre',
-    'user_nom' => $_SESSION['user_nom'],
 ]);
