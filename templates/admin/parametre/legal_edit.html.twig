@@ -1,0 +1,81 @@
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
+
+{% block titre %}Modifier —
+	{{ page.titre }}
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://cdn.tiny.cloud/1/l5emzp4vl5hfv2tvrlmvuk4u9eji40glpnxuc559gkadzi4r/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="{{ base }}/assets/js/tinymce-init.js"></script>
+{% endblock %}
+
+{% block content %}
+	<nav>
+		{% include 'components/breadcrumb.html.twig' with {
+            'breadcrumb': [
+                {'label': 'Paramètres', 'url': base ~ '/admin/parametre'},
+                {'label': page.titre, 'url': null}
+            ]
+        } %}
+	</nav>
+
+	<div class="mt-10 md:max-w-2xl md:mx-auto">
+
+		<div class="flex flex-col gap-2 mb-30">
+			<p class="text-center text-cerise-05">Vous êtes en train de modifier :</p>
+			<h1 class="text-3xl text-center text-gradient">{{ page.titre }}</h1>
+		</div>
+
+		{% if errors is defined and errors|length > 0 %}
+			<aside role="alert">
+				<ul>
+					{% for error in errors %}
+						<li>{{ error }}</li>
+					{% endfor %}
+				</ul>
+			</aside>
+		{% endif %}
+
+		{% if success is defined and success %}
+			<aside role="status" class="mb-6 p-4 bg-green-50 border border-cerise-09 rounded-xl text-sm text-green-600">
+				Page mise à jour avec succès.
+			</aside>
+		{% endif %}
+
+		<form class="flex flex-col gap-10" method="POST" action="{{ base }}/admin/parametre/legal/edit?type={{ page.type }}" novalidate>
+			<fieldset class="grid gap-10">
+
+				{% include 'admin/partials/contenteditable-field.html.twig' with {
+                    label: 'Titre',
+                    name: 'titre',
+                    value: page.titre ?? '',
+                    required: true,
+                    class: 'text-lg'
+                } only %}
+
+				<div>
+					<label for="contenu" class="text-cerise-05">Contenu
+						<abbr title="Champ obligatoire">*</abbr>
+					</label>
+					<textarea id="contenu" name="contenu" rows="20">{{ page.contenu ?? '' }}</textarea>
+				</div>
+
+			</fieldset>
+			<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
+				{% include 'components/button.html.twig' with {
+					label: "Enregistrer les modifications",
+					type: "submit",
+					class: "w-full md:order-last"
+				} %}
+				{% include 'components/button.html.twig' with {
+					label: "Retour",
+					href: base ~ "/admin/parametre",
+					class: "w-full md:order-first"
+				} %}
+			</div>
+
+		</form>
+
+	</div>
+{% endblock %}

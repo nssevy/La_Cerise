@@ -29,6 +29,12 @@ RewriteRule ^legal/confidentialite/?$ controller/public/legal/confidentialite.ph
 RewriteRule ^legal/mentions-legales/?$ controller/public/legal/mentions-legales.php [L]
 RewriteRule ^legal/cgu/?$ controller/public/legal/cgu.php [L]
 
+# Routes paramètre
+RewriteRule ^admin/parametre/?$ controller/admin/parametre/index.php [L]
+RewriteRule ^admin/parametre/update-profil/?$ controller/admin/parametre/update-profil.php [L]
+RewriteRule ^admin/parametre/legal/edit/?$ controller/admin/parametre/legal/edit.php [L,QSA]
+
+
 # Routes admin
 
 RewriteRule ^admin/(.+?)(?:\.php)?$ controller/admin/$1.php [L]

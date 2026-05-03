@@ -1,0 +1,20 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block titre %}Paramètres
+{% endblock %}
+
+{% block content %}
+	<div class="mt-10 md:max-w-2xl md:mx-auto flex flex-col gap-10">
+
+		{% include 'admin/parametre/bloc/profil.html.twig' %}
+
+		<hr class="border-t border-cerise-09">
+
+		{% include 'admin/parametre/bloc/auteur.html.twig' %}
+
+		<hr class="border-t border-cerise-09">
+
+		{% include 'admin/parametre/bloc/pages-legales.html.twig' %}
+
+	</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
+
+{% block titre %}Modifier —
+	{{ auteur.nom }}
+{% endblock %}
+
+{% block content %}
+	<nav>
+		{% include 'components/breadcrumb.html.twig' with {
+            'breadcrumb': [
+                {'label': 'Paramètres', 'url': base ~ '/admin/parametre'},
+                {'label': auteur.nom, 'url': null}
+            ]
+        } %}
+	</nav>
+
+	<div class="mt-10 md:max-w-2xl md:mx-auto">
+
+		<div class="flex flex-col gap-2 mb-30">
+			<p class="text-center text-cerise-05">Vous êtes en train de modifier :</p>
+			<h1 class="text-3xl text-center text-gradient">{{ auteur.nom }}</h1>
+		</div>
+
+		{% if errors is defined and errors|length > 0 %}
+			<aside role="alert">
+				<ul>
+					{% for error in errors %}
+						<li>{{ error }}</li>
+					{% endfor %}
+				</ul>
+			</aside>
+		{% endif %}
+
+		{% if success is defined and success %}
+			<aside role="status" class="mb-6 p-4 bg-green-50 border border-cerise-09 rounded-xl text-sm text-green-600">
+				Auteur mis à jour avec succès.
+			</aside>
+		{% endif %}
+
+		<form class="flex flex-col gap-10" method="POST" action="{{ base }}/admin/parametre/auteur/edit?id={{ auteur.id }}" novalidate>
+			<fieldset class="grid gap-10">
+
+				{% include 'admin/partials/contenteditable-field.html.twig' with {
+                    label: 'Nom',
+                    name: 'nom',
+                    value: auteur.nom ?? '',
+                    required: true,
+                    class: 'text-lg'
+                } only %}
+
+				{% include 'admin/partials/contenteditable-field.html.twig' with {
+                    label: 'Email',
+                    name: 'email',
+                    value: auteur.email ?? '',
+                    required: false,
+                    class: 'text-lg'
+                } only %}
+
+				{% include 'admin/partials/contenteditable-field.html.twig' with {
+                    label: 'Bio',
+                    name: 'bio',
+                    value: auteur.bio ?? '',
+                    required: false,
+                    class: 'text-lg'
+                } only %}
+
+			</fieldset>
+
+			<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
+				{% include 'components/button.html.twig' with {
+					label: "Enregistrer les modifications",
+					type: "submit",
+					class: "w-full md:order-last"
+				} %}
+				{% include 'components/button.html.twig' with {
+					label: "Retour",
+					href: base ~ "/admin/parametre",
+					class: "w-full md:order-first"
+				} %}
+			</div>
+			<a href="{{ base }}/admin/parametre/auteur/delete?id={{ auteur.id }}" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="return confirm('Supprimer cet auteur ?')">
+				Supprimer l'auteur
+			</a>
+
+
+		</form>
+
+	</div>
+{% endblock %}

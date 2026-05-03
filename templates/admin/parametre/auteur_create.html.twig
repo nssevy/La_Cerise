@@ -1,0 +1,77 @@
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
+
+{% block titre %}Ajouter un auteur — La Cerise
+{% endblock %}
+
+{% block content %}
+	<nav>
+		{% include 'components/breadcrumb.html.twig' with {
+            'breadcrumb': [
+                {'label': 'Paramètres', 'url': base ~ '/admin/parametre'},
+                {'label': 'Ajouter un auteur', 'url': null}
+            ]
+        } %}
+	</nav>
+
+	<div class="mt-10 md:max-w-2xl md:mx-auto">
+
+		<div class="flex flex-col gap-2 mb-30">
+			<p class="text-center text-cerise-05">Vous êtes en train de créer :</p>
+			<h1 class="text-3xl text-center text-gradient">Un nouvel auteur</h1>
+		</div>
+
+		{% if errors is defined and errors|length > 0 %}
+			<aside role="alert">
+				<ul>
+					{% for error in errors %}
+						<li>{{ error }}</li>
+					{% endfor %}
+				</ul>
+			</aside>
+		{% endif %}
+
+		<form class="flex flex-col gap-10" method="POST" action="{{ base }}/admin/parametre/auteur/create" novalidate>
+			<fieldset class="grid gap-10">
+
+				{% include 'admin/partials/contenteditable-field.html.twig' with {
+                    label: 'Nom',
+                    name: 'nom',
+                    value: auteur.nom ?? '',
+                    required: true,
+                    class: 'text-lg'
+                } only %}
+
+				{% include 'admin/partials/contenteditable-field.html.twig' with {
+                    label: 'Email',
+                    name: 'email',
+                    value: auteur.email ?? '',
+                    required: false,
+                    class: 'text-lg'
+                } only %}
+
+				<div>
+					<label for="bio" class="text-cerise-05">Bio</label>
+					<textarea id="bio" name="bio" rows="6" class="input w-full mt-2">{{ auteur.bio ?? '' }}</textarea>
+				</div>
+
+			</fieldset>
+
+			<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
+
+				{% include 'components/button.html.twig' with {
+                    label: "Créer l'auteur",
+                    type: "submit",
+                    class: "w-full md:order-last"
+                } %}
+				{% include 'components/button.html.twig' with {
+                    label: "Retour",
+                    href: base ~ "/admin/parametre",
+                    class: "w-full md:order-first"
+                } %}
+			</div>
+
+		</form>
+
+	</div>
+{% endblock %}
