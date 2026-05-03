@@ -1,0 +1,61 @@
+<section>
+	<h2 class="text-4xl mb-8 text-gradient">Profil</h2>
+
+	{% if errors is defined and errors|length > 0 %}
+		<div class="mb-6 p-4 bg-red-50 border border-cerise-09 rounded-xl text-sm text-red-600 space-y-1">
+			{% for error in errors %}
+				<p>{{ error }}</p>
+			{% endfor %}
+		</div>
+	{% endif %}
+
+	{% if success is defined and success %}
+		<div class="mb-6 p-4 bg-green-50 border border-cerise-09 rounded-xl text-sm text-green-600">
+			Profil mis à jour avec succès.
+		</div>
+	{% endif %}
+
+	<form class="flex flex-col gap-10 " method="POST" action="{{ base }}/admin/parametre/update-profil" novalidate>
+
+		<fieldset class="grid gap-10">
+
+			{% include 'admin/partials/contenteditable-field.html.twig' with {
+						label: 'Nom',
+						name: 'nom',
+						value: user.nom ?? '',
+						required: true,
+						class: 'text-lg'
+						} only %}
+
+
+			{% include 'admin/partials/contenteditable-field.html.twig' with {
+						label: 'Email',
+						name: 'email',
+						value: user.email ?? '',
+						required: true,
+						class: 'text-lg'
+						} only %}
+
+			{% include 'admin/partials/password-field.html.twig' with {
+						label: 'Nouveau mot de passe',
+						name: 'mot_de_passe',
+						hint: '(laisser vide pour ne pas changer)'
+					} only %}
+
+			{% include 'admin/partials/password-field.html.twig' with {
+						label: 'Confirmer le mot de passe',
+						name: 'mot_de_passe_confirm'
+					} only %}
+
+		</fieldset>
+
+		<div class="flex flex-col gap-5 mt-4">
+			{% include 'components/button.html.twig' with {
+                    label: "Enregistrer",
+                    type: "submit",
+                    class: "w-full"
+                } %}
+		</div>
+
+	</form>
+</section>

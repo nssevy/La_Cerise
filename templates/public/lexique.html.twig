@@ -1,0 +1,56 @@
+{% extends 'public/base.html.twig' %}
+
+{% block titre %}Le lexique
+{% endblock %}
+
+{% block content %}
+	<div class="mt-10">
+		{% include 'components/breadcrumb.html.twig' with {
+        'breadcrumb': [
+            {'label': 'Lexique', 'url': null}
+        ]
+    } %}
+	</div>
+
+	<div class="flex flex-col gap-6 mt-6 mb-16">
+		<h1 class="text-h1-serif">Le lexique</h1>
+		<p class="text-body max-w-3xl">Les sujets traités par Cerise font souvent référence à des institutions, des conventions ou des principes juridiques. Cette page rassemble les définitions essentielles pour suivre nos articles sans prérequis.</p>
+	</div>
+
+	{# Navigation alphabétique #}
+	<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-wrap gap-2 justify-center pb-4 z-40 w-full backdrop-blur-[5px]">
+		{% for lettre, termes in termesParLettre %}
+			<a href="#lettre-{{ lettre }}" class="group relative flex items-center justify-center w-10 h-10 overflow-hidden border border-(--09) text-(--10) font-serif text-[15px] bg-cerise-01 transition-colors">
+				<span class="inline-flex translate-y-0 items-center justify-center transition duration-300 group-hover:-translate-y-[150%]">{{ lettre }}</span>
+				<span class="absolute inline-flex w-full translate-y-full items-center justify-center transition duration-300 group-hover:translate-y-0">{{ lettre }}</span>
+			</a>
+		{% endfor %}
+	</nav>
+
+	{# Les définitions #}
+	<div class="flex flex-col gap-24">
+		{% for lettre, termes in termesParLettre %}
+			<section id="lettre-{{ lettre }}" class="flex flex-col gap-16">
+
+				<div class="flex items-end gap-2 sticky top-20 py-4">
+					<span class="text-h1-serif text-(--01) text-[32px]">{{ lettre }}</span>
+					<span class="text-small text-cerise-07">{{ termes|length }}</span>
+				</div>
+
+				<div class="flex flex-col gap-16 pl-24">
+					{% for terme in termes %}
+						<article class="flex flex-col gap-6 max-w-3xl pb-16">
+							<h2 class="text-h2-section-serif">{{ terme.terme }}</h2>
+							<p class="text-body">{{ terme.definition }}</p>
+							{% if terme.categorie %}
+								<small class="text-cerise-06">{{ terme.categorie }}</small>
+							{% endif %}
+						</article>
+					{% endfor %}
+				</div>
+
+			</section>
+		{% endfor %}
+	</div>
+
+{% endblock %}

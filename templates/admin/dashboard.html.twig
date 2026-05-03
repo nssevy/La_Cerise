@@ -1,56 +1,42 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Dashboard — Admin La Cerise</title>
-	</head>
-	<body>
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
+{% block titre %}L'espace Admin
+{% endblock %}
 
-		<h1>Tableau de bord</h1>
-		<p>Connecté en tant que
-			{{ user_nom }}</p>
-		<a href="{{ base }}/admin/logout">Se déconnecter</a>
+{% block content %}
 
-		<a href="{{ base }}/admin/article_create">Nouvel article</a>
+	<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+		{% for article in articles %}
+			<li class="flex flex-col p-7 md:p-10 justify-between hover:bg-cerise-10">
 
-		<a href="{{ base }}">Le site</a>
+				{% include "admin/partials/dropdown-actions.html.twig" %}
 
-		<table>
-			<thead>
-				<tr>
-					<th>Titre</th>
-					<th>Rubrique</th>
-					<th>Statut</th>
-					<th>Date de publication</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for article in articles %}
-					<tr>
-						<td>{{ article.titre }}</td>
-						<td>{{ article.rubrique ?? 'Non classé' }}</td>
-						<td>{{ article.statut }}</td>
-						<td>{{ article.date_publication ? article.date_publication|date('d/m/Y') : '—' }}</td>
-						<td>
-							<a href="{{ base }}/admin/article_edit?id={{ article.id }}">Éditer</a>
+				<a href="{{ base }}/admin/article/edit?id={{ article.id }}" class="flex flex-col gap-5 grow">
+					<div class="flex flex-row justify-between">
+						<div class="flex flex-row gap-3">
+							{% include "admin/partials/badge-statut.html.twig" with { statut: article.statut } only %}
+							<time datetime="{{ article.date_publication }}">
+								{{ formatDateFr(article.date_publication) }}
+							</time>
+						</div>
+					</div>
+					<h2 class="text-h2-section">{{ article.titre }}</h2>
+					<p class="text-cerise-04">{{ article.chapeau | striptags | slice(0, 200) }}...</p>
+				</a>
 
-							<form method="POST" action="{{ base }}/admin/article_delete" style="display:inline;">
-								<input type="hidden" name="id" value="{{ article.id }}">
-								<button type="submit" data-action="confirm-delete">Supprimer</button>
-							</form>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="5">Aucun article pour le moment.</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				<span class="mt-5">{{ article.rubrique ?? 'Non classé' }}</span>
 
-		<script src="/La_Cerise/assets/js/confirm.js" defer></script>
+			</li>
+		{% else %}
+			<li>Aucun article pour le moment</li>
+		{% endfor %}
+	</ul>
 
-	</body>
-</html>
+	<div class=" md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+		<a href="{{ base }}/admin/article/create.php">
+			{% include 'components/button.html.twig' with { label: "Nouvel article" } %}
+		</a>
+	</div>
+
+	<script src="/La_Cerise/assets/js/confirm.js" defer></script>
+{% endblock %}

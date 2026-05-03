@@ -1,0 +1,15 @@
+<section>
+	<h2 class="text-4xl mb-8 text-gradient">Pages légales</h2>
+
+	<ul class="grid grid-cols-1 md:grid-cols-3 gap-3">
+		{% for page in pages_legales %}
+			<li class="flex">
+				{% include 'admin/partials/cards-parametre.html.twig' with {
+					href: base ~ '/admin/parametre/legal/edit?type=' ~ page.type,
+					label: page.titre,
+					type: page.type
+				} only %}
+			</li>
+		{% endfor %}
+	</ul>
+</section>

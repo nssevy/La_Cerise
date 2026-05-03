@@ -1,0 +1,27 @@
+{% extends 'public/base.html.twig' %}
+
+{% block titre %}
+	{{ page.titre }}
+	— La Cerise
+{% endblock %}
+
+{% block content %}
+	<main class="max-w-2xl mx-auto px-6 py-16">
+
+		<div class="mb-20 text-center">
+			{% if page.updated_at %}
+				<p class=" text-sm text-cerise-05 font-extralight">
+					Dernière mise à jour :
+					{{ page.updated_at|date('d/m/Y') }}
+				</p>
+			{% endif %}
+			<h1 class="mt-4 text-4xl md:text-5xl text-gradient">{{ page.titre }}</h1>
+		</div>
+
+		<div class="prose prose-gray max-w-none">
+			{{ page.contenu|raw }}
+		</div>
+
+
+	</main>
+{% endblock %}

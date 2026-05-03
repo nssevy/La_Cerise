@@ -1,0 +1,11 @@
+{% set statutDot = {
+  'publie':    'bg-green-500',
+  'brouillon': 'bg-yellow-500',
+  'archive':   'bg-gray-500',
+  'a_venir':   'bg-blue-500',
+} %}
+
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cerise-09/50 text-xs font-medium">
+	<span class="w-2 h-2 rounded-full {{ statutDot[statut] ?? 'bg-gray-500' }}"></span>
+	{{ statut }}
+</span>

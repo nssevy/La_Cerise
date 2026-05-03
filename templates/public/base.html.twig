@@ -1,0 +1,36 @@
+{% import 'macros/icons.html.twig' as icons %}
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block titre %}La Cerise
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="{{ base }}/assets/css/output.css">
+		<link rel="icon" type="image/x-icon" href="{{ base }}/assets/images/favicon/favicon.ico">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ base }}/assets/images/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="{{ base }}/assets/images/favicon/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="{{ base }}/assets/images/favicon/apple-touch-icon.png">
+	</head>
+
+	<body>
+
+		{% include 'partials/header.html.twig' %}
+		{% include 'partials/nav-mobile.html.twig' %}
+
+		<script src="{{ base }}/assets/js/menu.js" defer></script>
+
+		{% block main_class %}
+			<main class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+			{% endblock %}
+
+			{% block content %}{% endblock %}
+		</main>
+
+		{% include 'partials/footer.html.twig' %}
+
+	</body>
+</html>

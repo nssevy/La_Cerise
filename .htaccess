@@ -3,7 +3,7 @@ RewriteBase /La_Cerise/
 
 # Page d'accueil
 
-RewriteRule ^$ controller/index.php [L]
+RewriteRule ^$ controller/public/index.php [L]
 
 # Laisser passer les fichiers existants (assets, images, css...)
 
@@ -18,8 +18,24 @@ RewriteRule ^ - [L]
 
 # Route article : /article/mon-slug
 
-RewriteRule ^article/([^/]+)/?$ controller/article.php?slug=$1 [L,QSA]
+RewriteRule ^article/([^/]+)/?$ controller/public/article.php?slug=$1 [L,QSA]
 
-# Toutes les autres routes : /lexique → controller/lexique.php
+# Route lexique
 
-RewriteRule ^(.+?)(?:\.php)?$ controller/$1.php [L]
+RewriteRule ^lexique/?$ controller/public/lexique.php [L]
+
+# Routes légales
+RewriteRule ^legal/confidentialite/?$ controller/public/legal/confidentialite.php [L]
+RewriteRule ^legal/mentions-legales/?$ controller/public/legal/mentions-legales.php [L]
+RewriteRule ^legal/cgu/?$ controller/public/legal/cgu.php [L]
+
+# Routes paramètre
+RewriteRule ^admin/parametre/?$ controller/admin/parametre/index.php [L]
+RewriteRule ^admin/parametre/update-profil/?$ controller/admin/parametre/update-profil.php [L]
+RewriteRule ^admin/parametre/legal/edit/?$ controller/admin/parametre/legal/edit.php [L,QSA]
+
+
+# Routes admin
+
+RewriteRule ^admin/(.+?)(?:\.php)?$ controller/admin/$1.php [L]
+

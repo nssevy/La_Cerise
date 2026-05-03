@@ -1,0 +1,114 @@
+<form class="flex flex-col gap-10" method="POST" action="" novalidate enctype="multipart/form-data">
+	<fieldset class="grid gap-10">
+		{% include 'admin/partials/contenteditable-field.html.twig' with {
+      label: 'Titre',
+      name: 'titre',
+      value: article.titre ?? '',
+      required: true,
+      class: 'text-lg'
+    } only %}
+
+		{% include 'admin/partials/contenteditable-field.html.twig' with {
+      label: 'Chapeau',
+      name: 'chapeau',
+      value: article.chapeau ?? '',
+      required: true,
+      class: 'text-lg'
+    } only %}
+
+		<div>
+			<label for="contenu" class="text-cerise-05">Contenu
+				<abbr title="Champ obligatoire">*</abbr>
+			</label>
+			<textarea id="contenu" name="contenu" rows="20">{{ article.contenu ?? '' }}</textarea>
+		</div>
+
+	</fieldset>
+
+	<fieldset class="grid gap-10">
+
+		<div class="flex flex-col gap-2">
+			<label class="text-cerise-05" for="rubrique_id">Rubrique</label>
+			<select id="rubrique_id" name="rubrique_id" class="select w-full">
+				<option value="">— Choisir une rubrique —</option>
+				{% for rubrique in rubriques %}
+					<option value="{{ rubrique.id }}" {{ (article.rubrique_id ?? '') == rubrique.id ? 'selected' : '' }}>
+						{{ rubrique.nom }}
+					</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<label class="text-cerise-05" for="auteur_id">Auteur</label>
+			<select id="auteur_id" name="auteur_id" class="select w-full">
+				<option value="">— Choisir un auteur —</option>
+				{% for auteur in auteurs %}
+					<option value="{{ auteur.id }}" {{ (article.auteur_id ?? '') == auteur.id ? 'selected' : '' }}>
+						{{ auteur.nom }}
+					</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<label class="text-cerise-05" for="statut">Statut</label>
+			<select id="statut" name="statut" class="select w-full">
+				<option value="brouillon" {{ (article.statut ?? 'brouillon') == 'brouillon' ? 'selected' : '' }}>Brouillon</option>
+				<option value="publie" {{ (article.statut ?? '') == 'publie' ? 'selected' : '' }}>Publié</option>
+				<option value="a_venir" {{ (article.statut ?? '') == 'a_venir' ? 'selected' : '' }}>À venir</option>
+				<option value="archive" {{ (article.statut ?? '') == 'archive' ? 'selected' : '' }}>Archivé</option>
+			</select>
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<label class="text-cerise-05" for="date_publication">Date de publication</label>
+			<input type="date" class="input w-full" id="date_publication" name="date_publication" value="{{ article.date_publication ? article.date_publication|date('Y-m-d') : '' }}">
+		</div>
+
+	</fieldset>
+
+	<fieldset class="grid gap-10">
+
+		<div>
+			<label class="text-cerise-05">Image principale</label>
+			<div id="dropzone" class="flex flex-col items-center justify-center gap-3 border border-dashed border-cerise-09 rounded-lg p-10 cursor-pointer hover:bg-cerise-10 transition">
+				<p>Glissez votre image ici ou
+					<span class="text-cerise-04 underline">parcourir</span>
+				</p>
+				<small class="text-cerise-05">JPEG, PNG</small>
+				<div id="dropzone-preview"></div>
+			</div>
+			<input type="file" id="image_principale" name="image_principale" accept=".jpg,.jpeg,.png" class="hidden">
+		</div>
+
+		{% include 'admin/partials/contenteditable-field.html.twig' with {
+      label: 'Crédit photo',
+      name: 'credit_photo',
+      value: article.credit_photo ?? '',
+      required: false,
+      class: 'text-base'
+    } only %}
+
+	</fieldset>
+
+	<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
+		{% include 'components/button.html.twig' with {
+        label: submit_label ?? "Enregistrer",
+        type: "submit",
+        class: "w-full md:order-last"
+    } %}
+		{% include 'components/button.html.twig' with {
+        label: "Retour",
+        href: base ~ "/admin/article/list",
+        class: "w-full md:order-first"
+    } %}
+	</div>
+
+	{% if show_delete is defined and show_delete %}
+		<a href="{{ base }}/admin/article/delete?id={{ article.id }}" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="return confirm('Supprimer cet article ?')">
+			Supprimer l'article
+		</a>
+	{% endif %}
+
+</form>

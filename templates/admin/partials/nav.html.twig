@@ -1,0 +1,16 @@
+{% set links = [
+    { label: 'Articles', href: base ~ '/admin/article/list', section: 'articles' },
+    { label: 'Lexique', href: base ~ '/admin/lexique/list', section: 'lexique' },
+    { label: 'Newsletter', href: base ~ '/admin/newsletter/list', section: 'newsletter' },
+    { label: 'Paramètre', href: base ~ '/admin/parametre', section: 'parametre' },
+] %}
+
+<div class="fixed top-6 left-1/2 -translate-x-1/2 z-10">
+	<nav id="admin-nav" class="inline-flex items-center bg-cerise-10 rounded-full border border-cerise-09 p-1 gap-1 transition ease-in-out">
+		{% for link in links %}
+			<a href="{{ link.href }}" class="{{ section == link.section ? 'bg-cerise-01 text-cerise-10' : 'text-cerise-01 hover:bg-cerise-09/30' }} px-5 py-2 rounded-full text-sm transition-colors cursor-pointer">
+				{{ link.label }}
+			</a>
+		{% endfor %}
+	</nav>
+</div>

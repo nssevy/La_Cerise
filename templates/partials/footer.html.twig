@@ -4,21 +4,35 @@
 		<div class="">
 			<p class="text-5xl md:text-[52px] font-light leading-none text-(--01)">La cerise</p>
 		</div>
-		<div class="grid grid-cols-2 grid-rows-1 gap-4 uppercase text-body pt-15 md:pt-0">
+		<div class="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-10 text-body pt-15 md:pt-0">
 			<section class="flex flex-col gap-5">
-				<h2 class="text-cerise-06 text-body">Nous suivre</h2>
-				<ul class="flex flex-col gap-3">
+				<h2 class="text-cerise-01 text-body">Nous suivre</h2>
+				<ul class="flex flex-col gap-3 text-cerise-04">
 					<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
 						<a href="https://www.instagram.com/revue.cerise/" target="_blank" rel="noopener noreferrer">Instagram</a>
 					</li>
 				</ul>
 			</section>
 			<section class="flex flex-col gap-5">
-				<h2 class="text-cerise-06 text-body">Article</h2>
-				<ul class="flex flex-col gap-3">
-					<li>HUMANITAIRE ET CONFLITS</li>
-					<li>INDÉPENDANCE DES PEUPLES</li>
-					<li>JUSTICE SOCIALE, TRAVAIL ET DIGNITÉ HUMAINE</li>
+				<h2 class="text-cerise-01 text-body">Article</h2>
+				<ul class="flex flex-col gap-3 text-cerise-04">
+					<li>Humanitaire et conflit</li>
+					<li>Indépendance des peuples</li>
+					<li>Justice Sociale, Travail et Dignité Humaine</li>
+				</ul>
+			</section>
+			<section class="flex flex-col gap-5">
+				<h2 class="text-cerise-01 text-body">Légal</h2>
+				<ul class="flex flex-col gap-3 text-cerise-04">
+					<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+						<a href="{{ base }}/legal/confidentialite">Politique de confidentialité</a>
+					</li>
+					<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+						<a href="{{ base }}/legal/mentions-legales">Mentions légales</a>
+					</li>
+					<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+						<a href="{{ base }}/legal/cgu">CGU</a>
+					</li>
 				</ul>
 			</section>
 		</div>
@@ -27,7 +41,6 @@
 	<div class="flex flex-wrap justify-between py-10">
 		<p class="whitespace-nowrap">© 2026 La Cerise - Tous droits réservés.</p>
 		<a href="{{ base }}/admin/login" class="hocus:text-(--special) transition-colors whitespace-nowrap">Admin</a>
-		<a href="#" class="hocus:text-(--special) transition-colors whitespace-nowrap">Mentions légales</a>
 	</div>
 	{% block scripts %}{% endblock %}
 </footer>

@@ -3,6 +3,7 @@
 vendor/
 node_modules/
 assets/css/output.css
+images/
 .claude
 cache/
 .DS_Store

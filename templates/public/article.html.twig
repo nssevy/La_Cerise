@@ -1,0 +1,87 @@
+{% extends 'public/base.html.twig' %}
+
+{% block titre %}
+	{{ article.titre }}
+	- La Cerise
+{% endblock %}
+
+{% block content %}
+
+	<div
+		class="relative flex gap-10 mt-10 mb-50">
+
+		{# Contenu article #}
+		<article class="w-full flex flex-col gap-10 lg:w-3/5 lg:mx-auto">
+			{% include 'components/breadcrumb.html.twig' with {
+                'breadcrumb': [
+                    {'label': article.rubrique_nom, 'url': '#'},
+                    {'label': article.titre, 'url': null}
+                ]
+            } %}
+
+			<header class="flex flex-col gap-5">
+				<div class="flex flex-col justify-between">
+					<small class="text-small-serif">{{ formatDateFr(article.date_publication) }}</small>
+					<small class="text-small-serif text-cerise-06">{{ article.rubrique_nom }}</small>
+				</div>
+				<h1 class="text-h1-serif text-gradient">{{ article.titre }}</h1>
+			</header>
+
+			<div class="contenu prose max-w-none w-full text-body-serif">
+				{{ article.contenu | raw }}
+			</div>
+		</article>
+
+		{% if toc %}
+			<nav aria-label="Table des matières" class="hidden lg:flex flex-col gap-4 w-1/5 sticky top-10 self-start pt-20">
+				{% for item in toc %}
+					<a href="#{{ item.ancre }}" class="toc-link text-small text-cerise-06 hocus:text-cerise-01 transition-colors duration-200">
+						{{ item.texte }}
+					</a>
+				{% endfor %}
+			</nav>
+		{% endif %}
+
+	</div>
+
+	{% if suggeres %}
+		<div class="flex flex-col justify-center-safe gap-4">
+			<section class="my-20 flex flex-col gap-15">
+				<div class="flex flex-row items-center gap-5">
+					<hr class="flex-1 border-t border-(--09)">
+					<h2 class="text-h2-section-serif whitespace-nowrap">Poursuivre la lecture</h2>
+					<hr class="flex-1 border-t border-(--09)">
+				</div>
+				<div class="grid grid-cols-1 gap-10
+																								    {% if suggeres|length == 2 %}md:grid-cols-2
+																								    {% else %}md:grid-cols-3
+																								    {% endif %}">
+					{% if suggeres|length == 1 %}
+						<div></div>
+						{% include 'components/card.html.twig' with {'card': suggeres[0]} %}
+						<div></div>
+					{% else %}
+						{% for suggere in suggeres %}
+							{% include 'components/card.html.twig' with {'card': suggere} %}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</section>
+		</div>
+	{% endif %}
+
+	<div class="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+		<a href="{{ base }}/">
+			{% include 'components/button.html.twig' with { label: "Retour" } %}
+		</a>
+
+		<button type="button" data-action="share" class="text-body group relative inline-flex h-12 items-center justify-center overflow-hidden bg-cerise-01 text-cerise-10 cursor-pointer">
+			<div class="inline-flex h-12 translate-y-0 items-center justify-center px-6 transition duration-300 group-hover:-translate-y-[150%]">Partager</div>
+			<div class="absolute inline-flex h-12 w-full translate-y-full items-center justify-center px-6 transition duration-300 group-hover:translate-y-0">Partager</div>
+		</button>
+	</div>
+
+	<script src="{{ base }}/assets/js/share.js" defer></script>
+	<script src="{{ base }}/assets/js/toc.js" defer></script>
+
+{% endblock %}

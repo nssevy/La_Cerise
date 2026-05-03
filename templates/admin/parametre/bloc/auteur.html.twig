@@ -1,0 +1,27 @@
+<section>
+	<h2 class="text-4xl mb-8 text-gradient">Auteurs</h2>
+
+	{% if auteurs|length > 0 %}
+
+		<ul class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+			{% for auteur in auteurs %}
+				<li class="flex">
+					{% include 'admin/partials/cards-parametre.html.twig' with {
+						href: base ~ '/admin/parametre/auteur/edit?id=' ~ auteur.id,
+						type: auteur.bio,
+						label: auteur.nom
+					} only %}
+				</li>
+			{% endfor %}
+		</ul>
+
+	{% else %}
+		<p class="text-sm text-cerise-04 mb-6">Aucun auteur pour le moment.</p>
+	{% endif %}
+
+	{% include 'components/button.html.twig' with {
+                label: "Ajouter un auteur",
+                href: base ~ "/admin/parametre/auteur/create",
+                class: "w-full"
+            } %}
+</section>

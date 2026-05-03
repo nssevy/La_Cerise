@@ -1,16 +1,8 @@
 <?php
-require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 2) . '/config/db.php';
-require_once dirname(__DIR__, 2) . '/config/twig.php';
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once dirname(__DIR__, 2) . '/config/bootstrap.php';
 
 if (!empty($_SESSION['user_id'])) {
-    $base = $_ENV['BASE_URL'] ?? '';
-    header('Location: ' . $base . '/admin/dashboard');
-    exit;
+    redirect('/admin/article/list');
 }
 
 $error = null;
@@ -31,9 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_nom'] = $user['nom'];
             $_SESSION['user_role'] = $user['role'];
 
-            $base = $_ENV['BASE_URL'] ?? '';
-            header('Location: ' . $base . '/admin/dashboard');
-            exit;
+            redirect('/admin/article/list');
         } else {
             $error = 'Email, Nom ou mot de passe incorrect.';
         }
@@ -42,6 +32,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 echo $twig->render('admin/login.html.twig', [
     'error' => $error,
-    'base' => $_ENV['BASE_URL'] ?? ''
-
 ]);
