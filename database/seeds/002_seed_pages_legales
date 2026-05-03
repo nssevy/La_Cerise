@@ -1,0 +1,123 @@
+-- ============================================================
+--  Seed 002 : données initiales pages_legales
+--  Projet : lacerise.blog
+--  Date : avril 2026
+-- ============================================================
+INSERT INTO
+    pages_legales (type, titre, contenu)
+VALUES
+    (
+        'confidentialite',
+        'Politique de confidentialité',
+        '<h2>1. Qui sommes-nous ?</h2>
+<p>Lacerise est un site de journalisme et de partage d\'articles, exploité à titre personnel par Lacerise (pseudo). Il n\'est rattaché à aucune structure commerciale.</p>
+
+<h2>2. Données collectées</h2>
+<p>Nous collectons uniquement les données que vous nous transmettez volontairement :</p>
+<ul>
+  <li>Votre adresse email, via le formulaire de contact ou l\'inscription à la newsletter.</li>
+  <li>Le contenu de vos messages envoyés via le formulaire de contact.</li>
+</ul>
+<p>Aucune donnée de navigation n\'est collectée. Nous n\'utilisons pas de cookies analytiques, de trackers, ni d\'outils de statistiques tiers.</p>
+
+<h2>3. Finalité du traitement</h2>
+<p>Les données collectées sont utilisées uniquement pour :</p>
+<ul>
+  <li>Répondre à vos messages envoyés via le formulaire de contact.</li>
+  <li>Vous envoyer la newsletter à laquelle vous avez souscrit.</li>
+</ul>
+<p>Vos données ne sont jamais utilisées à des fins commerciales, publicitaires ou revendues à des tiers.</p>
+
+<h2>4. Durée de conservation</h2>
+<p>Les emails de contact sont conservés le temps nécessaire pour traiter votre demande, puis supprimés. Les adresses emails de la newsletter sont conservées tant que vous êtes abonné. Vous pouvez vous désabonner à tout moment.</p>
+
+<h2>5. Hébergement</h2>
+<p>Le site est hébergé par Hostinger (hostinger.fr). Les données sont stockées sur leurs serveurs. Vous pouvez consulter leur politique de confidentialité sur leur site officiel.</p>
+
+<h2>6. Vos droits</h2>
+<p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+<ul>
+  <li>Droit d\'accès à vos données personnelles.</li>
+  <li>Droit de rectification de vos données.</li>
+  <li>Droit à l\'effacement (droit à l\'oubli).</li>
+  <li>Droit d\'opposition au traitement de vos données.</li>
+</ul>
+<p>Pour exercer ces droits, contactez-nous à : <a href="mailto:contact@lacerise.blog">contact@lacerise.blog</a></p>
+
+<h2>7. Cookies</h2>
+<p>Ce site n\'utilise pas de cookies de suivi ou d\'analyse. Des cookies techniques peuvent être déposés par l\'hébergeur pour assurer le bon fonctionnement du site, sans collecte de données personnelles de notre part.</p>
+
+<h2>8. Modifications</h2>
+<p>Cette politique peut être mise à jour. Toute modification sera indiquée par une nouvelle date d\'entrée en vigueur en haut de cette page.</p>'
+    );
+
+INSERT INTO
+    pages_legales (type, titre, contenu)
+VALUES
+    (
+        'mentions_legales',
+        'Mentions légales',
+        '<p>Conformément à la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l\'Économie Numérique (LCEN).</p>
+
+<h2>1. Éditeur du site</h2>
+<p>Nom d\'usage : Lacerise<br>
+Statut : Particulier<br>
+Email : <a href="mailto:contact@lacerise.blog">contact@lacerise.blog</a><br>
+Site web : lacerise.blog</p>
+
+<h2>2. Directrice de la publication</h2>
+<p>Lacerise (pseudo)</p>
+
+<h2>3. Hébergeur</h2>
+<p>Raison sociale : Hostinger International Ltd<br>
+Adresse : 61 Lordou Vironos Street, 6023 Larnaca, Chypre<br>
+Site web : hostinger.fr</p>
+
+<h2>4. Propriété intellectuelle</h2>
+<p>L\'ensemble du contenu publié sur lacerise.blog (articles, textes, visuels) est la propriété exclusive de leurs auteurs respectifs. Toute reproduction, même partielle, est interdite sans autorisation préalable.</p>
+
+<h2>5. Responsabilité</h2>
+<p>Les informations publiées sur ce site sont données à titre informatif. Lacerise ne saurait être tenue responsable des erreurs ou omissions présentes dans ses contenus, ni des éventuels dommages résultant de leur utilisation.</p>
+
+<h2>6. Contact</h2>
+<p>Pour toute question relative au site : <a href="mailto:contact@lacerise.blog">contact@lacerise.blog</a></p>'
+    );
+
+INSERT INTO
+    pages_legales (type, titre, contenu)
+VALUES
+    (
+        'cgu',
+        'Conditions Générales d\'Utilisation',
+        '<p>Site : lacerise.blog — Date d\'entrée en vigueur : avril 2026</p>
+
+<h2>1. Objet</h2>
+<p>Les présentes Conditions Générales d\'Utilisation (CGU) définissent les règles d\'utilisation du site lacerise.blog, site éditorial indépendant dédié au partage d\'articles journalistiques.</p>
+
+<h2>2. Accès au site</h2>
+<p>L\'accès au site est libre et gratuit. Lacerise se réserve le droit de modifier, suspendre ou interrompre l\'accès au site à tout moment, sans préavis ni indemnité.</p>
+
+<h2>3. Propriété des contenus</h2>
+<p>Tous les articles, textes et contenus publiés sur lacerise.blog sont la propriété de leurs auteurs. Ils sont protégés par le droit d\'auteur. Toute reproduction, diffusion ou utilisation sans accord préalable est interdite.</p>
+<p>Vous pouvez citer des extraits à condition de mentionner clairement la source (lacerise.blog) et de ne pas dénaturer le propos original.</p>
+
+<h2>4. Comportement des utilisateurs</h2>
+<p>En utilisant ce site, vous vous engagez à :</p>
+<ul>
+  <li>Ne pas utiliser le formulaire de contact ou la newsletter à des fins de spam ou de sollicitation non désirée.</li>
+  <li>Ne pas tenter d\'accéder à des parties non publiques du site.</li>
+  <li>Respecter les droits de propriété intellectuelle des contenus publiés.</li>
+</ul>
+
+<h2>5. Liens externes</h2>
+<p>Le site peut contenir des liens vers des sites tiers. Lacerise n\'est pas responsable du contenu de ces sites ni de leurs pratiques en matière de confidentialité.</p>
+
+<h2>6. Limitation de responsabilité</h2>
+<p>Les contenus publiés sur lacerise.blog sont rédigés avec soin, mais Lacerise ne garantit pas l\'exactitude ou l\'exhaustivité des informations. L\'utilisation des contenus se fait sous la responsabilité de l\'utilisateur.</p>
+
+<h2>7. Droit applicable</h2>
+<p>Les présentes CGU sont soumises au droit français. En cas de litige, les tribunaux français seront compétents.</p>
+
+<h2>8. Contact</h2>
+<p>Pour toute question : <a href="mailto:contact@lacerise.blog">contact@lacerise.blog</a></p>'
+    );
