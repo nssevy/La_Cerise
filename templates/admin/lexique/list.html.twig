@@ -5,7 +5,7 @@
 
 {% block content %}
 
-	<div class="px-7 md:px-10 md:pt-10 pb-4 flex flex-col gap-2">
+	<div class="px-7 md:px-10 md:pt-10 pb-4 flex flex-row justify-between gap-2">
 		<h1 class="text-4xl text-gradient">
 			{% if categorie_id %}
 				{% for categorie in categories %}
@@ -14,11 +14,11 @@
 					{% endif %}
 				{% endfor %}
 			{% else %}
-				<h1 class="text-4xl text-gradient">
-					Tous
-				</h1>
+				Tous
 			{% endif %}
 		</h1>
+		<p class="text-cerise-05 text-sm">{{ termes|length }}
+			définition{{ termes|length > 1 ? 's' : '' }}</p>
 	</div>
 
 	<div class="px-7 md:px-10 flex gap-6 overflow-x-auto border-b md:border-b-0 border-cerise-09">
