@@ -1,0 +1,78 @@
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
+{% block titre %}Lexique{% endblock %}
+
+{% block content %}
+
+	<div class="px-7 md:px-10 pt-10 pb-4 flex flex-col gap-2 border-b border-cerise-09">
+		<h1 class="text-h1">Lexique</h1>
+		<p class="text-cerise-05 text-sm">{{ termes|length }} terme{{ termes|length > 1 ? 's' : '' }}</p>
+	</div>
+
+	{% if termes is empty %}
+		<div class="flex flex-col items-center justify-center gap-4 py-32 text-cerise-05">
+			<p>Aucun terme pour le moment.</p>
+		</div>
+	{% else %}
+		<table class="w-full text-left">
+			<thead>
+				<tr class="border-b border-cerise-09 text-sm text-cerise-05">
+					<th class="px-7 md:px-10 py-4 font-medium">Terme</th>
+					<th class="px-4 py-4 font-medium hidden md:table-cell">Catégorie</th>
+					<th class="px-4 py-4 font-medium hidden lg:table-cell">Ajouté le</th>
+					<th class="px-7 md:px-10 py-4 font-medium text-right">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for terme in termes %}
+					<tr class="border-b border-cerise-09 hover:bg-cerise-10 transition-colors group">
+
+						<td class="px-7 md:px-10 py-5">
+							<a href="{{ base }}/admin/lexique/edit?id={{ terme.id }}" class="font-medium hover:underline">
+								{{ terme.terme }}
+							</a>
+							<p class="text-sm text-cerise-05 mt-1 line-clamp-1 md:hidden">{{ terme.rubrique_nom }}</p>
+						</td>
+
+						<td class="px-4 py-5 text-cerise-04 text-sm hidden md:table-cell">
+							{{ terme.rubrique_nom ?: '—' }}
+						</td>
+
+						<td class="px-4 py-5 text-cerise-05 text-sm hidden lg:table-cell">
+							<time datetime="{{ terme.date_creation }}">
+								{{ formatDateFr(terme.date_creation) }}
+							</time>
+						</td>
+
+						<td class="px-7 md:px-10 py-5 text-right">
+							<div class="flex items-center justify-end gap-4">
+								<a
+									href="{{ base }}/admin/lexique/edit?id={{ terme.id }}"
+									class="text-sm text-cerise-04 hover:text-cerise-02 transition-colors"
+								>
+									Éditer
+								</a>
+								<form method="POST" action="{{ base }}/admin/lexique/delete" onsubmit="return confirm('Supprimer « {{ terme.terme }} » ?')">
+									<input type="hidden" name="id" value="{{ terme.id }}">
+									<button type="submit" class="text-sm text-red-800 hover:text-red-500 transition-colors">
+										Supprimer
+									</button>
+								</form>
+							</div>
+						</td>
+
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+
+	<div class="md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+		<a href="{{ base }}/admin/lexique/create">
+			{% include 'components/button.html.twig' with { label: "Nouveau terme" } %}
+		</a>
+	</div>
+
+	<script src="{{ base }}/assets/js/confirm.js" defer></script>
+
+{% endblock %}

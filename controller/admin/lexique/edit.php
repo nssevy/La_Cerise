@@ -16,10 +16,12 @@ $terme = $stmt->fetch();
 if (!$terme)
     redirect('/admin/lexique/list');
 
+$rubriques = $pdo->query('SELECT * FROM rubriques ORDER BY nom ASC')->fetchAll();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $termeVal = trim($_POST['terme'] ?? '');
     $definition = trim($_POST['definition'] ?? '');
-    $categorie = trim($_POST['categorie'] ?? '');
+    $rubrique_id = $_POST['rubrique_id'] !== '' ? (int) $_POST['rubrique_id'] : null;
 
     if ($termeVal === '')
         $errors[] = 'Le terme est obligatoire.';
@@ -27,21 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'La définition est obligatoire.';
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare('UPDATE lexique SET terme = ?, definition = ?, categorie = ? WHERE id = ?');
-        $stmt->execute([$termeVal, $definition, $categorie ?: null, $id]);
+        $stmt = $pdo->prepare('UPDATE lexique SET terme = ?, definition = ?, rubrique_id = ? WHERE id = ?');
+        $stmt->execute([$termeVal, $definition, $rubrique_id, $id]);
 
         flash_success('Terme mis à jour.');
         redirect('/admin/lexique/list');
     }
 
     $terme = array_merge($terme, [
-        'terme' => $termeVal,
+        'terme'      => $termeVal,
         'definition' => $definition,
-        'categorie' => $categorie,
+        'rubrique_id' => $rubrique_id,
     ]);
 }
 
-echo $twig->render('admin/lexique_edit.html.twig', [
-    'terme' => $terme,
-    'errors' => $errors,
+echo $twig->render('admin/lexique/edit.html.twig', [
+    'terme'     => $terme,
+    'rubriques' => $rubriques,
+    'errors'    => $errors,
 ]);

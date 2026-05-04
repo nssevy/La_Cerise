@@ -1,0 +1,55 @@
+<form class="flex flex-col gap-10" method="POST" action="" novalidate>
+	<fieldset class="grid gap-10">
+
+		{% include 'admin/partials/contenteditable-field.html.twig' with {
+			label: 'Terme',
+			name: 'terme',
+			value: terme.terme ?? '',
+			required: true,
+			class: 'text-lg'
+		} only %}
+
+		<div>
+			<label for="definition" class="text-cerise-05">Définition
+				<abbr title="Champ obligatoire">*</abbr>
+			</label>
+			<textarea id="definition" name="definition" rows="6" class="input w-full mt-2">{{ terme.definition ?? '' }}</textarea>
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<label class="text-cerise-05" for="rubrique_id">Rubrique</label>
+			<select id="rubrique_id" name="rubrique_id" class="select w-full">
+				<option value="">— Choisir une rubrique —</option>
+				{% for rubrique in rubriques %}
+					<option value="{{ rubrique.id }}" {{ (terme.rubrique_id ?? '') == rubrique.id ? 'selected' : '' }}>
+						{{ rubrique.nom }}
+					</option>
+				{% endfor %}
+			</select>
+		</div>
+
+	</fieldset>
+
+	<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
+		{% include 'components/button.html.twig' with {
+			label: submit_label ?? "Enregistrer",
+			type: "submit",
+			class: "w-full md:order-last"
+		} %}
+		{% include 'components/button.html.twig' with {
+			label: "Retour",
+			href: base ~ "/admin/lexique/list",
+			class: "w-full md:order-first"
+		} %}
+	</div>
+
+	{% if show_delete is defined and show_delete %}
+		<form method="POST" action="{{ base }}/admin/lexique/delete" onsubmit="return confirm('Supprimer ce terme ?')">
+			<input type="hidden" name="id" value="{{ terme.id }}">
+			<button type="submit" class="text-sm text-red-800 hover:text-red-500 transition-colors">
+				Supprimer le terme
+			</button>
+		</form>
+	{% endif %}
+
+</form>
