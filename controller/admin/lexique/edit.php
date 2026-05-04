@@ -9,19 +9,24 @@ $id = $_GET['id'] ?? null;
 if (!$id)
     redirect('/admin/lexique/list');
 
-$stmt = $pdo->prepare('SELECT * FROM lexique WHERE id = ?');
+$stmt = $pdo->prepare('
+    SELECT l.*, c.nom AS categorie_nom
+    FROM lexique l
+    LEFT JOIN categories c ON l.categorie_id = c.id
+    WHERE l.id = ?
+');
 $stmt->execute([$id]);
 $terme = $stmt->fetch();
 
 if (!$terme)
     redirect('/admin/lexique/list');
 
-$rubriques = $pdo->query('SELECT * FROM rubriques ORDER BY nom ASC')->fetchAll();
+$categories = $pdo->query('SELECT * FROM categories ORDER BY nom ASC')->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $termeVal = trim($_POST['terme'] ?? '');
     $definition = trim($_POST['definition'] ?? '');
-    $rubrique_id = $_POST['rubrique_id'] !== '' ? (int) $_POST['rubrique_id'] : null;
+    $categorie_id = $_POST['categorie_id'] !== '' ? (int) $_POST['categorie_id'] : null;
 
     if ($termeVal === '')
         $errors[] = 'Le terme est obligatoire.';
@@ -29,22 +34,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'La définition est obligatoire.';
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare('UPDATE lexique SET terme = ?, definition = ?, rubrique_id = ? WHERE id = ?');
-        $stmt->execute([$termeVal, $definition, $rubrique_id, $id]);
+        $stmt = $pdo->prepare('UPDATE lexique SET terme = ?, definition = ?, categorie_id = ? WHERE id = ?');
+        $stmt->execute([$termeVal, $definition, $categorie_id, $id]);
 
         flash_success('Terme mis à jour.');
         redirect('/admin/lexique/list');
     }
 
     $terme = array_merge($terme, [
-        'terme'      => $termeVal,
+        'terme' => $termeVal,
         'definition' => $definition,
-        'rubrique_id' => $rubrique_id,
+        'categorie_id' => $categorie_id,
     ]);
 }
 
 echo $twig->render('admin/lexique/edit.html.twig', [
-    'terme'     => $terme,
-    'rubriques' => $rubriques,
-    'errors'    => $errors,
+    'terme' => $terme,
+    'categories' => $categories,
+    'errors' => $errors,
 ]);

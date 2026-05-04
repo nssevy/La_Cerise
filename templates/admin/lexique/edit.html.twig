@@ -7,7 +7,7 @@
 
 	<div class="px-7 md:px-10 pt-10 pb-4 border-b border-cerise-09">
 		<h1 class="text-h1">{{ terme.terme }}</h1>
-		<p class="text-cerise-05 text-sm mt-1">{{ terme.categorie ?: 'Sans catégorie' }}</p>
+		<p class="text-cerise-05 text-sm mt-1">{{ terme.categorie_nom ?: 'Sans catégorie' }}</p>
 	</div>
 
 	<div class="px-7 md:px-10 py-10 max-w-2xl">
@@ -22,7 +22,7 @@
 
 		{% include 'admin/lexique/form.html.twig' with {
 			terme: terme,
-			rubriques: rubriques,
+			categories: categories,
 			submit_label: "Enregistrer les modifications",
 			show_delete: true
 		} only %}

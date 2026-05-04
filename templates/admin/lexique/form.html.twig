@@ -17,12 +17,12 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<label class="text-cerise-05" for="rubrique_id">Rubrique</label>
-			<select id="rubrique_id" name="rubrique_id" class="select w-full">
-				<option value="">— Choisir une rubrique —</option>
-				{% for rubrique in rubriques %}
-					<option value="{{ rubrique.id }}" {{ (terme.rubrique_id ?? '') == rubrique.id ? 'selected' : '' }}>
-						{{ rubrique.nom }}
+			<label class="text-cerise-05" for="categorie_id">Catégorie</label>
+			<select id="categorie_id" name="categorie_id" class="select w-full">
+				<option value="">— Choisir une catégorie —</option>
+				{% for categorie in categories %}
+					<option value="{{ categorie.id }}" {{ (terme.categorie_id ?? '') == categorie.id ? 'selected' : '' }}>
+						{{ categorie.nom }}
 					</option>
 				{% endfor %}
 			</select>
@@ -43,13 +43,13 @@
 		} %}
 	</div>
 
-	{% if show_delete is defined and show_delete %}
-		<form method="POST" action="{{ base }}/admin/lexique/delete" onsubmit="return confirm('Supprimer ce terme ?')">
-			<input type="hidden" name="id" value="{{ terme.id }}">
-			<button type="submit" class="text-sm text-red-800 hover:text-red-500 transition-colors">
-				Supprimer le terme
-			</button>
-		</form>
-	{% endif %}
-
 </form>
+
+{% if show_delete is defined and show_delete %}
+	<form method="POST" action="{{ base }}/admin/lexique/delete" onsubmit="return confirm('Supprimer ce terme ?')">
+		<input type="hidden" name="id" value="{{ terme.id }}">
+		<button type="submit" class="text-sm text-red-800 hover:text-red-500 transition-colors">
+			Supprimer le terme
+		</button>
+	</form>
+{% endif %}
