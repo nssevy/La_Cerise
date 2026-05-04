@@ -52,4 +52,6 @@ echo $twig->render('admin/lexique/edit.html.twig', [
     'terme' => $terme,
     'categories' => $categories,
     'errors' => $errors,
+    'section' => 'lexique',
+    ...get_flash(),
 ]);

@@ -4,28 +4,40 @@
 {% endblock %}
 
 {% block content %}
+	<nav>
+		{% include 'components/breadcrumb.html.twig' with {
+      'breadcrumb': [
+        {'label': 'modifier une définition', 'url': null}
+      ]
+    } %}
+	</nav>
 
-	<div class="px-7 md:px-10 pt-10 pb-4 border-b border-cerise-09">
-		<h1 class="text-h1">{{ terme.terme }}</h1>
-		<p class="text-cerise-05 text-sm mt-1">{{ terme.categorie_nom ?: 'Sans catégorie' }}</p>
-	</div>
+	<div class="mt-10 md:max-w-2xl md:mx-auto">
 
-	<div class="px-7 md:px-10 py-10 max-w-2xl">
+		<div class="px-7 md:px-10 py-10 max-w-2xl">
 
-		{% if errors is defined and errors|length %}
-			<ul class="flex flex-col gap-1 mb-8 p-4 border border-red-300 bg-red-50 rounded text-sm text-red-800">
-				{% for error in errors %}
-					<li>{{ error }}</li>
-				{% endfor %}
-			</ul>
-		{% endif %}
+			<div class="flex flex-col gap-2 mb-30">
+				<p class="text-center text-cerise-05">Vous êtes en train de modifier :</p>
+				<h1 class="text-3xl text-center text-gradient">{{ terme.terme }}</h1>
+			</div>
 
-		{% include 'admin/lexique/form.html.twig' with {
+			{% if errors is defined and errors|length %}
+				<ul class="flex flex-col gap-1 mb-8 p-4 border border-red-300 bg-red-50 rounded text-sm text-red-800">
+					{% for error in errors %}
+						<li>{{ error }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% include 'admin/lexique/form.html.twig' with {
 			terme: terme,
 			categories: categories,
 			submit_label: "Enregistrer les modifications",
 			show_delete: true
 		} only %}
+
+		</div>
 	</div>
+
 
 {% endblock %}

@@ -26,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 echo $twig->render('admin/lexique/create.html.twig', [
-    'errors'     => $errors,
+    'errors' => $errors,
     'categories' => $categories,
+    'section' => 'lexique',
+    ...get_flash(),
 ]);

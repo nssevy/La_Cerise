@@ -30,4 +30,6 @@ echo $twig->render('admin/lexique/list.html.twig', [
     'termes' => $termes,
     'categories' => $categories,
     'categorie_id' => $categorie_id,
+    'section' => 'lexique',
+    ...get_flash(),
 ]);

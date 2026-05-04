@@ -1,15 +1,15 @@
 {% for terme in termes %}
-	<a href="{{ base }}/admin/lexique/edit?id={{ terme.id }}" class="flex flex-col md:flex-row gap-2 md:gap-0 py-8 border-b border-cerise-09 hover:bg-cerise-10 transition-colors px-7 md:px-10 group">
+	<a href="{{ base }}/admin/lexique/edit?id={{ terme.id }}" class="flex flex-col md:flex-row gap-2 md:gap-0 py-8 hover:bg-cerise-10 transition-colors px-7 md:px-10 group">
 
-		<div class="md:w-1/3 flex flex-col gap-1 text-sm text-cerise-05">
-			<span>{{ terme.categorie_nom ?: '—' }}</span>
-			<time datetime="{{ terme.date_creation }}">
+		<div class="md:w-1/3 flex flex-row justify-between md:justify-start md:flex-col gap-1 text-sm">
+			<span class="text-cerise-01">{{ terme.categorie_nom ?: '—' }}</span>
+			<time class="text-cerise-05" datetime="{{ terme.date_creation }}">
 				{{ formatDateFr(terme.date_creation) }}
 			</time>
 		</div>
 
 		<div class="md:w-2/3 flex flex-col gap-2">
-			<h2 class="font-medium text-cerise-01 group-hover:underline">{{ terme.terme }}</h2>
+			<h2 class="font-medium text-cerise-01 group-hover:text-cerise-special">{{ terme.terme }}</h2>
 			{% if terme.definition %}
 				<p class="text-sm text-cerise-04 line-clamp-2">{{ terme.definition | striptags }}</p>
 			{% endif %}
