@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
-require_once dirname(__DIR__, 3) . '/src/upload.php';
+require_once dirname(__DIR__, 3) . '/src/utils/upload.php';
 require_once dirname(__DIR__, 3) . '/src/repositories/ArticleRepository.php';
 
 requireLogin();
