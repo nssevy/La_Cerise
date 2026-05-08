@@ -1,24 +1,19 @@
 <?php
 require_once dirname(__DIR__, 4) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 4) . '/src/repositories/AuteurRepository.php';
 
 requireLogin();
 
+$auteurRepo = new AuteurRepository($pdo);
 $id = $_GET['id'] ?? null;
 
 if (!$id)
     redirect('/admin/parametre');
 
-$stmt = $pdo->prepare('SELECT id FROM auteurs WHERE id = ?');
-$stmt->execute([$id]);
-$auteur = $stmt->fetch();
-
-if (!$auteur)
+if (!$auteurRepo->exists((int) $id))
     redirect('/admin/parametre');
 
-// Vérifier si l'auteur est lié à des articles
-$stmt = $pdo->prepare('SELECT titre FROM articles WHERE auteur_id = ?');
-$stmt->execute([$id]);
-$articles = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$articles = $auteurRepo->findLinkedArticles((int) $id);
 
 if (!empty($articles)) {
     $total = count($articles);
@@ -35,8 +30,6 @@ if (!empty($articles)) {
     redirect('/admin/parametre');
 }
 
-$stmt = $pdo->prepare('DELETE FROM auteurs WHERE id = ?');
-$stmt->execute([$id]);
-
+$auteurRepo->delete((int) $id);
 flash_error('Auteur supprimé.');
 redirect('/admin/parametre');

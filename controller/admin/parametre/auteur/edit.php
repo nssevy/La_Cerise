@@ -1,21 +1,19 @@
 <?php
 require_once dirname(__DIR__, 4) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 4) . '/src/repositories/AuteurRepository.php';
 
 requireLogin();
 
+$auteurRepo = new AuteurRepository($pdo);
+$errors = [];
 $id = $_GET['id'] ?? null;
 
 if (!$id)
     redirect('/admin/parametre');
 
-$stmt = $pdo->prepare('SELECT * FROM auteurs WHERE id = ?');
-$stmt->execute([$id]);
-$auteur = $stmt->fetch();
-
+$auteur = $auteurRepo->findById((int) $id);
 if (!$auteur)
     redirect('/admin/parametre');
-
-$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom'] ?? '');
@@ -29,9 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare('UPDATE auteurs SET nom = ?, bio = ?, email = ? WHERE id = ?');
-        $stmt->execute([$nom, $bio ?: null, $email ?: null, $id]);
-
+        $auteurRepo->update((int) $id, $nom, $bio ?: null, $email ?: null);
         flash_success('Auteur mis à jour.');
         redirect('/admin/parametre');
     }

@@ -1,8 +1,10 @@
 <?php
 require_once dirname(__DIR__, 4) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 4) . '/src/repositories/AuteurRepository.php';
 
 requireLogin();
 
+$auteurRepo = new AuteurRepository($pdo);
 $errors = [];
 $auteur = ['nom' => '', 'bio' => '', 'email' => ''];
 
@@ -18,9 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare('INSERT INTO auteurs (nom, bio, email) VALUES (?, ?, ?)');
-        $stmt->execute([$nom, $bio ?: null, $email ?: null]);
-
+        $auteurRepo->insert($nom, $bio ?: null, $email ?: null);
         flash_success('Auteur ajouté.');
         redirect('/admin/parametre');
     }
