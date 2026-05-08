@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../lib/helpers.php';
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../src/helpers.php';
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
 

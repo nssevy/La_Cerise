@@ -10,6 +10,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/twig.php';
-require_once __DIR__ . '/../lib/auth.php';
-require_once __DIR__ . '/../lib/flash.php';
-require_once __DIR__ . '/../lib/helpers.php';
+require_once __DIR__ . '/../src/auth.php';
+require_once __DIR__ . '/../src/flash.php';
+require_once __DIR__ . '/../src/helpers.php';
