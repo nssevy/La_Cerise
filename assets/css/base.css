@@ -1,0 +1,20 @@
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.48px;
+    color: var(--01);
+    background-color: var(--10);
+  }
+
+  strong {
+    font-weight: bold;
+    color: #760c2f;
+  }
+}

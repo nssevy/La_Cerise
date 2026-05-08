@@ -1,0 +1,68 @@
+/* Design système — La Cerise provenant de la maquette Figma "Cerise" */
+
+/* Thème Tailwind v4.2 */
+
+@theme {
+  --color-cerise-01: #000000;
+  --color-cerise-02: #1f1f1f;
+  --color-cerise-03: #363636;
+  --color-cerise-04: #4f4f4f;
+  --color-cerise-05: #6a6a6a;
+  --color-cerise-06: #868686;
+  --color-cerise-07: #a3a3a3;
+  --color-cerise-08: #c1c1c1;
+  --color-cerise-09: #dfdfdf;
+  --color-cerise-10: #ffffff;
+
+  --color-cerise-special: #d01152;
+  --color-cerise-special-mid: #a91947;
+  --color-cerise-special-dark: #760c2f;
+
+  --font-sans: "DejaVu Sans Condensed", "DejaVu Sans", sans-serif;
+  --font-serif: "DejaVu Serif Condensed", "DejaVu Serif", serif;
+}
+
+/* Aliases vers @theme */
+
+@layer base {
+  :root {
+    --01: var(--color-cerise-01);
+    --02: var(--color-cerise-02);
+    --03: var(--color-cerise-03);
+    --04: var(--color-cerise-04);
+    --05: var(--color-cerise-05);
+    --06: var(--color-cerise-06);
+    --07: var(--color-cerise-07);
+    --08: var(--color-cerise-08);
+    --09: var(--color-cerise-09);
+    --10: var(--color-cerise-10);
+
+    --special: var(--color-cerise-special);
+    --special-mid: var(--color-cerise-special-mid);
+    --special-dark: var(--color-cerise-special-dark);
+  }
+}
+
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url("../fonts/DejaVuSans.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DejaVu Sans Condensed";
+  src: url("../fonts/DejaVuSansCondensed.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DejaVu Serif Condensed";
+  src: url("../fonts/DejaVuSerifCondensed.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
