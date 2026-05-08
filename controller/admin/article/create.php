@@ -1,10 +1,10 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 3) . '/lib/upload.php';
 
 requireLogin();
 
 $errors = [];
-
 $rubriques = $pdo->query('SELECT id, nom FROM rubriques ORDER BY nom')->fetchAll();
 $auteurs = $pdo->query('SELECT id, nom FROM auteurs ORDER BY nom')->fetchAll();
 
@@ -24,32 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Le contenu est obligatoire.';
 
     $slug = slugify($titre);
-
     $image_principale = null;
 
     if (!empty($_FILES['image_principale']['name'])) {
-        $file = $_FILES['image_principale'];
-        $allowed = ['image/jpeg', 'image/png'];
-
-        if (!in_array($file['type'], $allowed)) {
-            $errors[] = 'Format d\'image non supporté (JPEG ou PNG uniquement).';
-        } elseif ($file['size'] > 5 * 1024 * 1024) {
-            $errors[] = 'L\'image ne doit pas dépasser 5 Mo.';
-        } else {
-            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-            $filename = uniqid('img_') . '.' . $ext;
-            $uploadDir = dirname(__DIR__, 3) . '/assets/images/';
-
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
-            }
-
-            if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
-                $image_principale = $filename;
-            } else {
-                $errors[] = 'Erreur lors de l\'upload de l\'image.';
-            }
-        }
+        $uploadDir = dirname(__DIR__, 3) . '/assets/images/';
+        $image_principale = handleImageUpload($_FILES['image_principale'], $errors, $uploadDir);
     }
 
     if (empty($errors)) {
@@ -57,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             INSERT INTO articles (titre, slug, chapeau, contenu, image_principale, credit_photo, statut, date_publication, rubrique_id, auteur_id)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ');
-
         $stmt->execute([
             $titre,
             $slug,

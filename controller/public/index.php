@@ -1,8 +1,8 @@
 <?php
 require_once dirname(__DIR__, 2) . '/config/db.php';
 require_once dirname(__DIR__, 2) . '/config/twig.php';
+require_once dirname(__DIR__, 2) . '/lib/ArticleService.php';
 
-// Article hero (le plus récent)
 $stmtHero = $pdo->query("
     SELECT a.*, r.nom AS rubrique, au.nom AS auteur
     FROM articles a
@@ -14,11 +14,8 @@ $stmtHero = $pdo->query("
 ");
 $hero = $stmtHero->fetch();
 
-// Calcul du temps de lecture (200 mots/min)
-$motsHero = $hero ? str_word_count(strip_tags($hero['contenu'])) : 0;
-$lectureHero = max(1, round($motsHero / 200));
+$lectureHero = $hero ? formatLecture(calculateReadingTime($hero['contenu'])) : null;
 
-// 2 articles suivants pour les cards (3 au total avec le hero)
 $stmtCards = $pdo->prepare("
     SELECT a.*, r.nom AS rubrique
     FROM articles a
@@ -30,7 +27,6 @@ $stmtCards = $pdo->prepare("
 $stmtCards->execute([':id' => $hero['id'] ?? 0]);
 $cards = $stmtCards->fetchAll();
 
-// Termes du lexique
 $lexique = $pdo->query("
     SELECT l.terme, c.nom AS categorie
     FROM lexique l
@@ -38,7 +34,6 @@ $lexique = $pdo->query("
     ORDER BY l.terme ASC
 ")->fetchAll();
 
-// Articles à venir
 $stmtAVenir = $pdo->query("
     SELECT a.*, r.nom AS rubrique, au.nom AS auteur
     FROM articles a
@@ -50,15 +45,10 @@ $stmtAVenir = $pdo->query("
 ");
 $articleAVenir = $stmtAVenir->fetch();
 
-// Image newsletter
 $mediaNewsletter = $pdo->query("
-    SELECT fichier, alt
-    FROM medias
-    WHERE contexte = 'newsletter'
-    LIMIT 1
+    SELECT fichier, alt FROM medias WHERE contexte = 'newsletter' LIMIT 1
 ")->fetch();
 
-// Gestion inscription newsletter
 $newsletterMessage = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -69,11 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email'])) {
             $stmt->execute([':email' => $email]);
             $newsletterMessage = ['type' => 'succes', 'texte' => 'Vous êtes bien inscrit à la newsletter.'];
         } catch (PDOException $e) {
-            if ($e->getCode() === '23000') {
-                $newsletterMessage = ['type' => 'erreur', 'texte' => 'Cet email est déjà inscrit.'];
-            } else {
-                $newsletterMessage = ['type' => 'erreur', 'texte' => 'Une erreur est survenue, veuillez réessayer.'];
-            }
+            $newsletterMessage = $e->getCode() === '23000'
+                ? ['type' => 'erreur', 'texte' => 'Cet email est déjà inscrit.']
+                : ['type' => 'erreur', 'texte' => 'Une erreur est survenue, veuillez réessayer.'];
         }
     } else {
         $newsletterMessage = ['type' => 'erreur', 'texte' => 'Adresse e-mail invalide.'];
