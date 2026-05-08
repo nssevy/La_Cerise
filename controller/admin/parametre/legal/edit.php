@@ -18,6 +18,8 @@ if (!$page)
     redirect('/admin/parametre');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrf_verify();
+
     $titre = trim($_POST['titre'] ?? '');
     $contenu = $_POST['contenu'] ?? '';
 

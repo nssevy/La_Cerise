@@ -51,3 +51,26 @@ function formatLecture(int $minutes): string
 
     return $minutes . ' minutes de lecture';
 }
+
+/** Génère un token CSRF et le stocke en session */
+function csrf_generate(): string
+{
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+/** Vérifie le token CSRF soumis — redirige si invalide */
+function csrf_verify(): void
+{
+    $token = $_POST['csrf_token'] ?? '';
+
+    if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $token)) {
+        http_response_code(403);
+        exit('Action non autorisée.');
+    }
+
+    // Régénère le token après vérification
+    unset($_SESSION['csrf_token']);
+}

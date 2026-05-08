@@ -9,6 +9,8 @@ $errors = [];
 $categories = $lexiqueRepo->findCategories();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrf_verify();
+
     $terme = trim($_POST['terme'] ?? '');
     $definition = trim($_POST['definition'] ?? '');
     $categorieId = $_POST['categorie_id'] !== '' ? (int) $_POST['categorie_id'] : null;

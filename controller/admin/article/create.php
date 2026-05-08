@@ -11,6 +11,8 @@ $rubriques = $articleRepo->findRubriques();
 $auteurs = $articleRepo->findAuteurs();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrf_verify();
+
     $titre = trim($_POST['titre'] ?? '');
     $chapeau = trim($_POST['chapeau'] ?? '');
     $contenu = $_POST['contenu'] ?? '';

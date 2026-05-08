@@ -9,6 +9,8 @@ $errors = [];
 $auteur = ['nom' => '', 'bio' => '', 'email' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrf_verify();
+
     $nom = trim($_POST['nom'] ?? '');
     $bio = trim($_POST['bio'] ?? '');
     $email = trim($_POST['email'] ?? '');

@@ -3,6 +3,7 @@ require_once dirname(__DIR__, 4) . '/config/bootstrap.php';
 require_once dirname(__DIR__, 4) . '/src/repositories/AuteurRepository.php';
 
 requireLogin();
+csrf_verify();
 
 $auteurRepo = new AuteurRepository($pdo);
 $id = $_GET['id'] ?? null;

@@ -11,6 +11,7 @@ $twig = new \Twig\Environment($loader, [
 
 $twig->addGlobal('base', $_ENV['BASE_URL'] ?? '');
 $twig->addGlobal('user_nom', $_SESSION['user_nom'] ?? '');
+$twig->addGlobal('csrf_token', csrf_generate());
 
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);

@@ -8,6 +8,8 @@ requireLogin();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST')
     redirect('/admin/parametre');
 
+csrf_verify();
+
 $parametreRepo = new ParametreRepository($pdo);
 $auteurRepo = new AuteurRepository($pdo);
 

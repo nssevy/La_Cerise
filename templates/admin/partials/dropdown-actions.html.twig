@@ -12,6 +12,7 @@
 	</li>
 	<li>
 		<form method="POST" action="{{ base }}/admin/article/delete" style="display:inline;">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 			<input type="hidden" name="id" value="{{ article.id }}">
 			<button type="submit" data-action="confirm-delete">Supprimer</button>
 		</form>
