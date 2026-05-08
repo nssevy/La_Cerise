@@ -220,41 +220,7 @@ strong {
   font-display: swap;
 }
 
-/* Style text avec Prose de Tailwind */
-
-.prose h2 {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;  
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.45px;
-    color: var(--01);
-
-    @media (min-width: 768px)  { font-size: 1.375rem; }
-    @media (min-width: 1024px) { font-size: 1.5rem;   } 
-}
-
-.prose p {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: -0.48px;
-    color: var(--01);
-
-}
-
-.prose blockquote {
-    font-family: var(--font-serif);
-    border-left: 1.5px solid var(--special);
-    border-color: var(--01);
-    padding-left: 1rem;
-    color: var(--01);
-}
-
-.contenu h2 {
-    scroll-margin-top: 80px;
-}
+@import "./prose.css";
 
 @import "./carousel.css";
 
