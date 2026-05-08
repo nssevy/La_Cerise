@@ -1,9 +1,11 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/NewsletterRepository.php';
 
 requireLogin();
 
-$inscrits = $pdo->query('SELECT * FROM newsletter ORDER BY date_inscription DESC')->fetchAll();
+$newsletterRepo = new NewsletterRepository($pdo);
+$inscrits = $newsletterRepo->findAll();
 
 echo $twig->render('admin/newsletter/list.html.twig', [
     'inscrits' => $inscrits,

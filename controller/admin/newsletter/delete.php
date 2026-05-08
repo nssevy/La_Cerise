@@ -1,13 +1,14 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/NewsletterRepository.php';
 
 requireLogin();
 
+$newsletterRepo = new NewsletterRepository($pdo);
 $id = $_POST['id'] ?? null;
 
 if ($id) {
-    $stmt = $pdo->prepare('DELETE FROM newsletter WHERE id = ?');
-    $stmt->execute([$id]);
+    $newsletterRepo->delete((int) $id);
     flash_error('Inscrit supprimé.');
 }
 

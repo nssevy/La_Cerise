@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__DIR__, 2) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 2) . '/src/repositories/NewsletterRepository.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['email'])) {
     redirect('/');
@@ -12,9 +13,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     redirect('/');
 }
 
+$newsletterRepo = new NewsletterRepository($pdo);
+
 try {
-    $stmt = $pdo->prepare("INSERT INTO newsletter (email) VALUES (:email)");
-    $stmt->execute([':email' => $email]);
+    $newsletterRepo->insert($email);
     $_SESSION['newsletter'] = ['type' => 'succes', 'texte' => 'Vous êtes bien inscrit à la newsletter.'];
 } catch (PDOException $e) {
     $_SESSION['newsletter'] = $e->getCode() === '23000'
