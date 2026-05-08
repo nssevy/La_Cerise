@@ -29,6 +29,7 @@
 					<span class="font-medium text-cerise-01">{{ inscrit.email }}</span>
 
 					<form method="POST" action="{{ base }}/admin/newsletter/delete" onsubmit="return confirm('Désinscrire {{ inscrit.email }} ?')">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 						<input type="hidden" name="id" value="{{ inscrit.id }}">
 						<button type="submit" class="text-sm text-red-800 hover:text-red-500 transition-colors cursor-pointer">
 							Supprimer
