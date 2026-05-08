@@ -1,6 +1,5 @@
 <?php
-require_once dirname(__DIR__, 2) . '/config/db.php';
-require_once dirname(__DIR__, 2) . '/config/twig.php';
+require_once dirname(__DIR__, 2) . '/config/bootstrap.php';
 
 $types_valides = ['cgu', 'confidentialite', 'mentions_legales'];
 $type = $_GET['type'] ?? null;

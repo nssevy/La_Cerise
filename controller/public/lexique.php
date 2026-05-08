@@ -1,6 +1,5 @@
 <?php
-require_once dirname(__DIR__, 2) . '/config/db.php';
-require_once dirname(__DIR__, 2) . '/config/twig.php';
+require_once dirname(__DIR__, 2) . '/config/bootstrap.php';
 
 $listTermes = $pdo->query("
     SELECT l.terme, l.definition, c.nom AS categorie
