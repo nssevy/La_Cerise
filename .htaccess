@@ -34,6 +34,8 @@ RewriteRule ^admin/parametre/?$ controller/admin/parametre/index.php [L]
 RewriteRule ^admin/parametre/update-profil/?$ controller/admin/parametre/update-profil.php [L]
 RewriteRule ^admin/parametre/legal/edit/?$ controller/admin/parametre/legal/edit.php [L,QSA]
 
+# Route newsletter
+RewriteRule ^newsletter/?$ controller/public/newsletter.php [L]
 
 # Routes admin
 

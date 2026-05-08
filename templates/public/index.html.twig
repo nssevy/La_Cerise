@@ -91,8 +91,7 @@
 								<small class="text-small">Abonnez-vous à la newsletter de La Cerise et recevez nos articles en avant-première et toute l'actualité du site.</small>
 							</div>
 
-							<form action="" method="post" class="flex flex-col gap-7 justify-center items-center">
-
+							<form action="{{ base }}/newsletter" method="post" class="flex flex-col gap-7 justify-center items-center">
 								{% include 'components/input.html.twig' with {
 									type: 'email',
 									id: 'email',

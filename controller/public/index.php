@@ -49,24 +49,8 @@ $mediaNewsletter = $pdo->query("
     SELECT fichier, alt FROM medias WHERE contexte = 'newsletter' LIMIT 1
 ")->fetch();
 
-$newsletterMessage = null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email'])) {
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        try {
-            $stmt = $pdo->prepare("INSERT INTO newsletter (email) VALUES (:email)");
-            $stmt->execute([':email' => $email]);
-            $newsletterMessage = ['type' => 'succes', 'texte' => 'Vous êtes bien inscrit à la newsletter.'];
-        } catch (PDOException $e) {
-            $newsletterMessage = $e->getCode() === '23000'
-                ? ['type' => 'erreur', 'texte' => 'Cet email est déjà inscrit.']
-                : ['type' => 'erreur', 'texte' => 'Une erreur est survenue, veuillez réessayer.'];
-        }
-    } else {
-        $newsletterMessage = ['type' => 'erreur', 'texte' => 'Adresse e-mail invalide.'];
-    }
-}
+$newsletterMessage = $_SESSION['newsletter'] ?? null;
+unset($_SESSION['newsletter']);
 
 echo $twig->render('public/index.html.twig', [
     'hero' => $hero,
