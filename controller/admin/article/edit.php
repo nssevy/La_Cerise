@@ -1,24 +1,23 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 require_once dirname(__DIR__, 3) . '/src/upload.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/ArticleRepository.php';
 
 requireLogin();
 
+$articleRepo = new ArticleRepository($pdo);
 $errors = [];
 $id = $_GET['id'] ?? null;
 
 if (!$id)
     redirect('/admin/article/list');
 
-$stmt = $pdo->prepare('SELECT * FROM articles WHERE id = ?');
-$stmt->execute([$id]);
-$article = $stmt->fetch();
-
+$article = $articleRepo->findById((int) $id);
 if (!$article)
     redirect('/admin/article/list');
 
-$rubriques = $pdo->query('SELECT id, nom FROM rubriques ORDER BY nom')->fetchAll();
-$auteurs = $pdo->query('SELECT id, nom FROM auteurs ORDER BY nom')->fetchAll();
+$rubriques = $articleRepo->findRubriques();
+$auteurs = $articleRepo->findAuteurs();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre'] ?? '');
@@ -47,24 +46,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare('
-            UPDATE articles
-            SET titre = ?, slug = ?, chapeau = ?, contenu = ?, image_principale = ?,
-                credit_photo = ?, statut = ?, date_publication = ?, rubrique_id = ?, auteur_id = ?
-            WHERE id = ?
-        ');
-        $stmt->execute([
-            $titre,
-            $slug,
-            $chapeau ?: null,
-            $contenu,
-            $image_principale ?: null,
-            $credit_photo ?: null,
-            $statut,
-            $date_publication ?: null,
-            $rubrique_id ?: null,
-            $auteur_id ?: null,
-            $id,
+        $articleRepo->update((int) $id, [
+            'titre' => $titre,
+            'slug' => $slug,
+            'chapeau' => $chapeau ?: null,
+            'contenu' => $contenu,
+            'image_principale' => $image_principale ?: null,
+            'credit_photo' => $credit_photo ?: null,
+            'statut' => $statut,
+            'date_publication' => $date_publication ?: null,
+            'rubrique_id' => $rubrique_id ?: null,
+            'auteur_id' => $auteur_id ?: null,
         ]);
 
         flash_success('Article mis à jour.');

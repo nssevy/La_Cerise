@@ -1,13 +1,14 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/ArticleRepository.php';
 
 requireLogin();
 
+$articleRepo = new ArticleRepository($pdo);
 $id = $_POST['id'] ?? null;
 
 if ($id) {
-    $stmt = $pdo->prepare('DELETE FROM articles WHERE id = ?');
-    $stmt->execute([$id]);
+    $articleRepo->delete((int) $id);
     flash_error('Article supprimé.');
 }
 

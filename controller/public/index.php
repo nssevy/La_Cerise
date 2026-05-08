@@ -1,30 +1,15 @@
 <?php
 require_once dirname(__DIR__, 2) . '/config/bootstrap.php';
 require_once dirname(__DIR__, 2) . '/src/services/ArticleService.php';
+require_once dirname(__DIR__, 2) . '/src/repositories/ArticleRepository.php';
 
-$stmtHero = $pdo->query("
-    SELECT a.*, r.nom AS rubrique, au.nom AS auteur
-    FROM articles a
-    LEFT JOIN rubriques r  ON a.rubrique_id = r.id
-    LEFT JOIN auteurs   au ON a.auteur_id   = au.id
-    WHERE a.statut = 'publie'
-    ORDER BY a.date_publication DESC
-    LIMIT 1
-");
-$hero = $stmtHero->fetch();
+$articleRepo = new ArticleRepository($pdo);
+$articleService = new ArticleService();
 
-$lectureHero = $hero ? formatLecture(calculateReadingTime($hero['contenu'])) : null;
-
-$stmtCards = $pdo->prepare("
-    SELECT a.*, r.nom AS rubrique
-    FROM articles a
-    LEFT JOIN rubriques r ON a.rubrique_id = r.id
-    WHERE a.statut = 'publie' AND a.id != :id
-    ORDER BY a.date_publication DESC
-    LIMIT 2
-");
-$stmtCards->execute([':id' => $hero['id'] ?? 0]);
-$cards = $stmtCards->fetchAll();
+$hero = $articleRepo->findHero();
+$lectureHero = $hero ? formatLecture($articleService->calculateReadingTime($hero['contenu'])) : null;
+$cards = $articleRepo->findCards($hero['id'] ?? 0);
+$articleAVenir = $articleRepo->findUpcoming();
 
 $lexique = $pdo->query("
     SELECT l.terme, c.nom AS categorie
@@ -32,17 +17,6 @@ $lexique = $pdo->query("
     LEFT JOIN categories c ON l.categorie_id = c.id
     ORDER BY l.terme ASC
 ")->fetchAll();
-
-$stmtAVenir = $pdo->query("
-    SELECT a.*, r.nom AS rubrique, au.nom AS auteur
-    FROM articles a
-    LEFT JOIN rubriques r  ON a.rubrique_id = r.id
-    LEFT JOIN auteurs   au ON a.auteur_id   = au.id
-    WHERE a.statut = 'a_venir'
-    ORDER BY a.date_creation DESC
-    LIMIT 1
-");
-$articleAVenir = $stmtAVenir->fetch();
 
 $mediaNewsletter = $pdo->query("
     SELECT fichier, alt FROM medias WHERE contexte = 'newsletter' LIMIT 1
