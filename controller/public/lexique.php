@@ -1,14 +1,10 @@
 <?php
 require_once dirname(__DIR__, 2) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 2) . '/src/repositories/LexiqueRepository.php';
 
-$listTermes = $pdo->query("
-    SELECT l.terme, l.definition, c.nom AS categorie
-    FROM lexique l
-    LEFT JOIN categories c ON l.categorie_id = c.id
-    ORDER BY l.terme ASC
-")->fetchAll(PDO::FETCH_ASSOC);
+$lexiqueRepo = new LexiqueRepository($pdo);
+$listTermes = $lexiqueRepo->findAllPublic();
 
-// Grouper les termes par première lettre
 $termesParLettre = [];
 foreach ($listTermes as $terme) {
     $lettre = mb_strtoupper(mb_substr($terme['terme'], 0, 1));
