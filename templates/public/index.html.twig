@@ -92,6 +92,8 @@
 							</div>
 
 							<form action="{{ base }}/newsletter" method="post" class="flex flex-col gap-7 justify-center items-center">
+								<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
 								{% include 'components/input.html.twig' with {
 									type: 'email',
 									id: 'email',

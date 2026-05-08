@@ -1,4 +1,5 @@
 <form class="flex flex-col gap-10" method="POST" action="" novalidate>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 	<fieldset class="grid gap-10">
 
 		{% include 'admin/partials/contenteditable-field.html.twig' with {
@@ -15,8 +16,7 @@
 			value: terme.definition ?? '',
 			required: true,
 			class: 'text-lg'
-			} only %}
-
+		} only %}
 
 	</fieldset>
 
@@ -50,15 +50,16 @@
 	</div>
 
 	{% if show_delete is defined and show_delete %}
-		<a href="#" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="if(confirm('Supprimer ce terme ?')) document.getElementById('form-delete-terme').submit(); return false;">
+		<button type="button" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="if(confirm('Supprimer ce terme ?')) document.getElementById('form-delete-terme').submit();">
 			Supprimer le terme
-		</a>
+		</button>
 	{% endif %}
 
 </form>
 
 {% if show_delete is defined and show_delete %}
 	<form method="POST" action="{{ base }}/admin/lexique/delete" id="form-delete-terme" class="hidden">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 		<input type="hidden" name="id" value="{{ terme.id }}">
 	</form>
 {% endif %}

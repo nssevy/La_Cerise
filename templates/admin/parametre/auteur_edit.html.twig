@@ -39,6 +39,8 @@
 		{% endif %}
 
 		<form class="flex flex-col gap-10" method="POST" action="{{ base }}/admin/parametre/auteur/edit?id={{ auteur.id }}" novalidate>
+			<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
 			<fieldset class="grid gap-10">
 
 				{% include 'admin/partials/contenteditable-field.html.twig' with {
@@ -79,12 +81,15 @@
 					class: "w-full md:order-first"
 				} %}
 			</div>
-			<a href="{{ base }}/admin/parametre/auteur/delete?id={{ auteur.id }}" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="return confirm('Supprimer cet auteur ?')">
+			<button type="button" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="if(confirm('Supprimer cet auteur ?')) document.getElementById('form-delete-auteur').submit();">
 				Supprimer l'auteur
-			</a>
+			</button>
 
 
 		</form>
-
+		<form method="POST" action="{{ base }}/admin/parametre/auteur/delete" id="form-delete-auteur" class="hidden">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+			<input type="hidden" name="id" value="{{ auteur.id }}">
+		</form>
 	</div>
 {% endblock %}

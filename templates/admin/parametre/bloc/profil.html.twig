@@ -16,6 +16,7 @@
 	{% endif %}
 
 	<form class="flex flex-col gap-10 " method="POST" action="{{ base }}/admin/parametre/update-profil" novalidate>
+		<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
 		<fieldset class="grid gap-10">
 

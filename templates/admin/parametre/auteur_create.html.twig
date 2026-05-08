@@ -32,6 +32,8 @@
 		{% endif %}
 
 		<form class="flex flex-col gap-10" method="POST" action="{{ base }}/admin/parametre/auteur/create" novalidate>
+			<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
 			<fieldset class="grid gap-10">
 
 				{% include 'admin/partials/contenteditable-field.html.twig' with {

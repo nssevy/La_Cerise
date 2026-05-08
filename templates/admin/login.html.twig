@@ -17,6 +17,7 @@
 
 
 			<form method="POST" action="">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 				<fieldset class="fieldset w-xs p-4 flex flex-col gap-3">
 
 					<h1 class="text-4xl bg-linear-to-r from-cerise-01 via-cerise-special to-cerise-special-mid inline-block text-transparent bg-clip-text">Saisissez vos informations pour vous identifier</h1>

@@ -6,7 +6,7 @@ requireLogin();
 csrf_verify();
 
 $auteurRepo = new AuteurRepository($pdo);
-$id = $_GET['id'] ?? null;
+$id = $_POST['id'] ?? null;
 
 if (!$id)
     redirect('/admin/parametre');
