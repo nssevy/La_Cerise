@@ -1,10 +1,15 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/ParametreRepository.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/AuteurRepository.php';
 
 requireLogin();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST')
     redirect('/admin/parametre');
+
+$parametreRepo = new ParametreRepository($pdo);
+$auteurRepo = new AuteurRepository($pdo);
 
 $errors = [];
 $nom = trim($_POST['nom'] ?? '');
@@ -28,11 +33,14 @@ if ($mdp !== '') {
 
 if (empty($errors)) {
     if ($mdp !== '') {
-        $stmt = $pdo->prepare('UPDATE users SET nom = ?, email = ?, mot_de_passe = ? WHERE id = ?');
-        $stmt->execute([$nom, $email, password_hash($mdp, PASSWORD_DEFAULT), $_SESSION['user_id']]);
+        $parametreRepo->updateUserWithPassword(
+            $_SESSION['user_id'],
+            $nom,
+            $email,
+            password_hash($mdp, PASSWORD_DEFAULT)
+        );
     } else {
-        $stmt = $pdo->prepare('UPDATE users SET nom = ?, email = ? WHERE id = ?');
-        $stmt->execute([$nom, $email, $_SESSION['user_id']]);
+        $parametreRepo->updateUser($_SESSION['user_id'], $nom, $email);
     }
 
     $_SESSION['user_nom'] = $nom;
@@ -42,12 +50,9 @@ if (empty($errors)) {
     redirect('/admin/parametre');
 }
 
-$stmt = $pdo->prepare('SELECT id, nom, email FROM users WHERE id = ?');
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
-
-$auteurs = $pdo->query('SELECT id, nom, bio, email FROM auteurs ORDER BY nom')->fetchAll();
-$pages_legales = $pdo->query('SELECT type, titre FROM pages_legales ORDER BY id')->fetchAll();
+$user = $parametreRepo->findUser($_SESSION['user_id']);
+$auteurs = $auteurRepo->findAll();
+$pages_legales = $parametreRepo->findPagesLegales();
 
 echo $twig->render('admin/parametre/index.html.twig', [
     'user' => $user,

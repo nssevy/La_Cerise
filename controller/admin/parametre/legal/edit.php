@@ -1,8 +1,10 @@
 <?php
 require_once dirname(__DIR__, 4) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 4) . '/src/repositories/ParametreRepository.php';
 
 requireLogin();
 
+$parametreRepo = new ParametreRepository($pdo);
 $types_valides = ['confidentialite', 'mentions_legales', 'cgu'];
 $type = $_GET['type'] ?? '';
 
@@ -10,10 +12,7 @@ if (!in_array($type, $types_valides))
     redirect('/admin/parametre');
 
 $errors = [];
-
-$stmt = $pdo->prepare('SELECT * FROM pages_legales WHERE type = ?');
-$stmt->execute([$type]);
-$page = $stmt->fetch();
+$page = $parametreRepo->findPageLegaleByType($type);
 
 if (!$page)
     redirect('/admin/parametre');
@@ -28,9 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Le contenu est obligatoire.';
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare('UPDATE pages_legales SET titre = ?, contenu = ? WHERE type = ?');
-        $stmt->execute([$titre, $contenu, $type]);
-
+        $parametreRepo->updatePageLegale($type, $titre, $contenu);
         flash_success('Page mise à jour.');
         redirect('/admin/parametre/legal/edit?type=' . $type);
     }

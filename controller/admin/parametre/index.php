@@ -1,14 +1,16 @@
 <?php
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/ParametreRepository.php';
+require_once dirname(__DIR__, 3) . '/src/repositories/AuteurRepository.php';
 
 requireLogin();
 
-$stmt = $pdo->prepare('SELECT id, nom, email FROM users WHERE id = ?');
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
+$parametreRepo = new ParametreRepository($pdo);
+$auteurRepo = new AuteurRepository($pdo);
 
-$auteurs = $pdo->query('SELECT id, nom, bio, email FROM auteurs ORDER BY nom')->fetchAll();
-$pages_legales = $pdo->query('SELECT type, titre FROM pages_legales ORDER BY id')->fetchAll();
+$user = $parametreRepo->findUser($_SESSION['user_id']);
+$auteurs = $auteurRepo->findAll();
+$pages_legales = $parametreRepo->findPagesLegales();
 
 echo $twig->render('admin/parametre/index.html.twig', [
     'user' => $user,
