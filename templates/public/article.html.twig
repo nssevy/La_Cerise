@@ -8,7 +8,7 @@
 {% block content %}
 	{% import 'macros/icons.html.twig' as icons %}
 
-	<div class="relative flex gap-10 mt-10 mb-50">
+	<div class="relative flex gap-10 mt-10 md:mb-[20%]">
 
 		<article class="w-full flex flex-col gap-10 lg:w-3/5 lg:mx-auto">
 			{% include 'components/breadcrumb.html.twig' with {
@@ -58,9 +58,9 @@
 					<hr class="flex-1 border-t border-(--09)">
 				</div>
 				<div class="grid grid-cols-1 gap-10
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	{% if suggeres|length == 2 %}md:grid-cols-2
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	{% else %}md:grid-cols-3
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	{% endif %}">
+																																																											{% if suggeres|length == 2 %}md:grid-cols-2
+																																																											{% else %}md:grid-cols-3
+																																																											{% endif %}">
 					{% if suggeres|length == 1 %}
 						<div></div>
 						{% include 'components/card.html.twig' with {'card': suggeres[0]} %}

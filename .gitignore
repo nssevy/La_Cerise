@@ -9,4 +9,5 @@ cache/
 .DS_Store
 .DS_Store
 generate_hash.php
+.prettierignore
 **/.DS_Store
