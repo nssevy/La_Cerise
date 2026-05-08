@@ -76,7 +76,7 @@ if ($article['contenu']) {
 
 echo $twig->render('public/article.html.twig', [
     'article' => $article,
-    'lecture' => $lecture,
+    'lecture' => formatLecture($lecture),
     'suggeres' => $suggeres,
     'toc' => $toc,
     'base' => $_ENV['BASE_URL'] ?? '',
