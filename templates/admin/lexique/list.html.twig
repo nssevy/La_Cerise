@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
+{% block titre %}Lexique
+{% endblock %}
+
+{% block content %}
+
+	<div class="px-7 md:px-10 md:pt-10 pb-4 flex flex-row justify-between gap-2">
+		<h1 class="text-4xl text-gradient">
+			{% if categorie_id %}
+				{% for categorie in categories %}
+					{% if categorie.id == categorie_id %}
+						{{ categorie.nom }}
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				Tous
+			{% endif %}
+		</h1>
+		<p class="text-cerise-05 text-sm">{{ termes|length }}
+			définition{{ termes|length > 1 ? 's' : '' }}</p>
+	</div>
+
+	<div class="px-7 md:px-10 flex gap-6 overflow-x-auto border-b md:border-b-0 border-cerise-09">
+		<a href="{{ base }}/admin/lexique/list" class="py-4 text-base whitespace-nowrap transition-colors {{ categorie_id is null ? ' text-cerise-01 font-medium' : 'border-transparent text-cerise-05 hover:text-cerise-02' }}">
+			Tous
+		</a>
+		{% for categorie in categories %}
+			<a href="{{ base }}/admin/lexique/list?categorie={{ categorie.id }}" class="py-4 text-base whitespace-nowrap transition-colors {{ categorie_id == categorie.id ? 'border-cerise-01 text-cerise-01 font-medium' : 'border-transparent text-cerise-05 hover:text-cerise-02' }}">
+				{{ categorie.nom }}
+			</a>
+		{% endfor %}
+	</div>
+
+	{% include 'admin/lexique/bloc/sectionLexique.html.twig' %}
+
+	<div class="md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+		<a href="{{ base }}/admin/lexique/create">
+			{% include 'components/button.html.twig' with { label: "Nouveau terme" } %}
+		</a>
+	</div>
+
+	<script src="{{ base }}/assets/js/confirm.js" defer></script>
+
+{% endblock %}

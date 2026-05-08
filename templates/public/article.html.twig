@@ -6,11 +6,10 @@
 {% endblock %}
 
 {% block content %}
+	{% import 'macros/icons.html.twig' as icons %}
 
-	<div
-		class="relative flex gap-10 mt-10 mb-50">
+	<div class="relative flex gap-10 mt-10 mb-50">
 
-		{# Contenu article #}
 		<article class="w-full flex flex-col gap-10 lg:w-3/5 lg:mx-auto">
 			{% include 'components/breadcrumb.html.twig' with {
                 'breadcrumb': [
@@ -20,13 +19,19 @@
             } %}
 
 			<header class="flex flex-col gap-5">
-				<div class="flex flex-col justify-between">
-					<small class="text-small-serif">{{ formatDateFr(article.date_publication) }}</small>
-					<small class="text-small-serif text-cerise-06">{{ article.rubrique_nom }}</small>
+				<h1 class="font-serif text-3xl md:text-4xl text-gradient">{{ article.titre }}</h1>
+				<div class="grid grid-cols-2 grid-rows-2 gap-0 md:gap-4 text-cerise-04 font-serif text-sm">
+					<span>Par :
+						{{ article.auteur_nom }}</span>
+					<span class="justify-self-end">{{ formatDateFr(article.date_publication) }}</span>
+					<div class="flex flex-row items-center gap-1">
+						{{ icons.icon('clock-countdown', 'regular', 'w-5 h-5 text-cerise-03') }}
+						<span>{{ lecture }}</span>
+					</div>
+					<span class="justify-self-end text-right">{{ article.rubrique_nom }}</span>
 				</div>
-				<h1 class="text-h1-serif text-gradient">{{ article.titre }}</h1>
 			</header>
-
+			<hr class="border-0.5 border-cerise-08 border-dashed">
 			<div class="contenu prose max-w-none w-full text-body-serif">
 				{{ article.contenu | raw }}
 			</div>
@@ -53,9 +58,9 @@
 					<hr class="flex-1 border-t border-(--09)">
 				</div>
 				<div class="grid grid-cols-1 gap-10
-																								    {% if suggeres|length == 2 %}md:grid-cols-2
-																								    {% else %}md:grid-cols-3
-																								    {% endif %}">
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	{% if suggeres|length == 2 %}md:grid-cols-2
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	{% else %}md:grid-cols-3
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	{% endif %}">
 					{% if suggeres|length == 1 %}
 						<div></div>
 						{% include 'components/card.html.twig' with {'card': suggeres[0]} %}

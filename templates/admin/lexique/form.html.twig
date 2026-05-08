@@ -1,0 +1,64 @@
+<form class="flex flex-col gap-10" method="POST" action="" novalidate>
+	<fieldset class="grid gap-10">
+
+		{% include 'admin/partials/contenteditable-field.html.twig' with {
+			label: 'Terme',
+			name: 'terme',
+			value: terme.terme ?? '',
+			required: true,
+			class: 'text-lg'
+		} only %}
+
+		{% include 'admin/partials/contenteditable-field.html.twig' with {
+			label: 'Definition',
+			name: 'definition',
+			value: terme.definition ?? '',
+			required: true,
+			class: 'text-lg'
+			} only %}
+
+
+	</fieldset>
+
+	<fieldset class="grid gap-10">
+
+		<div class="flex flex-col gap-2">
+			<label class="text-cerise-05" for="categorie_id">Catégorie</label>
+			<select id="categorie_id" name="categorie_id" class="select w-full">
+				<option value="">— Choisir une catégorie —</option>
+				{% for categorie in categories %}
+					<option value="{{ categorie.id }}" {{ (terme.categorie_id ?? '') == categorie.id ? 'selected' : '' }}>
+						{{ categorie.nom }}
+					</option>
+				{% endfor %}
+			</select>
+		</div>
+
+	</fieldset>
+
+	<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
+		{% include 'components/button.html.twig' with {
+			label: submit_label ?? "Enregistrer",
+			type: "submit",
+			class: "w-full md:order-last"
+		} %}
+		{% include 'components/button.html.twig' with {
+			label: "Retour",
+			href: base ~ "/admin/lexique/list",
+			class: "w-full md:order-first"
+		} %}
+	</div>
+
+	{% if show_delete is defined and show_delete %}
+		<a href="#" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="if(confirm('Supprimer ce terme ?')) document.getElementById('form-delete-terme').submit(); return false;">
+			Supprimer le terme
+		</a>
+	{% endif %}
+
+</form>
+
+{% if show_delete is defined and show_delete %}
+	<form method="POST" action="{{ base }}/admin/lexique/delete" id="form-delete-terme" class="hidden">
+		<input type="hidden" name="id" value="{{ terme.id }}">
+	</form>
+{% endif %}

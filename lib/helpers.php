@@ -38,3 +38,16 @@ function redirect(string $path): void
     header('Location: ' . $base . $path);
     exit;
 }
+
+function formatLecture(int $minutes): string
+{
+    if ($minutes < 1) {
+        return 'Moins d\'une minute de lecture';
+    }
+
+    if ($minutes === 1) {
+        return '1 minute de lecture';
+    }
+
+    return $minutes . ' minutes de lecture';
+}

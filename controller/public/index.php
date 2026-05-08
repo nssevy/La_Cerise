@@ -31,7 +31,12 @@ $stmtCards->execute([':id' => $hero['id'] ?? 0]);
 $cards = $stmtCards->fetchAll();
 
 // Termes du lexique
-$lexique = $pdo->query("SELECT terme, categorie FROM lexique ORDER BY terme ASC")->fetchAll();
+$lexique = $pdo->query("
+    SELECT l.terme, c.nom AS categorie
+    FROM lexique l
+    LEFT JOIN categories c ON l.categorie_id = c.id
+    ORDER BY l.terme ASC
+")->fetchAll();
 
 // Articles à venir
 $stmtAVenir = $pdo->query("
@@ -75,8 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email'])) {
     }
 }
 
-// Le render
-
 echo $twig->render('public/index.html.twig', [
     'hero' => $hero,
     'cards' => $cards,
@@ -86,5 +89,4 @@ echo $twig->render('public/index.html.twig', [
     'mediaNewsletter' => $mediaNewsletter,
     'newsletterMessage' => $newsletterMessage,
     'base' => $_ENV['BASE_URL'] ?? '',
-
 ]);

@@ -3,7 +3,7 @@ tinymce.init({
   language: "fr_FR",
   plugins: "lists link image code",
   toolbar:
-    "undo redo | bold italic | h2 h3 | bullist numlist | blockquote | link image | code",
+    "undo redo | bold italic | h2 | bullist numlist | blockquote | link image | code",
   menubar: false,
   selector: "#contenu",
   plugins: "autoresize bold italic lists link image code",

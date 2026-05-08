@@ -3,9 +3,10 @@ require_once dirname(__DIR__, 2) . '/config/db.php';
 require_once dirname(__DIR__, 2) . '/config/twig.php';
 
 $listTermes = $pdo->query("
-    SELECT terme, categorie, definition
-    FROM lexique
-    ORDER BY terme ASC
+    SELECT l.terme, l.definition, c.nom AS categorie
+    FROM lexique l
+    LEFT JOIN categories c ON l.categorie_id = c.id
+    ORDER BY l.terme ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
 
 // Grouper les termes par première lettre
@@ -19,5 +20,4 @@ ksort($termesParLettre);
 echo $twig->render('public/lexique.html.twig', [
     'termesParLettre' => $termesParLettre,
     'base' => $_ENV['BASE_URL'] ?? '',
-
 ]);
