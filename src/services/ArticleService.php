@@ -50,17 +50,15 @@ class ArticleService
     public function enrichirContenuAvecLexique(string $contenu, array $termes): string
     {
         foreach ($termes as $terme) {
-            // On prend uniquement la partie avant la parenthèse si elle existe
-            // ex: "Convention de Genève (1949)" → "Convention de Genève"
-            // ex: "UNRWA (Office de...)" → "UNRWA"
             $mot = trim(preg_replace('/\s*\(.*\)/', '', $terme['terme']));
             $motEscape = preg_quote($mot, '/');
 
             $definition = htmlspecialchars($terme['definition'], ENT_QUOTES, 'UTF-8');
             $remplacement = '<abbr class="lexique-terme" data-definition="' . $definition . '">${1}</abbr>';
 
+            // On remplace uniquement dans les noeuds texte, pas dans les attributs
             $contenu = preg_replace(
-                '/(?<![a-zA-ZÀ-ÿ])(' . $motEscape . 's?)(?![a-zA-ZÀ-ÿ])/ui', // i = insensible à la casse, s? = pluriel optionnel
+                '/(?<![a-zA-ZÀ-ÿ"\-])(' . $motEscape . 's?)(?![a-zA-ZÀ-ÿ"\-])(?=[^>]*(<|$))/ui',
                 $remplacement,
                 $contenu,
                 1
