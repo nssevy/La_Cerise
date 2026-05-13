@@ -37,7 +37,7 @@
 			</article>
 
 			{# Colonne droite Termes clés #}
-			<div class="col-start-3 sticky top-20 mt-20 self-start">
+			<div class="col-start-3 sticky top-20 mt-20 self-start justify-self-center">
 				<aside id="lexique-panel" class="flex flex-col w-3xs border border-dashed border-cerise-08">
 					<div id="lexique-header" class="p-5 pb-0"></div>
 					<div id="lexique-body" class="flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-10rem)] p-5"></div>
@@ -62,9 +62,9 @@
 						<hr class="flex-1 border-t border-(--09)">
 					</div>
 					<div class="grid grid-cols-1 gap-10
-																																																																																																																																																																																																																																																																																																																																																																					                    {% if suggeres|length == 2 %}md:grid-cols-2
-																																																																																																																																																																																																																																																																																																																																																																					                    {% else %}md:grid-cols-3
-																																																																																																																																																																																																																																																																																																																																																																					                    {% endif %}">
+																																																																																																																																																																																																																																																																																																																																																																												                    {% if suggeres|length == 2 %}md:grid-cols-2
+																																																																																																																																																																																																																																																																																																																																																																												                    {% else %}md:grid-cols-3
+																																																																																																																																																																																																																																																																																																																																																																												                    {% endif %}">
 						{% if suggeres|length == 1 %}
 							<div></div>
 							{% include 'components/card.html.twig' with {'card': suggeres[0]} %}

@@ -37,7 +37,12 @@ RewriteRule ^admin/parametre/legal/edit/?$ controller/admin/parametre/legal/edit
 # Route newsletter
 RewriteRule ^newsletter/?$ controller/public/newsletter.php [L]
 
+RewriteRule ^404\.php$ 404.php [L]
 # Routes admin
 
 RewriteRule ^admin/(.+?)(?:\.php)?$ controller/admin/$1.php [L]
+
+# Page 404
+ErrorDocument 404 /La_Cerise/404.php
+
 
