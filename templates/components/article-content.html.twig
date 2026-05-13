@@ -1,0 +1,28 @@
+{% import 'macros/icons.html.twig' as icons %}
+
+{% include 'components/breadcrumb.html.twig' with {
+    'breadcrumb': [
+        {'label': article.rubrique_nom, 'url': '#'},
+        {'label': article.titre, 'url': null}
+    ]
+} %}
+
+<header class="flex flex-col gap-5">
+	<h1 class="font-serif text-3xl md:text-4xl text-gradient">{{ article.titre }}</h1>
+	<div class="grid grid-cols-2 grid-rows-2 gap-0 md:gap-4 text-cerise-04 font-serif text-sm">
+		<span>Par :
+			{{ article.auteur_nom }}</span>
+		<span class="justify-self-end">{{ formatDateFr(article.date_publication) }}</span>
+		<div class="flex flex-row items-center gap-1">
+			{{ icons.icon('clock-countdown', 'regular', 'w-5 h-5 text-cerise-03') }}
+			<span>{{ lecture }}</span>
+		</div>
+		<span class="justify-self-end text-right">{{ article.rubrique_nom }}</span>
+	</div>
+</header>
+
+<hr class="border-0.5 border-cerise-08 border-dashed">
+
+<div class="contenu prose max-w-none w-full text-body-serif">
+	{{ article.contenu | raw }}
+</div>
