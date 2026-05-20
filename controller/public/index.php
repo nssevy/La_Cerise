@@ -13,9 +13,19 @@ $articleService = new ArticleService();
 $hero = $articleRepo->findHero();
 $lectureHero = $hero ? formatLecture($articleService->calculateReadingTime($hero['contenu'])) : null;
 $cards = $articleRepo->findCards($hero['id'] ?? 0);
+$cards = $articleRepo->findCards($hero['id'] ?? 0);
+$gridArticles = $hero ? array_merge([$hero], $cards) : $cards;
 $articleAVenir = $articleRepo->findUpcoming();
 $lexique = $lexiqueRepo->findAllPublic();
 $mediaNewsletter = $mediaRepo->findNewsletterMedia();
+
+// IDs déjà utilisés dans le carousel
+$excludeIds = array_column($cards, 'id');
+if ($hero)
+    $excludeIds[] = $hero['id'];
+
+$gridArticles = $articleRepo->findExcluding($excludeIds, 4);
+
 
 $newsletterMessage = $_SESSION['newsletter'] ?? null;
 unset($_SESSION['newsletter']);
@@ -23,6 +33,7 @@ unset($_SESSION['newsletter']);
 echo $twig->render('public/index.html.twig', [
     'hero' => $hero,
     'cards' => $cards,
+    'gridArticles' => $gridArticles,
     'lexique' => $lexique,
     'lectureHero' => $lectureHero,
     'articleAVenir' => $articleAVenir,

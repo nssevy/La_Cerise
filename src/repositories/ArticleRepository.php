@@ -179,4 +179,41 @@ class ArticleRepository
         $stmt = $this->pdo->prepare('DELETE FROM articles WHERE id = ?');
         $stmt->execute([$id]);
     }
+    /** Récupère les N derniers articles publiés pour la grille homepage */
+    public function findLatestPublished(int $limit = 4): array
+    {
+        $stmt = $this->pdo->query("
+        SELECT a.*, r.nom AS rubrique, au.nom AS auteur
+        FROM articles a
+        LEFT JOIN rubriques r  ON a.rubrique_id = r.id
+        LEFT JOIN auteurs   au ON a.auteur_id   = au.id
+        WHERE a.statut = 'publie'
+        ORDER BY a.date_publication DESC
+        LIMIT " . (int) $limit
+        );
+        return $stmt->fetchAll();
+    }
+
+    /** Récupère N articles publiés en excluant une liste d'IDs */
+    public function findExcluding(array $excludeIds, int $limit = 4): array
+    {
+        if (empty($excludeIds)) {
+            $placeholders = '0';
+        } else {
+            $placeholders = implode(',', array_map('intval', $excludeIds));
+        }
+
+        $stmt = $this->pdo->query(
+            "
+        SELECT a.*, r.nom AS rubrique, au.nom AS auteur
+        FROM articles a
+        LEFT JOIN rubriques r  ON a.rubrique_id = r.id
+        LEFT JOIN auteurs   au ON a.auteur_id   = au.id
+        WHERE a.statut = 'publie'
+        AND a.id NOT IN ($placeholders)
+        ORDER BY a.date_publication DESC
+        LIMIT " . (int) $limit
+        );
+        return $stmt->fetchAll();
+    }
 }

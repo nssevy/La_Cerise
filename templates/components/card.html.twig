@@ -1,17 +1,19 @@
 {# Card pour la page d'accueil et à la fin des articles #}
+{# Paramètres : card (array), show_image (bool, défaut true) #}
 
-<article class="flex flex-col gap-5">
-	<a href="{{ base }}/article/{{ card.slug }}" class="flex flex-col gap-5 group">
+{% set show_image = show_image ?? true %}
+
+	<article class="flex flex-col gap-5"> <a href="{{ base }}/article/{{ card.slug }}" class="flex flex-col gap-5 group">
 		<div class="flex flex-col gap-2">
-			{% if card.image_principale is not empty %}
+			{% if show_image and card.image_principale is not empty %}
 				<div class="overflow-hidden aspect-3/2">
 					<img src="{{ base }}/assets/images/{{ card.image_principale }}" alt="{{ card.titre }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
 				</div>
+				<small class="text-neutral-400">{{ card.credit_photo }}</small>
 			{% endif %}
-			<small class="text-neutral-400">{{ card.credit_photo }}</small>
 		</div>
 
-		<h2 class="text-h2-section group-hover:text-cerise-special transition-colors duration-200">{{ card.titre }}</h2>
+		<h2 class="text-h2-section-serif group-hover:text-cerise-special transition-colors duration-200">{{ card.titre }}</h2>
 		<small class="text-small">{{ card.chapeau | striptags | slice(0, 250) | split(' ') | slice(0, -1) | join(' ') ~ '...' }}</small>
 		<div class="flex justify-between">
 			<small>{{ formatDateFr(card.date_publication) }}</small>

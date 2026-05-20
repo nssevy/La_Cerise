@@ -1,0 +1,44 @@
+{# Grille d'articles après le carousel #}
+{% if gridArticles is defined and gridArticles is not empty %}
+	<section class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 mt-16 mb-20">
+		{% if gridArticles|length == 1 %}
+			{% set article = gridArticles[0] %}
+			<hr class="border-0.5 border-cerise-08 border-dashed max-w-3xl mx-auto">
+
+			<a href="{{ base }}/article/{{ article.slug }}" class="group flex flex-col md:flex-row gap-10 items-start pt-8 max-w-3xl mx-auto">
+				{% if article.image_principale is not empty %}
+					<div class="overflow-hidden aspect-3/2 w-full md:w-64 shrink-0">
+						<img src="{{ base }}/assets/images/{{ article.image_principale }}" alt="{{ article.titre }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+					</div>
+				{% endif %}
+				<div class="flex flex-col gap-5">
+					<h2 class="text-h2-section group-hover:text-cerise-special transition-colors duration-200">{{ article.titre }}</h2>
+					<small class="text-small">{{ article.chapeau | striptags | slice(0, 250) | split(' ') | slice(0, -1) | join(' ') ~ '...' }}</small>
+					<div class="flex justify-between">
+						<small>{{ formatDateFr(article.date_publication) }}</small>
+						<small class="text-cerise-06">{{ article.rubrique_nom ?? article.rubrique }}</small>
+					</div>
+				</div>
+			</a>
+		{% else %}
+			<div class="
+																																																							                {% if gridArticles|length == 2 %}
+																																																							                    grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-(--09)
+																																																							                {% elseif gridArticles|length == 3 %}
+																																																							                    grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-(--09)
+																																																							                {% else %}
+																																																							                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-(--09)
+																																																							                {% endif %}
+																																																							            ">
+				{% for article in gridArticles %}
+					<div class="{% if not loop.first %}pt-8 md:pt-0 md:pl-8{% endif %}">
+						{% include 'components/card.html.twig' with {
+                            card: article,
+                            show_image: false
+                        } %}
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</section>
+{% endif %}
