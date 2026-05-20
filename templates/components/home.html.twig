@@ -12,7 +12,7 @@
 					</div>
 				{% endif %}
 				<div class="flex flex-col gap-5">
-					<h2 class="text-h2-section group-hover:text-cerise-special transition-colors duration-200">{{ article.titre }}</h2>
+					<h2 class="text-h2-section-serif group-hover:text-cerise-special transition-colors duration-200">{{ article.titre }}</h2>
 					<small class="text-small">{{ article.chapeau | striptags | slice(0, 250) | split(' ') | slice(0, -1) | join(' ') ~ '...' }}</small>
 					<div class="flex justify-between">
 						<small>{{ formatDateFr(article.date_publication) }}</small>
@@ -22,14 +22,14 @@
 			</a>
 		{% else %}
 			<div class="
-																																																							                {% if gridArticles|length == 2 %}
-																																																							                    grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-(--09)
-																																																							                {% elseif gridArticles|length == 3 %}
-																																																							                    grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-(--09)
-																																																							                {% else %}
-																																																							                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-(--09)
-																																																							                {% endif %}
-																																																							            ">
+																																																												                {% if gridArticles|length == 2 %}
+																																																												                    grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-(--09)
+																																																												                {% elseif gridArticles|length == 3 %}
+																																																												                    grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-(--09)
+																																																												                {% else %}
+																																																												                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-(--09)
+																																																												                {% endif %}
+																																																												            ">
 				{% for article in gridArticles %}
 					<div class="{% if not loop.first %}pt-8 md:pt-0 md:pl-8{% endif %}">
 						{% include 'components/card.html.twig' with {
