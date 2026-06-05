@@ -54,6 +54,25 @@
   color: var(--color-pink-900);
 }
 
+/* Supprimer les guillemets automatiques sur le paragraphe contenant le cite */
+.prose blockquote p:has(cite)::before,
+.prose blockquote p:has(cite)::after {
+  content: none;
+}
+
+/* Style de l'auteur de la citation */
+.prose blockquote cite {
+  display: block;
+  font-style: normal;
+  font-size: 0.875rem;
+  color: var(--06);
+  margin-top: 0.25rem;
+}
+
+.prose blockquote cite::before {
+  content: "— ";
+}
+
 .contenu h2 {
   scroll-margin-top: 80px;
 }

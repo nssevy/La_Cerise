@@ -24,7 +24,7 @@ $excludeIds = array_column($cards, 'id');
 if ($hero)
     $excludeIds[] = $hero['id'];
 
-$gridArticles = $articleRepo->findExcluding($excludeIds, 4);
+$gridArticles = $articleRepo->findExcluding($excludeIds);
 
 
 $newsletterMessage = $_SESSION['newsletter'] ?? null;

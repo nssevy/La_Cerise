@@ -194,26 +194,20 @@ class ArticleRepository
         return $stmt->fetchAll();
     }
 
-    /** Récupère N articles publiés en excluant une liste d'IDs */
-    public function findExcluding(array $excludeIds, int $limit = 4): array
+    /** Récupère tous les articles publiés en excluant une liste d'IDs */
+    public function findExcluding(array $excludeIds): array
     {
-        if (empty($excludeIds)) {
-            $placeholders = '0';
-        } else {
-            $placeholders = implode(',', array_map('intval', $excludeIds));
-        }
+        $placeholders = empty($excludeIds) ? '0' : implode(',', array_map('intval', $excludeIds));
 
-        $stmt = $this->pdo->query(
-            "
-        SELECT a.*, r.nom AS rubrique, au.nom AS auteur
-        FROM articles a
-        LEFT JOIN rubriques r  ON a.rubrique_id = r.id
-        LEFT JOIN auteurs   au ON a.auteur_id   = au.id
-        WHERE a.statut = 'publie'
-        AND a.id NOT IN ($placeholders)
-        ORDER BY a.date_publication DESC
-        LIMIT " . (int) $limit
-        );
+        $stmt = $this->pdo->query("
+            SELECT a.*, r.nom AS rubrique, au.nom AS auteur
+            FROM articles a
+            LEFT JOIN rubriques r  ON a.rubrique_id = r.id
+            LEFT JOIN auteurs   au ON a.auteur_id   = au.id
+            WHERE a.statut = 'publie'
+            AND a.id NOT IN ($placeholders)
+            ORDER BY a.date_publication DESC
+        ");
         return $stmt->fetchAll();
     }
 }
