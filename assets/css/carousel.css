@@ -32,6 +32,7 @@
   aspect-ratio: 800 / 450;
   object-fit: cover;
   display: block;
+  border-radius: 0.25rem;
 }
 
 /* Le texte n'est visible que sur la carte active */

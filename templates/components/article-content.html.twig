@@ -2,7 +2,7 @@
 
 {% include 'components/breadcrumb.html.twig' with {
     'breadcrumb': [
-        {'label': article.rubrique_nom, 'url': '#'},
+        {'label': article.rubrique_nom, 'url': base ~ '/allArticles?rubrique=' ~ article.rubrique_id},
         {'label': article.titre, 'url': null}
     ]
 } %}
