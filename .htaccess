@@ -24,6 +24,10 @@ RewriteRule ^article/([^/]+)/?$ controller/public/article.php?slug=$1 [L,QSA]
 
 RewriteRule ^lexique/?$ controller/public/lexique.php [L]
 
+# Route Tout les Articles
+
+RewriteRule ^allArticles/?$ controller/public/allArticles.php [L]
+
 # Routes légales
 RewriteRule ^legal/cgu/?$ controller/public/legal.php?type=cgu [L,QSA]
 RewriteRule ^legal/confidentialite/?$ controller/public/legal.php?type=confidentialite [L,QSA]

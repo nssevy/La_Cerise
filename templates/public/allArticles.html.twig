@@ -1,0 +1,50 @@
+{% extends 'public/base.html.twig' %}
+
+{% block titre %}Les Articles
+{% endblock %}
+
+{% block content %}
+
+	<div class="mt-10">
+		{% include 'components/breadcrumb.html.twig' with {
+        'breadcrumb': [
+            {'label': 'Tout les Articles', 'url': null}
+        ]
+    } %}
+	</div>
+
+	{# Titre #}
+	<div class="pr-7 md:pr-10 pb-4 flex flex-row justify-between gap-2 mt-6">
+		<h1 id="filtre-titre" class="text-4xl text-gradient">Tous</h1>
+	</div>
+
+	{# Nav filtres #}
+	<nav class="pr-7 md:pr-10 flex gap-6 overflow-x-auto border-b border-dashed border-cerise-08">
+		<button data-filter="all" class="py-4 text-base whitespace-nowrap transition-colors text-cerise-01 font-medium cursor-pointer">Tous</button>
+		{% for rubrique in rubriques %}
+			<button data-filter="{{ rubrique.nom }}" class="py-4 text-base whitespace-nowrap transition-colors border-transparent text-cerise-05 hover:text-cerise-02 cursor-pointer">
+				{{ rubrique.nom }}
+			</button>
+		{% endfor %}
+	</nav>
+
+	<div class="mb-12"></div>
+
+	{# Grille d'articles #}
+	<div id="grille-articles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-30">
+		{% for article in articles %}
+			<div data-rubrique="{{ article.rubrique }}">
+				{% include 'components/card.html.twig' with { card: article, show_image: true } %}
+			</div>
+		{% else %}
+			<p class="text-small text-cerise-07 col-span-3 text-center py-20">Aucun article publié pour le moment.</p>
+		{% endfor %}
+	</div>
+
+	{# Si aucun article n'est dans la catégorie) #}
+	<div id="message-vide" class="hidden h-[50dvh] items-center justify-center">
+		<p class="text-small text-cerise-07">Aucun article dans cette catégorie pour le moment.</p>
+	</div>
+
+	<script src="{{ base }}/assets/js/filter-articles.js" defer></script>
+{% endblock %}

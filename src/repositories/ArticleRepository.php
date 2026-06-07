@@ -179,6 +179,20 @@ class ArticleRepository
         $stmt = $this->pdo->prepare('DELETE FROM articles WHERE id = ?');
         $stmt->execute([$id]);
     }
+    /** Récupère tous les articles publiés, ordonnés par date décroissante */
+    public function findAllPublished(): array
+    {
+        $stmt = $this->pdo->query("
+            SELECT a.*, r.nom AS rubrique, au.nom AS auteur
+            FROM articles a
+            LEFT JOIN rubriques r  ON a.rubrique_id = r.id
+            LEFT JOIN auteurs   au ON a.auteur_id   = au.id
+            WHERE a.statut = 'publie'
+            ORDER BY a.date_publication DESC
+        ");
+        return $stmt->fetchAll();
+    }
+
     /** Récupère les N derniers articles publiés pour la grille homepage */
     public function findLatestPublished(int $limit = 4): array
     {
