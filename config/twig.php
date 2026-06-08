@@ -14,7 +14,10 @@ $twig->addGlobal('user_nom', $_SESSION['user_nom'] ?? '');
 $twig->addGlobal('csrf_token', csrf_generate());
 
 $rubriquesStmt = $pdo->query('SELECT id, nom FROM rubriques ORDER BY nom');
+$infos = $pdo->query('SELECT id, type FROM pages_legales ORDER BY type');
+
 $twig->addGlobal('rubriquesNav', $rubriquesStmt->fetchAll());
+$twig->addGlobal('infosNav', $infos->fetchAll());
 
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);

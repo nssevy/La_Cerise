@@ -31,7 +31,7 @@ RewriteRule ^allArticles/?$ controller/public/allArticles.php [L]
 # Routes légales
 RewriteRule ^legal/cgu/?$ controller/public/legal.php?type=cgu [L,QSA]
 RewriteRule ^legal/confidentialite/?$ controller/public/legal.php?type=confidentialite [L,QSA]
-RewriteRule ^legal/mentions-legales/?$ controller/public/legal.php?type=mentions_legales [L,QSA]
+RewriteRule ^legal/mentions_legales/?$ controller/public/legal.php?type=mentions_legales [L,QSA]
 
 # Routes paramètre
 RewriteRule ^admin/parametre/?$ controller/admin/parametre/index.php [L]
@@ -42,6 +42,7 @@ RewriteRule ^admin/parametre/legal/edit/?$ controller/admin/parametre/legal/edit
 RewriteRule ^newsletter/?$ controller/public/newsletter.php [L]
 
 RewriteRule ^404\.php$ 404.php [L]
+
 # Routes admin
 
 RewriteRule ^admin/(.+?)(?:\.php)?$ controller/admin/$1.php [L]
