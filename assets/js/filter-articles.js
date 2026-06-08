@@ -44,10 +44,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Activation automatique du filtre depuis l'URL (?rubrique=...)
-    // Placé APRÈS l'attachement des listeners pour que le click() fonctionne
     const rubriqueUrl = new URLSearchParams(window.location.search).get('rubrique');
     if (rubriqueUrl) {
         const btnCible = [...btns].find(b => b.dataset.filter === rubriqueUrl);
         if (btnCible) btnCible.click();
     }
+
+    // --- Tri ---
+    const sortBtn      = document.getElementById('sort-btn');
+    const sortDropdown = document.getElementById('sort-dropdown');
+    const sortArrow    = document.getElementById('sort-arrow');
+    const sortRadios   = document.querySelectorAll('input[name="sort"]');
+
+    function positionnerDropdown() {
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+            const rect = sortBtn.getBoundingClientRect();
+            sortDropdown.style.position = 'fixed';
+            sortDropdown.style.top      = rect.bottom + 'px';
+            sortDropdown.style.left     = '0';
+            sortDropdown.style.right    = '0';
+            sortDropdown.style.width    = 'auto';
+        } else {
+            sortDropdown.style.position = '';
+            sortDropdown.style.top      = '';
+            sortDropdown.style.left     = '';
+            sortDropdown.style.right    = '';
+            sortDropdown.style.width    = '';
+        }
+    }
+
+    function ouvrirDropdown() {
+        positionnerDropdown();
+        sortDropdown.classList.remove('hidden', 'is-closing');
+        sortDropdown.classList.add('is-opening');
+    }
+
+    function fermerDropdown() {
+        if (sortDropdown.classList.contains('hidden')) return;
+        sortDropdown.classList.remove('is-opening');
+        sortDropdown.classList.add('is-closing');
+        sortDropdown.addEventListener('animationend', () => {
+            sortDropdown.classList.remove('is-closing');
+            sortDropdown.classList.add('hidden');
+        }, { once: true });
+    }
+
+    sortBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sortDropdown.classList.contains('hidden') ? ouvrirDropdown() : fermerDropdown();
+    });
+
+    document.addEventListener('click', () => fermerDropdown());
+    window.addEventListener('scroll', () => fermerDropdown(), { passive: true });
+
+    function appliquerTri(ordre) {
+        const items = [...grille.querySelectorAll('[data-date]')];
+        items.sort((a, b) => {
+            const da = new Date(a.dataset.date);
+            const db = new Date(b.dataset.date);
+            return ordre === 'asc' ? da - db : db - da;
+        });
+        items.forEach(item => grille.appendChild(item));
+    }
+
+    sortRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            appliquerTri(radio.value);
+            sortDropdown.classList.add('hidden');
+        });
+    });
 });

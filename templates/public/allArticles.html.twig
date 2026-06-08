@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block content %}
+	{% import 'macros/icons.html.twig' as icons %}
 
 	<div class="mt-10">
 		{% include 'components/breadcrumb.html.twig' with {
@@ -13,28 +14,55 @@
     } %}
 	</div>
 
-	<div class="pr-7 md:pr-10 pb-4 flex flex-col md:flex-row justify-between gap-2 mt-6">
+	<div class="pr-7 md:pr-10 pb-4 flex flex-col md:flex-row gap-2 mt-6">
 		<h1 id="filtre-titre" class="text-3xl md-text-4xl text-gradient">Tout</h1>
-		<p id="filtre-count" class="text-cerise-05 text-sm">{{ articles|length }}
-			article{{ articles|length > 1 ? 's' : '' }}</p>
 	</div>
 
 	{# Nav filtres #}
-	<nav class="pr-7 md:pr-10 flex gap-6 overflow-x-auto border-b border-dashed border-cerise-08">
-		<button data-filter="all" data-nom="Tous" class="py-4 text-base whitespace-nowrap transition-colors text-cerise-01 font-medium cursor-pointer">Tout</button>
-		{% for rubrique in rubriques %}
-			<button data-filter="{{ rubrique.id }}" data-nom="{{ rubrique.nom }}" class="py-4 text-base whitespace-nowrap transition-colors border-transparent text-cerise-05 hover:text-cerise-02 cursor-pointer">
-				{{ rubrique.nom }}
-			</button>
-		{% endfor %}
-	</nav>
+	<div class="relative">
+		<div id="fade-left" class="absolute inset-y-0 left-0 w-8 bg-linear-to-r from-cerise-10 to-transparent z-10 pointer-events-none opacity-0 transition-opacity duration-300"></div>
+		<div id="fade-right" class="absolute inset-y-0 right-0 w-8 bg-linear-to-l from-cerise-10 to-transparent z-10 pointer-events-none opacity-100 transition-opacity duration-300"></div>
 
-	<div class="mb-12"></div>
+		<nav id="nav-filtres" class="pr-7 md:pr-10 flex gap-6 overflow-x-auto border-b border-dashed border-cerise-08">
+			<button data-filter="all" data-nom="Tous" class="py-4 text-base whitespace-nowrap transition-colors text-cerise-01 font-medium cursor-pointer">Tout</button>
+			{% for rubrique in rubriques %}
+				<button data-filter="{{ rubrique.id }}" data-nom="{{ rubrique.nom }}" class="py-4 text-base whitespace-nowrap transition-colors border-transparent text-cerise-05 hover:text-cerise-02 cursor-pointer">
+					{{ rubrique.nom }}
+				</button>
+			{% endfor %}
+		</nav>
+	</div>
+
+	<div class="my-6 flex items-center justify-between">
+		<div class="relative">
+			<button id="sort-btn" class="flex items-center gap-2 text-sm text-cerise-04 hover:text-cerise-01 transition-colors cursor-pointer">
+				Trier
+				<span id="sort-arrow" class="flex items-center">
+					{{ icons.icon('faders-horizontal', 'bold', 'w-4 h-4 text-cerise-04') }}
+				</span>
+			</button>
+
+			<div id="sort-dropdown" class="hidden absolute left-0 top-8 bg-cerise-10 border border-cerise-09 z-20 min-w-64 py-2 text-sm rounded-sm">
+				<label class="flex items-center gap-3 px-4 py-2 cursor-pointer hover:bg-cerise-09 transition-colors">
+					<input type="radio" name="sort" value="desc" checked class="accent-cerise-01">
+					Du plus récent au plus ancien
+				</label>
+				<label class="flex items-center gap-3 px-4 py-2 cursor-pointer hover:bg-cerise-09 transition-colors">
+					<input type="radio" name="sort" value="asc" class="accent-cerise-01">
+					Du plus ancien au plus récent
+				</label>
+			</div>
+
+		</div>
+		<p id="filtre-count" class="text-cerise-05 text-sm">{{ articles|length }}
+			article{{ articles|length > 1 ? 's' : '' }}</p>
+
+	</div>
 
 	{# Grille d'articles #}
 	<div id="grille-articles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-30">
 		{% for article in articles %}
-			<div data-rubrique="{{ article.rubrique_id }}">
+			<div data-rubrique="{{ article.rubrique_id }}" data-date="{{ article.date_publication }}">
 				{% include 'components/card.html.twig' with { card: article, show_image: true } %}
 			</div>
 		{% else %}
@@ -48,4 +76,6 @@
 	</div>
 
 	<script src="{{ base }}/assets/js/filter-articles.js" defer></script>
+	<script src="{{ base }}/assets/js/navFiltre.js"></script>
+
 {% endblock %}

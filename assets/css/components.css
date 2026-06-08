@@ -1,3 +1,36 @@
+/* Animation dropdown tri */
+@keyframes dropdown-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdown-close {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+#sort-dropdown.is-opening {
+  display: block;
+  animation: dropdown-open 180ms ease-out forwards;
+}
+
+#sort-dropdown.is-closing {
+  display: block;
+  animation: dropdown-close 150ms ease-in forwards;
+}
+
 /* État actif dans la table des matières */
 .toc-link.toc-active {
   color: var(--01);

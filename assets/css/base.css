@@ -17,4 +17,13 @@
     font-weight: bold;
     color: #760c2f;
   }
+
+  nav {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
 }
