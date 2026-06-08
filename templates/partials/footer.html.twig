@@ -6,15 +6,11 @@
 		<div class="flex flex-col gap-3 text-cerise-04 mb-8">
 			<a href="{{ base }}/allArticles" class="text-3xl">Articles</a>
 			<ul class="flex flex-col gap-2">
-				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-					<a href="">Humanitaire, Conflits et Protection des Civils</a>
-				</li>
-				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-					<a href="">Indépendance et Autodétermination des Peuples</a>
-				</li>
-				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-					<a href="">Justice Sociale, Travail et Dignité Humaine</a>
-				</li>
+				{% for rubrique in rubriquesNav %}
+					<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+						<a href="{{ base }}/allArticles?rubrique={{ rubrique.id }}">{{ rubrique.nom }}</a>
+					</li>
+				{% endfor %}
 			</ul>
 		</div>
 
