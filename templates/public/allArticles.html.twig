@@ -14,14 +14,14 @@
 	</div>
 
 	<div class="pr-7 md:pr-10 pb-4 flex flex-col md:flex-row justify-between gap-2 mt-6">
-		<h1 id="filtre-titre" class="text-3xl md-text-4xl text-gradient">Tous</h1>
+		<h1 id="filtre-titre" class="text-3xl md-text-4xl text-gradient">Tout</h1>
 		<p id="filtre-count" class="text-cerise-05 text-sm">{{ articles|length }}
 			article{{ articles|length > 1 ? 's' : '' }}</p>
 	</div>
 
 	{# Nav filtres #}
 	<nav class="pr-7 md:pr-10 flex gap-6 overflow-x-auto border-b border-dashed border-cerise-08">
-		<button data-filter="all" data-nom="Tous" class="py-4 text-base whitespace-nowrap transition-colors text-cerise-01 font-medium cursor-pointer">Tous</button>
+		<button data-filter="all" data-nom="Tous" class="py-4 text-base whitespace-nowrap transition-colors text-cerise-01 font-medium cursor-pointer">Tout</button>
 		{% for rubrique in rubriques %}
 			<button data-filter="{{ rubrique.id }}" data-nom="{{ rubrique.nom }}" class="py-4 text-base whitespace-nowrap transition-colors border-transparent text-cerise-05 hover:text-cerise-02 cursor-pointer">
 				{{ rubrique.nom }}
