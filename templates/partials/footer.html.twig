@@ -1,47 +1,51 @@
 <footer class="pt-12 flex flex-col max-w-7xl mx-auto px-4 pb-4 md:px-8 lg:px-12">
 	<hr class="w-full border-t border-(--09) my-15"> {% block scripts %}{% endblock %}
 
-	<div class="flex flex-col gap-3 text-cerise-04 mb-8">
-		<a href="" class="text-3xl">Articles</a>
-		<ul class="flex flex-col gap-2">
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="">Humanitaire, Conflits et Protection des Civils</a>
-			</li>
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="">Indépendance et Autodétermination des Peuples</a>
-			</li>
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="">Justice Sociale, Travail et Dignité Humaine</a>
-			</li>
-		</ul>
+	<div class="grid grid-cols-1 grid-rows-3 lg:grid-cols-3 lg:grid-rows-1 lg:gap-10">
+
+		<div class="flex flex-col gap-3 text-cerise-04 mb-8">
+			<a href="{{ base }}/allArticles" class="text-3xl">Articles</a>
+			<ul class="flex flex-col gap-2">
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="">Humanitaire, Conflits et Protection des Civils</a>
+				</li>
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="">Indépendance et Autodétermination des Peuples</a>
+				</li>
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="">Justice Sociale, Travail et Dignité Humaine</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="flex flex-col gap-3 text-cerise-04 mb-8">
+			<a href="" class="text-3xl">Infos</a>
+			<ul class="flex flex-col gap-2">
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="{{ base }}/legal/confidentialite">Politique de confidentialité</a>
+				</li>
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="{{ base }}/legal/mentions-legales">Mentions légales</a>
+				</li>
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="{{ base }}/legal/cgu">CGU</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="flex flex-col gap-3 text-cerise-04">
+			<a href="" class="text-3xl">Nous suivres</a>
+			<ul class="flex flex-col gap-2">
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="https://www.instagram.com/revue.cerise/" target="_blank" rel="noopener noreferrer">Instagram</a>
+				</li>
+				<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
+					<a href="https://www.tiktok.com/@revue.cerise" target="_blank" rel="noopener noreferrer">Tiktok</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 
-	<div class="flex flex-col gap-3 text-cerise-04 mb-8">
-		<a href="" class="text-3xl">Infos</a>
-		<ul class="flex flex-col gap-2">
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="{{ base }}/legal/confidentialite">Politique de confidentialité</a>
-			</li>
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="{{ base }}/legal/mentions-legales">Mentions légales</a>
-			</li>
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="{{ base }}/legal/cgu">CGU</a>
-			</li>
-		</ul>
-	</div>
-
-	<div class="flex flex-col gap-3 text-cerise-04">
-		<a href="" class="text-3xl">Nous suivres</a>
-		<ul class="flex flex-col gap-2">
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="https://www.instagram.com/revue.cerise/" target="_blank" rel="noopener noreferrer">Instagram</a>
-			</li>
-			<li class="hocus:text-(--special) transition-colors whitespace-nowrap">
-				<a href="https://www.tiktok.com/@revue.cerise" target="_blank" rel="noopener noreferrer">Tiktok</a>
-			</li>
-		</ul>
-	</div>
 
 	<div class="flex justify-between text-cerise-07 text-sm font-light my-15">
 		<p class="whitespace-nowrap">© La Cerise, 2026</p>
