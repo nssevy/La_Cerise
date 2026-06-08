@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grille      = document.getElementById('grille-articles');
     const msgVide     = document.getElementById('message-vide');
     const count       = document.getElementById('filtre-count');
+    const description = document.getElementById('filtre-description');
 
     const classesActif   = ['text-cerise-01', 'font-medium'];
     const classesInactif = ['border-transparent', 'text-cerise-05'];
@@ -21,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.remove(...classesInactif);
 
             titre.textContent = btn.dataset.nom ?? 'Tous';
+
+            const desc = btn.dataset.description ?? '';
+            description.textContent = desc;
+            description.classList.toggle('hidden', !desc);
 
             let visibles = 0;
             cards.forEach(card => {

@@ -119,7 +119,7 @@ class ArticleRepository
     /** Récupère toutes les rubriques triées par nom */
     public function findRubriques(): array
     {
-        return $this->pdo->query('SELECT id, nom FROM rubriques ORDER BY nom')->fetchAll();
+        return $this->pdo->query('SELECT id, nom, description FROM rubriques ORDER BY nom')->fetchAll();
     }
 
     /** Récupère tous les auteurs triés par nom */

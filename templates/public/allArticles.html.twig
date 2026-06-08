@@ -14,8 +14,9 @@
     } %}
 	</div>
 
-	<div class="pr-7 md:pr-10 pb-4 flex flex-col md:flex-row gap-2 mt-6">
+	<div class="pr-7 md:pr-10 pb-4 flex flex-col gap-2 mt-6">
 		<h1 id="filtre-titre" class="text-3xl md-text-4xl text-gradient">Tout</h1>
+		<p id="filtre-description" class="text-sm text-cerise-03 hidden"></p>
 	</div>
 
 	{# Nav filtres #}
@@ -26,7 +27,7 @@
 		<nav id="nav-filtres" class="pr-7 md:pr-10 flex gap-6 overflow-x-auto border-b border-dashed border-cerise-08">
 			<button data-filter="all" data-nom="Tous" class="py-4 text-base whitespace-nowrap transition-colors text-cerise-01 font-medium cursor-pointer">Tout</button>
 			{% for rubrique in rubriques %}
-				<button data-filter="{{ rubrique.id }}" data-nom="{{ rubrique.nom }}" class="py-4 text-base whitespace-nowrap transition-colors border-transparent text-cerise-05 hover:text-cerise-02 cursor-pointer">
+				<button data-filter="{{ rubrique.id }}" data-nom="{{ rubrique.nom }}" data-description="{{ rubrique.description }}" class="py-4 text-base whitespace-nowrap transition-colors border-transparent text-cerise-05 hover:text-cerise-02 cursor-pointer">
 					{{ rubrique.nom }}
 				</button>
 			{% endfor %}
