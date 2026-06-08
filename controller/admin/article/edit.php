@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 3) . '/config/bootstrap.php';
 require_once dirname(__DIR__, 3) . '/src/utils/upload.php';
 require_once dirname(__DIR__, 3) . '/src/repositories/ArticleRepository.php';
+require_once dirname(__DIR__, 3) . '/src/services/BrevoService.php';
 
 requireLogin();
 
@@ -21,6 +22,8 @@ $auteurs = $articleRepo->findAuteurs();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verify();
+
+    $ancienStatut = $article['statut'];
 
     $titre = trim($_POST['titre'] ?? '');
     $chapeau = trim($_POST['chapeau'] ?? '');
@@ -60,6 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'rubrique_id' => $rubrique_id ?: null,
             'auteur_id' => $auteur_id ?: null,
         ]);
+
+        if ($statut === 'publie' && $ancienStatut !== 'publie') {
+            (new BrevoService())->envoyerNewsletter($titre, $chapeau, $slug, $image_principale ?? '');
+        }
 
         flash_success('Article mis à jour.');
         redirect('/admin/article/list');
