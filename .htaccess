@@ -2,30 +2,24 @@ RewriteEngine On
 RewriteBase /La_Cerise/
 
 # Page d'accueil
-
 RewriteRule ^$ controller/public/index.php [L]
 
 # Laisser passer les fichiers existants (assets, images, css...)
-
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
 # Laisser passer les dossiers existants sauf la racine
-
 RewriteCond %{REQUEST_URI} !^/$
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
 # Route article : /article/mon-slug
-
 RewriteRule ^article/([^/]+)/?$ controller/public/article.php?slug=$1 [L,QSA]
 
 # Route lexique
-
 RewriteRule ^lexique/?$ controller/public/lexique.php [L]
 
 # Route Tout les Articles
-
 RewriteRule ^allArticles/?$ controller/public/allArticles.php [L]
 
 # Routes légales
@@ -44,7 +38,6 @@ RewriteRule ^newsletter/?$ controller/public/newsletter.php [L]
 RewriteRule ^404\.php$ 404.php [L]
 
 # Routes admin
-
 RewriteRule ^admin/(.+?)(?:\.php)?$ controller/admin/$1.php [L]
 
 # Page 404
