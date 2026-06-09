@@ -48,10 +48,9 @@
 
 .prose blockquote {
   font-family: var(--font-serif);
-  border-left: 1.5px solid var(--special);
-  border-color: var(--01);
   padding-left: 1rem;
   color: var(--color-pink-900);
+  border-left: none !important;
 }
 
 /* Supprimer les guillemets automatiques sur le paragraphe contenant le cite */
@@ -65,12 +64,25 @@
   display: block;
   font-style: normal;
   font-size: 0.875rem;
-  color: var(--06);
-  margin-top: 0.25rem;
+  color: var(--05);
 }
 
 .prose blockquote cite::before {
   content: "— ";
+}
+
+/* Crédit de citation */
+.prose .citation-credit {
+  font-family: var(--font-serif);
+  padding-left: 1rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  color: var(--06);
+  margin-top: 0;
+}
+
+.prose .citation-credit::before {
+  content: "@ ";
 }
 
 .contenu h2 {
