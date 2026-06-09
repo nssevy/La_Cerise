@@ -20,7 +20,6 @@ class BrevoService
             return;
         }
 
-        // Récupère tous les contacts de la liste
         $contacts = $this->getContacts();
         if (empty($contacts)) {
             error_log('[Brevo] Aucun contact dans la liste ' . $this->listId);
@@ -31,28 +30,26 @@ class BrevoService
         $lien = $base . '/article/' . $slug;
         $imgUrl = $image ? $base . '/assets/images/' . $image : '';
 
-        // Envoie via l'API transactionnelle
-        $result = $this->request('POST', '/smtp/email', [
-            'templateId' => $this->templateId,
-            'to' => $contacts,
-            'params' => [
-                'titre' => $titre,
-                'chapeau' => $chapeau,
-                'lien' => $lien,
-                'image' => $imgUrl,
-            ],
-        ]);
-
-        if (isset($result['messageId'])) {
-            error_log('[Brevo] Newsletter envoyée avec succès : ' . $result['messageId']);
-        } else {
-            error_log('[Brevo] Échec envoi : ' . json_encode($result));
+        // Un email individuel par contact
+        foreach ($contacts as $contact) {
+            $this->request('POST', '/smtp/email', [
+                'templateId' => $this->templateId,
+                'to' => [['email' => $contact['email']]],
+                'params' => [
+                    'titre' => $titre,
+                    'chapeau' => $chapeau,
+                    'lien' => $lien,
+                    'image' => $imgUrl,
+                ],
+            ]);
         }
+
+        error_log('[Brevo] Newsletter envoyée à ' . count($contacts) . ' contacts.');
     }
 
     private function getContacts(): array
     {
-        $result = $this->request('GET', '/contacts?listId=' . $this->listId . '&limit=500');
+        $result = $this->request('GET', '/contacts/lists/' . $this->listId . '/contacts?limit=500');
         $contacts = [];
         foreach ($result['contacts'] ?? [] as $contact) {
             if (!empty($contact['email'])) {
