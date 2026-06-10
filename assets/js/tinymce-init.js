@@ -12,6 +12,16 @@ tinymce.init({
   toolbar_sticky: true,
   toolbar_sticky_offset: navOffset,
 
+  content_style: `
+    .citation-credit {
+      color: #888;
+      font-size: 0.875rem;
+      padding-left: 0.75rem;
+      border-left: 2px dashed #ccc;
+      font-style: italic;
+    }
+  `,
+
   formats: {
     citation_credit: {
       block: "p",
