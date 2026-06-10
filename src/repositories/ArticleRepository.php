@@ -173,6 +173,13 @@ class ArticleRepository
         ]);
     }
 
+    /** Met à jour uniquement le statut d'un article */
+    public function updateStatut(int $id, string $statut): void
+    {
+        $stmt = $this->pdo->prepare('UPDATE articles SET statut = ? WHERE id = ?');
+        $stmt->execute([$statut, $id]);
+    }
+
     /** Supprime un article par son id */
     public function delete(int $id): void
     {

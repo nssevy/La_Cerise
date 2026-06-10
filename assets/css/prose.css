@@ -64,7 +64,8 @@
   display: block;
   font-style: normal;
   font-size: 0.875rem;
-  color: var(--05);
+  color: var(--06);
+  margin-top: 0.25rem;
 }
 
 .prose blockquote cite::before {

@@ -9,16 +9,22 @@ tinymce.init({
   plugins: "autoresize lists link image code",
   autoresize_bottom_margin: 0,
   min_height: 300,
-  toolbar_location: 'bottom',
+  toolbar_location: "bottom",
   toolbar_sticky: true,
   toolbar_sticky_offset: 0,
 
   content_style: `
+    blockquote {
+      border-left: 2px dotted #000 !important;
+      padding-left: 1rem !important;
+      margin: 16px 40px 16px 24px !important;
+    }
     .citation-credit {
       color: #888;
       font-size: 0.875rem;
       padding-left: 0.75rem;
-      border-left: 2px dashed #ccc;
+      border-left: 2px dotted #ccc;
+      margin: 16px 40px 16px 24px !important;
       font-style: italic;
     }
   `,

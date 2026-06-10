@@ -6,9 +6,34 @@
 		</button>
 	</div>
 </div>
-<ul popover id="actions-{{ article.id }}" style="position-anchor: --anchor-{{ article.id }}" class="dropdown menu w-40 rounded-box bg-base-100 shadow-sm">
+<ul popover id="actions-{{ article.id }}" style="position-anchor: --anchor-{{ article.id }}" class="dropdown menu w-48 rounded-box bg-base-100 shadow-sm">
 	<li>
 		<a href="{{ base }}/admin/article/edit?id={{ article.id }}">Éditer</a>
+	</li>
+	<li>
+		<details>
+			<summary>Statut</summary>
+			<ul>
+				{% set statuts = [
+					{ value: 'brouillon', label: 'Brouillon' },
+					{ value: 'publie',    label: 'Publié' },
+					{ value: 'a_venir',   label: 'À venir' },
+					{ value: 'archive',   label: 'Archivé' }
+				] %}
+				{% for s in statuts %}
+					<li>
+						<form method="POST" action="{{ base }}/admin/article/update-statut">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+							<input type="hidden" name="id" value="{{ article.id }}">
+							<input type="hidden" name="statut" value="{{ s.value }}">
+							<button type="submit" class="{{ article.statut == s.value ? 'font-bold text-cerise-special' : '' }}">
+								{{ s.label }}
+							</button>
+						</form>
+					</li>
+				{% endfor %}
+			</ul>
+		</details>
 	</li>
 	<li>
 		<form method="POST" action="{{ base }}/admin/article/delete" style="display:inline;">

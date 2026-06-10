@@ -28,22 +28,24 @@
 
 	<fieldset class="grid gap-10">
 
-		<div class="flex flex-col gap-2">
-			<label class="text-cerise-01" for="rubrique_id">Rubrique</label>
-			<select id="rubrique_id" name="rubrique_id" class="select w-full">
-				<option value="">— Choisir une rubrique —</option>
+		<div class="flex flex-col gap-3">
+			<label class="text-cerise-01">Rubrique</label>
+			<div class="flex flex-row flex-wrap gap-2">
 				{% for rubrique in rubriques %}
-					<option value="{{ rubrique.id }}" {{ (article.rubrique_id ?? '') == rubrique.id ? 'selected' : '' }}>
-						{{ rubrique.nom }}
-					</option>
+					<label class="cursor-pointer">
+						<input type="radio" name="rubrique_id" value="{{ rubrique.id }}" {{ (article.rubrique_id ?? '') == rubrique.id ? 'checked' : '' }} class="hidden peer">
+						<span class="btn btn-md btn-outline peer-checked:text-cerise-10 peer-checked:bg-(--03)">
+							{{ rubrique.nom }}
+						</span>
+					</label>
 				{% endfor %}
-			</select>
+			</div>
 		</div>
 
 		<div class="flex flex-col gap-2">
 			<label class="text-cerise-01" for="auteur_id">Auteur</label>
 			<select id="auteur_id" name="auteur_id" class="select w-full">
-				<option value="">— Choisir un auteur —</option>
+				<option value="" class="text-cerise-05">Aucun auteur choisis</option>
 				{% for auteur in auteurs %}
 					<option value="{{ auteur.id }}" {{ (article.auteur_id ?? '') == auteur.id ? 'selected' : '' }}>
 						{{ auteur.nom }}
@@ -52,19 +54,48 @@
 			</select>
 		</div>
 
-		<div class="flex flex-col gap-2">
-			<label class="text-cerise-01" for="statut">Statut</label>
-			<select id="statut" name="statut" class="select w-full">
-				<option value="brouillon" {{ (article.statut ?? 'brouillon') == 'brouillon' ? 'selected' : '' }}>Brouillon</option>
-				<option value="publie" {{ (article.statut ?? '') == 'publie' ? 'selected' : '' }}>Publié</option>
-				<option value="a_venir" {{ (article.statut ?? '') == 'a_venir' ? 'selected' : '' }}>À venir</option>
-				<option value="archive" {{ (article.statut ?? '') == 'archive' ? 'selected' : '' }}>Archivé</option>
-			</select>
+		<div class="flex flex-col gap-3">
+			<label class="text-cerise-01">Statut</label>
+			<div class="flex flex-row flex-wrap gap-2">
+				{% set statuts = [
+					{ value: 'brouillon', label: 'Brouillon' },
+					{ value: 'publie',    label: 'Publié' },
+					{ value: 'a_venir',   label: 'À venir' },
+					{ value: 'archive',   label: 'Archivé' }
+				] %}
+				{% for s in statuts %}
+					<label class="cursor-pointer">
+						<input type="radio" name="statut" value="{{ s.value }}" {{ (article.statut ?? 'brouillon') == s.value ? 'checked' : '' }} class="hidden peer">
+						<span class="btn btn-md btn-outline peer-checked:text-cerise-10 peer-checked:bg-(--03)">
+							{{ s.label }}
+						</span>
+					</label>
+				{% endfor %}
+			</div>
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<label class="text-cerise-01" for="date_publication">Date de publication</label>
-			<input type="date" class="input w-full" id="date_publication" name="date_publication" value="{{ article.date_publication ? article.date_publication|date('Y-m-d') : '' }}">
+			<label class="text-cerise-01">Date de publication</label>
+			{% set date_val = article.date_publication ? article.date_publication|date('Y-m-d') : '' %}
+			<input type="hidden" id="date_publication" name="date_publication" value="{{ date_val }}">
+			<button type="button" popovertarget="cally-popover-date" class="input input-border text-left w-full" id="cally-btn" style="anchor-name:--cally-date">
+				{{ date_val ? article.date_publication|date('d/m/Y') : 'Choisir une date' }}
+			</button>
+			<div popover id="cally-popover-date" class="dropdown bg-base-100 rounded-box shadow-lg" style="position-anchor:--cally-date">
+				<calendar-date class="cally" value="{{ date_val }}" onchange="
+																																																																													document.getElementById('date_publication').value = this.value;
+																																																																													document.getElementById('cally-btn').innerText = this.value.split('-').reverse().join('/');
+																																																																													document.getElementById('cally-popover-date').hidePopover();
+																																																																												">
+					<svg aria-label="Précédent" class="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+						<path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+					</svg>
+					<svg aria-label="Suivant" class="fill-current size-4" slot="next" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+						<path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+					</svg>
+					<calendar-month></calendar-month>
+				</calendar-date>
+			</div>
 		</div>
 
 	</fieldset>
@@ -115,7 +146,7 @@
 	</div>
 
 	{% if show_delete is defined and show_delete %}
-		<button type="button" class="text-sm text-red-800 hover:text-red-500 transition-colors" onclick="if(confirm('Supprimer cet article ?')) document.getElementById('form-delete-article').submit();">
+		<button type="button" class="text-sm text-red-800 hover:text-red-500 transition-colors cursor-pointer" onclick="if(confirm('Supprimer cet article ?')) document.getElementById('form-delete-article').submit();">
 			Supprimer l'article
 		</button>
 	{% endif %}

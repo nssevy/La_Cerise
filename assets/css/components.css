@@ -30,10 +30,10 @@
   fill: #ffffff !important;
 }
 
-/* Actif : remplace le bleu par cerise-special */
+/* Tools actifs */
 .tox .tox-tbtn--enabled,
 .tox .tox-tbtn--enabled:hover {
-  background-color: #d01152 !important;
+  background-color: var(--04) !important;
 }
 
 .tox .tox-tbtn--enabled svg,
