@@ -1,3 +1,10 @@
+/* Cursor pointer sur les boutons de la toolbar TinyMCE */
+.tox .tox-tbtn,
+.tox .tox-tbtn--select,
+.tox .tox-split-button {
+  cursor: pointer !important;
+}
+
 /* Animation dropdown tri */
 @keyframes dropdown-open {
   from {
