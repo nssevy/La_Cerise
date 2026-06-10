@@ -1,3 +1,16 @@
+// Fade gauche/droite sur la nav des filtres au scroll horizontal
+const navFiltres = document.getElementById('nav-filtres');
+if (navFiltres) {
+    const fadeLeft  = document.getElementById('fade-left');
+    const fadeRight = document.getElementById('fade-right');
+    navFiltres.addEventListener('scroll', () => {
+        const scrollLeft = navFiltres.scrollLeft;
+        const maxScroll  = navFiltres.scrollWidth - navFiltres.clientWidth;
+        fadeLeft.style.opacity  = scrollLeft > 0 ? '1' : '0';
+        fadeRight.style.opacity = scrollLeft < maxScroll ? '1' : '0';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const btns        = document.querySelectorAll('[data-filter]');
     const cards       = document.querySelectorAll('[data-rubrique]');

@@ -82,11 +82,7 @@
 				{{ date_val ? article.date_publication|date('d/m/Y') : 'Choisir une date' }}
 			</button>
 			<div popover id="cally-popover-date" class="dropdown bg-base-100 rounded-box shadow-lg" style="position-anchor:--cally-date">
-				<calendar-date class="cally" value="{{ date_val }}" onchange="
-																																																																													document.getElementById('date_publication').value = this.value;
-																																																																													document.getElementById('cally-btn').innerText = this.value.split('-').reverse().join('/');
-																																																																													document.getElementById('cally-popover-date').hidePopover();
-																																																																												">
+				<calendar-date class="cally" value="{{ date_val }}">
 					<svg aria-label="Précédent" class="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
 						<path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
 					</svg>

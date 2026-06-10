@@ -89,5 +89,6 @@ echo $twig->render('admin/article_edit.html.twig', [
     'article' => $article,
     'errors' => $errors,
     'rubriques' => $rubriques,
+    'section' => 'articles',
     'auteurs' => $auteurs,
 ]);

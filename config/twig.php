@@ -13,11 +13,13 @@ $twig->addGlobal('base', $_ENV['BASE_URL'] ?? '');
 $twig->addGlobal('user_nom', $_SESSION['user_nom'] ?? '');
 $twig->addGlobal('csrf_token', csrf_generate());
 
-$rubriquesStmt = $pdo->query('SELECT id, nom FROM rubriques ORDER BY nom');
-$infos = $pdo->query('SELECT id, type FROM pages_legales ORDER BY type');
+require_once __DIR__ . '/../src/repositories/RubriqueRepository.php';
 
-$twig->addGlobal('rubriquesNav', $rubriquesStmt->fetchAll());
-$twig->addGlobal('infosNav', $infos->fetchAll());
+$rubriqueRepo = new RubriqueRepository($pdo);
+$twig->addGlobal('rubriquesNav', $rubriqueRepo->findAll());
+
+$infosStmt = $pdo->query('SELECT id, type FROM pages_legales ORDER BY type');
+$twig->addGlobal('infosNav', $infosStmt->fetchAll());
 
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);
