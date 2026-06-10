@@ -1,3 +1,55 @@
+/* ── Toolbar TinyMCE dark mode ── */
+.tox .tox-editor-header {
+  background-color: #1f1f1f !important;
+  border-top: 1px solid #363636 !important;
+  border-bottom: none !important;
+}
+
+.tox .tox-toolbar,
+.tox .tox-toolbar__primary,
+.tox .tox-toolbar__overflow {
+  background-color: #1f1f1f !important;
+  border: none !important;
+}
+
+.tox .tox-tbtn svg {
+  fill: #dfdfdf !important;
+}
+
+.tox .tox-tbtn,
+.tox .tox-tbtn--select {
+  background-color: #1f1f1f !important;
+  color: #c1c1c1 !important;
+}
+
+.tox .tox-tbtn:hover {
+  background-color: #363636 !important;
+}
+
+.tox .tox-tbtn:hover svg {
+  fill: #ffffff !important;
+}
+
+/* Actif : remplace le bleu par cerise-special */
+.tox .tox-tbtn--enabled,
+.tox .tox-tbtn--enabled:hover {
+  background-color: #d01152 !important;
+}
+
+.tox .tox-tbtn--enabled svg,
+.tox .tox-tbtn--enabled:hover svg {
+  fill: #ffffff !important;
+}
+
+.tox .tox-tbtn--enabled .tox-tbtn__select-label {
+  color: #ffffff !important;
+}
+
+/* Séparateurs */
+.tox .tox-toolbar__group:not(:last-of-type) {
+  border-right-color: #363636 !important;
+}
+
 /* Cursor pointer sur les boutons de la toolbar TinyMCE */
 .tox .tox-tbtn,
 .tox .tox-tbtn--select,
