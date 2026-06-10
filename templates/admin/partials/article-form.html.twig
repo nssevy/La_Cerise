@@ -18,7 +18,7 @@
     } only %}
 
 		<div>
-			<label for="contenu" class="text-cerise-05">Contenu
+			<label for="contenu" class="text-cerise-01">Contenu
 				<abbr title="Champ obligatoire">*</abbr>
 			</label>
 			<textarea id="contenu" name="contenu" rows="20">{{ article.contenu ?? '' }}</textarea>
@@ -29,7 +29,7 @@
 	<fieldset class="grid gap-10">
 
 		<div class="flex flex-col gap-2">
-			<label class="text-cerise-05" for="rubrique_id">Rubrique</label>
+			<label class="text-cerise-01" for="rubrique_id">Rubrique</label>
 			<select id="rubrique_id" name="rubrique_id" class="select w-full">
 				<option value="">— Choisir une rubrique —</option>
 				{% for rubrique in rubriques %}
@@ -41,7 +41,7 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<label class="text-cerise-05" for="auteur_id">Auteur</label>
+			<label class="text-cerise-01" for="auteur_id">Auteur</label>
 			<select id="auteur_id" name="auteur_id" class="select w-full">
 				<option value="">— Choisir un auteur —</option>
 				{% for auteur in auteurs %}
@@ -53,7 +53,7 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<label class="text-cerise-05" for="statut">Statut</label>
+			<label class="text-cerise-01" for="statut">Statut</label>
 			<select id="statut" name="statut" class="select w-full">
 				<option value="brouillon" {{ (article.statut ?? 'brouillon') == 'brouillon' ? 'selected' : '' }}>Brouillon</option>
 				<option value="publie" {{ (article.statut ?? '') == 'publie' ? 'selected' : '' }}>Publié</option>
@@ -63,7 +63,7 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<label class="text-cerise-05" for="date_publication">Date de publication</label>
+			<label class="text-cerise-01" for="date_publication">Date de publication</label>
 			<input type="date" class="input w-full" id="date_publication" name="date_publication" value="{{ article.date_publication ? article.date_publication|date('Y-m-d') : '' }}">
 		</div>
 
@@ -72,7 +72,15 @@
 	<fieldset class="grid gap-10">
 
 		<div>
-			<label class="text-cerise-05">Image principale</label>
+			<label class="text-cerise-01">Image principale</label>
+
+			{% if article.image_principale is defined and article.image_principale %}
+				<div class="mb-3 flex flex-col gap-2">
+					<small class="text-cerise-05">Image actuelle</small>
+					<img src="{{ base }}/assets/images/{{ article.image_principale }}" alt="Image actuelle" class="w-full max-h-48 object-cover rounded">
+				</div>
+			{% endif %}
+
 			<div id="dropzone" class="flex flex-col items-center justify-center gap-3 border border-dashed border-cerise-09 rounded-lg p-10 cursor-pointer hover:bg-cerise-10 transition">
 				<p>Glissez votre image ici ou
 					<span class="text-cerise-04 underline">parcourir</span>
