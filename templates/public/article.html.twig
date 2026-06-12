@@ -79,7 +79,7 @@
 			</div>
 		{% endif %}
 
-		<div class="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+		<div id="article-actions" class="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-opacity duration-300">
 			<a href="{{ base }}/">
 				{% include 'components/button.html.twig' with { label: "Retour" } %}
 			</a>
@@ -91,5 +91,6 @@
 
 		<script src="{{ base }}/assets/js/share.js" defer></script>
 		<script src="{{ base }}/assets/js/toc.js" defer></script>
+		<script src="{{ base }}/assets/js/article-actions.js" defer></script>
 
 	{% endblock %}

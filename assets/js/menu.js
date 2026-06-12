@@ -14,9 +14,13 @@ menuBtn.addEventListener("click", function () {
     iconOpen.style.display = "inline-flex";
     iconClose.style.display = "none";
     document.body.classList.remove("overflow-hidden");
+    mobileMenu.classList.remove("ease-out");
+    mobileMenu.classList.add("ease-in");
   } else {
     iconOpen.style.display = "none";
     iconClose.style.display = "inline-flex";
     document.body.classList.add("overflow-hidden");
+    mobileMenu.classList.remove("ease-in");
+    mobileMenu.classList.add("ease-out");
   }
 });
