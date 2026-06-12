@@ -13,8 +13,10 @@ menuBtn.addEventListener("click", function () {
   if (isOpen) {
     iconOpen.style.display = "inline-flex";
     iconClose.style.display = "none";
+    document.body.classList.remove("overflow-hidden");
   } else {
     iconOpen.style.display = "none";
     iconClose.style.display = "inline-flex";
+    document.body.classList.add("overflow-hidden");
   }
 });
