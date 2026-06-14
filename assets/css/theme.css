@@ -18,8 +18,21 @@
   --color-cerise-special-mid: #a91947;
   --color-cerise-special-dark: #760c2f;
 
-  --font-sans: "DejaVu Sans Condensed", "DejaVu Sans", sans-serif;
-  --font-serif: "DejaVu Serif Condensed", "DejaVu Serif", serif;
+  --color-cerise-white: #fdfdfd;
+
+  /* Échelle neutral (maquette Figma "Cerise" v2) */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a1a1a1;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-800: #262626;
+  --color-neutral-950: #0a0a0a;
+
+  /* Satoshi (Fontshare) — police globale, remplace DejaVu */
+  --font-sans: "Satoshi", "DejaVu Sans Condensed", sans-serif;
+  --font-serif: "Satoshi", "DejaVu Serif Condensed", serif;
 }
 
 /* Aliases vers @theme */
@@ -41,6 +54,14 @@
     --special-mid: var(--color-cerise-special-mid);
     --special-dark: var(--color-cerise-special-dark);
   }
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
