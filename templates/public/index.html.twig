@@ -64,6 +64,33 @@
 				{# Bloc 3 : Pourquoi La Cerise #}
 				<hr class="hidden lg:block border-neutral-300">
 				{% include 'components/home/pourquoi-cerise.html.twig' %}
+
+				{# Bloc 4 : articles après "Pourquoi" — 2 sur mobile/tablette, 1 sur desktop #}
+				{% if gridArticles|length > 1 %}
+					<hr class="hidden lg:block border-neutral-300">
+					{# 1er article : déjà affiché en desktop (Bloc 2), donc mobile/tablette seulement #}
+					<div class="lg:hidden">
+						{% include 'components/cards-responsive.html.twig' with {
+						mobileLayout: 'horizontal',
+						tabletHorizontal: true,
+						href: base ~ '/article/' ~ gridArticles[0].slug,
+						image: gridArticles[0].image_principale,
+						category: gridArticles[0].rubrique,
+						title: gridArticles[0].titre,
+						description: gridArticles[0].chapeau|striptags
+					} %}
+					</div>
+					{# 2e article : tous formats, horizontal #}
+					{% include 'components/cards-responsive.html.twig' with {
+						mobileLayout: 'horizontal',
+						tabletHorizontal: true,
+						href: base ~ '/article/' ~ gridArticles[1].slug,
+						image: gridArticles[1].image_principale,
+						category: gridArticles[1].rubrique,
+						title: gridArticles[1].titre,
+						description: gridArticles[1].chapeau|striptags
+					} %}
+				{% endif %}
 			</section>
 
 			{# Sidebar lexique : épouse la hauteur de la colonne articles, déborde coupé #}
