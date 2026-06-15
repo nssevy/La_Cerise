@@ -39,6 +39,10 @@
 					description: card.chapeau|striptags
 				} %}
 				{% endfor %}
+
+				<div class="md:col-span-2">
+					{% include 'components/home/pourquoi-cerise.html.twig' %}
+				</div>
 			</section>
 
 			{# Sidebar lexique : épouse la hauteur de la colonne articles, déborde coupé #}
@@ -50,6 +54,7 @@
 				</div>
 			</aside>
 		</div>
+
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
 		<script src="{{ base }}/assets/js/lexique-sidebar.js" defer></script>
 
