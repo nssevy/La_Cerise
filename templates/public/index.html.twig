@@ -28,21 +28,41 @@
 		</section>
 		{# Articles (3/4) + sidebar lexique (1/4, desktop uniquement) #}
 		<div class="mt-16 lg:grid lg:grid-cols-4 lg:gap-8">
-			<section class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:col-span-3">
-				{% for card in cards %}
-					{% include 'components/cards-responsive.html.twig' with {
-					mobileLayout: loop.first ? 'normal' : 'horizontal',
-					href: base ~ '/article/' ~ card.slug,
-					image: card.image_principale,
-					category: card.rubrique,
-					title: card.titre,
-					description: card.chapeau|striptags
-				} %}
-				{% endfor %}
+			<section class="flex flex-col gap-8 lg:gap-12 lg:col-span-3">
 
-				<div class="md:col-span-2">
-					{% include 'components/home/pourquoi-cerise.html.twig' %}
+				{# Bloc 1 : 2 articles côte à côte #}
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+					{% for card in cards %}
+						{% include 'components/cards-responsive.html.twig' with {
+						mobileLayout: loop.first ? 'normal' : 'horizontal',
+						href: base ~ '/article/' ~ card.slug,
+						image: card.image_principale,
+						category: card.rubrique,
+						title: card.titre,
+						description: card.chapeau|striptags
+					} %}
+					{% endfor %}
 				</div>
+
+				{# Bloc 2 : 3ᵉ article horizontal (desktop uniquement) #}
+				{% if gridArticles is not empty %}
+					{% set a3 = gridArticles|first %}
+					<hr class="hidden lg:block border-neutral-300">
+					<div class="hidden lg:block">
+						{% include 'components/cards-responsive.html.twig' with {
+						mobileLayout: 'horizontal',
+						href: base ~ '/article/' ~ a3.slug,
+						image: a3.image_principale,
+						category: a3.rubrique,
+						title: a3.titre,
+						description: a3.chapeau|striptags
+					} %}
+					</div>
+				{% endif %}
+
+				{# Bloc 3 : Pourquoi La Cerise #}
+				<hr class="hidden lg:block border-neutral-300">
+				{% include 'components/home/pourquoi-cerise.html.twig' %}
 			</section>
 
 			{# Sidebar lexique : épouse la hauteur de la colonne articles, déborde coupé #}
