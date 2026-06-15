@@ -21,7 +21,9 @@
 				{% for item in lexique %}
 					{% include 'components/home/lexique-definition.html.twig' with { item: item } %}
 				{% endfor %}
-				{% include 'components/button-rounded.html.twig' with { label: "En savoir plus" } %}
+				<div class="flex items-center">
+					{% include 'components/button-rounded.html.twig' with { label: "En savoir plus" } %}
+				</div>
 			</div>
 		</section>
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
