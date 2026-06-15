@@ -1,0 +1,25 @@
+{% if hero is defined and hero is not empty %}
+	{% set badge = badge ?? 'Nouvel article !' %}
+
+	<a href="{{ base }}/article/{{ hero.slug }}" class="group block w-full /// mb-10">
+		<article class="flex flex-col gap-2 md:gap-3 lg:gap-7 items-start w-full overflow-hidden md:flex-row-reverse md:justify-end md:h-[45dvh] md:max-h-120">
+
+			<img src="{{ base }}/assets/images/{{ hero.image_principale }}" alt="{{ hero.titre }}" class="w-full h-full md:w-auto lg:w-1/2 aspect-5/3 md:aspect-square lg:aspect-auto lg:h-full object-cover transition-transform duration-300 group-hover:scale-105 rounded-t-lg md:rounded-l-none md:rounded-r-lg">
+
+			<div class="cerise-gradient border border-cerise-special-dark flex flex-col gap-5 md:justify-between p-10 w-full md:flex-1 md:max-w-sm h-full overflow-hidden rounded-b-lg md:rounded-l-lg md:rounded-r-none">
+				<span class="bg-cerise-special-dark px-2 md:py-1 rounded-sm w-fit">
+					<p class="text-cerise-10 text-sat-label whitespace-nowrap">{{ badge }}</p>
+				</span>
+
+				<div class="flex flex-col justify-between gap-2 w-fit self-start md:w-full">
+					<h1 class="text-cerise-10 text-sat-h2 line-clamp-4 md:line-clamp-6 group-hover:underline">
+						{{ hero.titre }}
+					</h1>
+					<p class="text-neutral-50/70 text-sat-base line-clamp-3 md:line-clamp-5">
+						{{ hero.chapeau | striptags }}
+					</p>
+				</div>
+			</div>
+		</article>
+	</a>
+{% endif %}

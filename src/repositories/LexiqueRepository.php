@@ -17,6 +17,18 @@ class LexiqueRepository
         ")->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /** Récupère N termes du lexique au hasard pour la page publique */
+    public function findRandom(int $limit = 3): array
+    {
+        return $this->pdo->query("
+            SELECT l.terme, l.definition, c.nom AS categorie
+            FROM lexique l
+            LEFT JOIN categories c ON l.categorie_id = c.id
+            ORDER BY RAND()
+            LIMIT " . (int) $limit
+        )->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /** Récupère tous les termes pour l'admin, avec filtre optionnel par catégorie */
     public function findAllAdmin(?int $categorieId = null): array
     {

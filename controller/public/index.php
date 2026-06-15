@@ -16,10 +16,9 @@ $cards = $articleRepo->findCards($hero['id'] ?? 0);
 $cards = $articleRepo->findCards($hero['id'] ?? 0);
 $gridArticles = $hero ? array_merge([$hero], $cards) : $cards;
 $articleAVenir = $articleRepo->findUpcoming();
-$lexique = $lexiqueRepo->findAllPublic();
+$lexique = $lexiqueRepo->findRandom(3);
 $mediaNewsletter = $mediaRepo->findNewsletterMedia();
 
-// IDs déjà utilisés dans le carousel
 $excludeIds = array_column($cards, 'id');
 if ($hero)
     $excludeIds[] = $hero['id'];

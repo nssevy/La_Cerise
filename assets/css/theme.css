@@ -35,6 +35,15 @@
   --font-serif: "Satoshi", "DejaVu Serif Condensed", serif;
 }
 
+@utility cerise-gradient {
+  background: linear-gradient(
+    95deg,
+    var(--color-cerise-special) -0.39%,
+    var(--color-cerise-special-dark) 42.54%,
+    var(--color-cerise-special-mid) 94.69%
+  );
+}
+
 /* Aliases vers @theme */
 
 @layer base {
