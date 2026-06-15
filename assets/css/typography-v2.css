@@ -4,7 +4,7 @@
 @utility text-sat-h1 {
   font-family: var(--font-sans);
   font-size: 2rem; /* 32px */
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.03; /* 33px */
   letter-spacing: -0.011em;
 }
