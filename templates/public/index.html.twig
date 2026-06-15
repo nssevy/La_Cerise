@@ -47,7 +47,7 @@
 
 			{# Sidebar lexique : épouse la hauteur de la colonne articles, déborde coupé #}
 			<aside class="hidden lg:block lg:col-span-1 relative">
-				<div data-lexique-fit class="absolute inset-0 overflow-hidden flex flex-col gap-8">
+				<div data-lexique-fit class="absolute inset-0 overflow-hidden flex flex-col gap-8 border p-5 border-neutral-300">
 					{% for item in lexique %}
 						{% include 'components/home/lexique-definition.html.twig' with { item: item, variant: 'sidebar' } %}
 					{% endfor %}
