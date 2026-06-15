@@ -84,6 +84,8 @@
 					{% include 'components/cards-responsive.html.twig' with {
 						mobileLayout: 'horizontal',
 						tabletHorizontal: true,
+						largeImageTablet: true,
+						largeImageDesktop: true,
 						href: base ~ '/article/' ~ gridArticles[1].slug,
 						image: gridArticles[1].image_principale,
 						category: gridArticles[1].rubrique,

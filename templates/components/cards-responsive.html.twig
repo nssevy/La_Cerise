@@ -7,13 +7,16 @@
    - description (string) : chapeau
    - mobileLayout ('normal' | 'horizontal', défaut 'normal') : disposition sur MOBILE
    - tabletHorizontal (bool, défaut false) : tablette en horizontal au lieu de vertical
+   - largeImageTablet (bool, défaut false)  : image plus large (1/2 au lieu de 1/3) sur tablette
+   - largeImageDesktop (bool, défaut false) : image plus large (1/2 au lieu de 1/3) sur desktop
    Desktop (lg) = toujours horizontal #}
 
 {% set mHoriz = mobileLayout|default('normal') == 'horizontal' %}
 {% set tHoriz = tabletHorizontal|default(false) %}
+{% set imgT = largeImageTablet|default(false) %}
+{% set imgD = largeImageDesktop|default(false) %}
 
-<a href="{{ href }}" class="group flex gap-4 md:gap-5 lg:gap-6 {{ mHoriz ? 'flex-row' : 'flex-col' }} {{ tHoriz ? 'md:flex-row' : 'md:flex-col' }} lg:flex-row">
-	<div class="rounded-md overflow-hidden shrink-0 {{ mHoriz ? 'w-1/3 self-stretch' : 'w-full aspect-6/3' }} {{ tHoriz ? 'md:w-1/3 md:aspect-auto md:self-stretch' : 'md:w-full md:aspect-5/3 md:self-auto' }} lg:w-1/3 lg:aspect-auto lg:self-stretch">
+	<a href="{{ href }}" class="group flex gap-4 md:gap-5 lg:gap-6 {{ mHoriz ? 'flex-row' : 'flex-col' }} {{ tHoriz ? 'md:flex-row' : 'md:flex-col' }} lg:flex-row"> <div class="rounded-md overflow-hidden shrink-0 {{ mHoriz ? 'w-1/3 self-stretch' : 'w-full aspect-6/3' }} {{ tHoriz ? (imgT ? 'md:w-1/2' : 'md:w-1/3') ~ ' md:aspect-auto md:self-stretch' : 'md:w-full md:aspect-5/3 md:self-auto' }} {{ imgD ? 'lg:w-2/3 lg:aspect-2.5/1 lg:self-start' : 'lg:w-1/3 lg:aspect-auto lg:self-stretch' }}">
 		<img src="{{ base }}/assets/images/{{ image }}" alt="{{ title }}" class="w-full h-full object-cover">
 	</div>
 	<div class="flex flex-col gap-5 lg:gap-0 lg:justify-between lg:py-2 lg:flex-1 {{ mHoriz ? 'flex-1' : '' }} {{ tHoriz ? 'md:flex-1 md:gap-0 md:justify-between md:py-2' : 'md:flex-none' }}">
