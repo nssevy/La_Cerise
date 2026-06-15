@@ -4,32 +4,32 @@
 {% endblock %}
 
 {% block main_class %}
-	<main class="mx-3.5 mt-3.5">
+	<main class="max-w-7xl lg:mx-auto mx-3.5 mt-3.5">
 	{% endblock %}
 
 	{% block content %}
-	{% import 'macros/icons.html.twig' as icons %}
-	{# Section Header #}
-	{% include 'components/home/hero.html.twig' with { hero: hero } %}
-	{# Sections Quelque termes #}
-	<section class="flex flex-col gap-5">
-		<h2 class="text-sat-h1">Quelques termes
-			<br>
-			<span class="text-gradient">de lexique</span>
-		</h2>
-		<div class="flex gap-6 md:gap-10 overflow-x-auto snap-x snap-mandatory pb-4">
-			{% for item in lexique %}
-				{% include 'components/home/lexique-definition.html.twig' with { item: item } %}
-			{% endfor %}
-			<div class="flex items-center">
-				{% include 'components/button-rounded.html.twig' with { label: "En savoir plus" } %}
+		{% import 'macros/icons.html.twig' as icons %}
+		{# Section Header #}
+		{% include 'components/home/hero.html.twig' with { hero: hero } %}
+		{# Sections Quelque termes #}
+		<section class="flex flex-col gap-5">
+			<h2 class="text-sat-h1">Quelques termes
+				<br>
+				<span class="text-gradient">de lexique</span>
+			</h2>
+			<div class="flex gap-6 md:gap-10 overflow-x-auto snap-x snap-mandatory pb-4">
+				{% for item in lexique %}
+					{% include 'components/home/lexique-definition.html.twig' with { item: item } %}
+				{% endfor %}
+				<div class="flex items-center">
+					{% include 'components/button-rounded.html.twig' with { label: "En savoir plus" } %}
+				</div>
 			</div>
-		</div>
-	</section>
-	{# Section 2 articles #}
-	<section class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-		{% for card in cards %}
-			{% include 'components/cards-responsive.html.twig' with {
+		</section>
+		{# Section 2 articles #}
+		<section class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 lg:max-h-112.5">
+			{% for card in cards %}
+				{% include 'components/cards-responsive.html.twig' with {
 				mobileLayout: loop.first ? 'normal' : 'horizontal',
 				href: base ~ '/article/' ~ card.slug,
 				image: card.image_principale,
@@ -37,8 +37,8 @@
 				title: card.titre,
 				description: card.chapeau|striptags
 			} %}
-		{% endfor %}
-	</section>
+			{% endfor %}
+		</section>
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
 
 	{% endblock %}
