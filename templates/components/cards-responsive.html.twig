@@ -11,8 +11,7 @@
 
 {% set mHoriz = mobileLayout|default('normal') == 'horizontal' %}
 
-<a href="{{ href }}" class="group flex gap-4 md:gap-5 lg:gap-6 {{ mHoriz ? 'flex-row' : 'flex-col' }} md:flex-col lg:flex-row">
-	<div class="rounded-md overflow-hidden shrink-0 {{ mHoriz ? 'w-1/3 self-stretch' : 'w-full aspect-5/3' }} md:w-full md:aspect-5/3 md:self-auto lg:w-1/3 lg:aspect-auto lg:self-stretch">
+	<a href="{{ href }}" class="group flex gap-4 md:gap-5 lg:gap-6 {{ mHoriz ? 'flex-row' : 'flex-col' }} md:flex-col lg:flex-row"> <div class="rounded-md overflow-hidden shrink-0 {{ mHoriz ? 'w-1/3 self-stretch' : 'w-full aspect-6/3' }} md:w-full md:aspect-5/3 md:self-auto lg:w-1/3 lg:aspect-3/4 lg:self-start">
 		<img src="{{ base }}/assets/images/{{ image }}" alt="{{ title }}" class="w-full h-full object-cover">
 	</div>
 	<div class="flex flex-col gap-5 {{ mHoriz ? 'flex-1' : '' }} md:flex-none lg:flex-1">
@@ -20,6 +19,6 @@
 			<p class="text-sat-info text-neutral-950 pb-2">{{ category }}</p>
 			<h3 class="text-sat-h3 text-neutral-950 group-hover:underline">{{ title }}</h3>
 		</div>
-		<p class="text-sat-base text-neutral-600 line-clamp-3">{{ description }}</p>
+		<p class="text-sat-base text-neutral-600 line-clamp-3 lg:line-clamp-5">{{ description }}</p>
 	</div>
 </a>
