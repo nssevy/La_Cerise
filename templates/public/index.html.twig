@@ -27,11 +27,12 @@
 			</div>
 		</section>
 		{# Articles (3/4) + sidebar lexique (1/4, desktop uniquement) #}
-		<div class="mt-16 lg:grid lg:grid-cols-4 lg:gap-8">
-			<section class="flex flex-col gap-8 lg:gap-12 lg:col-span-3">
+		<div class="mt-15 lg:grid lg:grid-cols-4 lg:gap-8">
+			<section
+				class="flex flex-col gap-15 lg:gap-12 lg:col-span-3">
 
 				{# Bloc 1 : 2 articles côte à côte #}
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-15">
 					{% for card in cards %}
 						{% include 'components/cards-responsive.html.twig' with {
 						mobileLayout: loop.first ? 'normal' : 'horizontal',
