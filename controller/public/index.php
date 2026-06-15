@@ -16,7 +16,7 @@ $cards = $articleRepo->findCards($hero['id'] ?? 0);
 $cards = $articleRepo->findCards($hero['id'] ?? 0);
 $gridArticles = $hero ? array_merge([$hero], $cards) : $cards;
 $articleAVenir = $articleRepo->findUpcoming();
-$lexique = $lexiqueRepo->findRandom(3);
+$lexique = $lexiqueRepo->findRandom(8);
 $mediaNewsletter = $mediaRepo->findNewsletterMedia();
 
 $excludeIds = array_column($cards, 'id');

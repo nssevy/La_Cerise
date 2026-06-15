@@ -12,13 +12,13 @@
 		{# Section Header #}
 		{% include 'components/home/hero.html.twig' with { hero: hero } %}
 		{# Sections Quelque termes #}
-		<section class="flex flex-col gap-5">
+		<section class="flex flex-col gap-5 lg:hidden">
 			<h2 class="text-sat-h1">Quelques termes
 				<br>
 				<span class="text-gradient">de lexique</span>
 			</h2>
 			<div class="flex gap-6 md:gap-10 overflow-x-auto snap-x snap-mandatory pb-4">
-				{% for item in lexique %}
+				{% for item in lexique|slice(0, 4) %}
 					{% include 'components/home/lexique-definition.html.twig' with { item: item } %}
 				{% endfor %}
 				<div class="flex items-center">
@@ -26,19 +26,30 @@
 				</div>
 			</div>
 		</section>
-		{# Section 2 articles #}
-		<section class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 lg:max-h-112.5">
-			{% for card in cards %}
-				{% include 'components/cards-responsive.html.twig' with {
-				mobileLayout: loop.first ? 'normal' : 'horizontal',
-				href: base ~ '/article/' ~ card.slug,
-				image: card.image_principale,
-				category: card.rubrique,
-				title: card.titre,
-				description: card.chapeau|striptags
-			} %}
-			{% endfor %}
-		</section>
+		{# Articles (3/4) + sidebar lexique (1/4, desktop uniquement) #}
+		<div class="mt-16 lg:grid lg:grid-cols-4 lg:gap-8">
+			<section class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:col-span-3">
+				{% for card in cards %}
+					{% include 'components/cards-responsive.html.twig' with {
+					mobileLayout: loop.first ? 'normal' : 'horizontal',
+					href: base ~ '/article/' ~ card.slug,
+					image: card.image_principale,
+					category: card.rubrique,
+					title: card.titre,
+					description: card.chapeau|striptags
+				} %}
+				{% endfor %}
+			</section>
+
+			{# Sidebar lexique : épouse la hauteur de la colonne articles, déborde coupé #}
+			<aside class="hidden lg:block lg:col-span-1 relative">
+				<div class="absolute inset-0 overflow-hidden flex flex-col gap-8">
+					{% for item in lexique %}
+						{% include 'components/home/lexique-definition.html.twig' with { item: item, variant: 'sidebar' } %}
+					{% endfor %}
+				</div>
+			</aside>
+		</div>
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
 
 	{% endblock %}
