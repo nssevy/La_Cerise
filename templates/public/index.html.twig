@@ -93,6 +93,10 @@
 						description: gridArticles[1].chapeau|striptags
 					} %}
 				{% endif %}
+
+				{# Bloc 5 : CTA "Tu veux lire plus d'articles ?" #}
+				<hr class="hidden lg:block border-neutral-300">
+				{% include 'components/home/cta-articles.html.twig' with { images: ctaImages } %}
 			</section>
 
 			{# Sidebar lexique : épouse la hauteur de la colonne articles, déborde coupé #}

@@ -231,4 +231,17 @@ class ArticleRepository
         ");
         return $stmt->fetchAll();
     }
+
+    /** Récupère N images d'articles publiés au hasard (collage CTA) */
+    public function findRandomImages(int $limit = 7): array
+    {
+        $stmt = $this->pdo->query("
+            SELECT image_principale
+            FROM articles
+            WHERE statut = 'publie' AND image_principale IS NOT NULL AND image_principale != ''
+            ORDER BY RAND()
+            LIMIT " . (int) $limit
+        );
+        return array_column($stmt->fetchAll(), 'image_principale');
+    }
 }
