@@ -111,9 +111,15 @@
 		</div>
 		{# Newsletter #}
 		{% include 'components/home/newsletter.html.twig' %}
+		{# Citation #}
+		<section class="flex items-center text-sat-base text-center h-[60dvh] mx-auto max-w-2xl">
+			<p data-typed-target>Notre objectif n'est pas de rendre le droit neutre. C'est de le rendre lisible, pour ceux qui veulent comprendre le monde tel qu'il est.</p>
+		</section>
 
 
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
 		<script src="{{ base }}/assets/js/lexique-sidebar.js" defer></script>
+		<script src="{{ base }}/assets/js/typed.umd.js" defer></script>
+		<script src="{{ base }}/assets/js/citation-typed.js" defer></script>
 
 	{% endblock %}
