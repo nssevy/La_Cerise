@@ -26,10 +26,10 @@
 				</div>
 			</div>
 		</section>
-		{# Articles (3/4) + sidebar lexique (1/4, desktop uniquement) #}
-		<div class="mt-15 lg:grid lg:grid-cols-4 lg:gap-8">
+		{# Les Articles occupent 3/4 + La sidebar lexique 1/4 desktop uniquement #}
+		<div class="mt-10 lg:mt-20 lg:grid lg:grid-cols-4 lg:gap-8">
 			<section
-				class="flex flex-col gap-15 lg:gap-12 lg:col-span-3">
+				class="flex flex-col gap-15 md:gap-20 lg:col-span-3">
 
 				{# Bloc 1 : 2 articles côte à côte #}
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-15">
@@ -45,7 +45,7 @@
 					{% endfor %}
 				</div>
 
-				{# Bloc 2 : 3ᵉ article horizontal (desktop uniquement) #}
+				{# 3eme article horizontal desktop uniquement #}
 				{% if gridArticles is not empty %}
 					{% set a3 = gridArticles|first %}
 					<hr class="hidden lg:block border-neutral-300">
@@ -61,11 +61,11 @@
 					</div>
 				{% endif %}
 
-				{# Bloc 3 : Pourquoi La Cerise #}
+				{# Pourquoi La Cerise #}
 				<hr class="hidden lg:block border-neutral-300">
 				{% include 'components/home/pourquoi-cerise.html.twig' %}
 
-				{# Bloc 4 : articles après "Pourquoi" — 2 sur mobile/tablette, 1 sur desktop #}
+				{# Articles 2 sur mobile/tablette, 1 sur desktop #}
 				{% if gridArticles|length > 1 %}
 					<hr
 					class="hidden lg:block border-neutral-300">
@@ -95,12 +95,12 @@
 					} %}
 				{% endif %}
 
-				{# Bloc 5 : CTA "Tu veux lire plus d'articles ?" #}
+				{# CTA "Tu veux lire plus d'articles ?" #}
 				<hr class="hidden lg:block border-neutral-300">
 				{% include 'components/home/cta-articles.html.twig' with { images: ctaImages } %}
 			</section>
 
-			{# Sidebar lexique : épouse la hauteur de la colonne articles, déborde coupé #}
+			{# Sidebar lexique #}
 			<aside class="hidden lg:block lg:col-span-1 relative">
 				<div data-lexique-fit class="absolute inset-0 overflow-hidden flex flex-col gap-8 border p-5 border-neutral-300">
 					{% for item in lexique %}
@@ -114,12 +114,14 @@
 			class="flex flex-col">
 			{# Newsletter #}
 			{% include 'components/home/newsletter.html.twig' %}
+
 			{# Citation #}
 			<section class="flex items-center text-sat-base text-center h-[60dvh] mx-auto max-w-2xl">
 				<p data-typed-target>Notre objectif n'est pas de rendre le droit neutre. C'est de le rendre lisible, pour ceux qui veulent comprendre le monde tel qu'il est.</p>
 			</section>
+
 			{# Les thèmes de LaCerise #}
-			<section class="flex flex-col gap-8 lg:order-first">
+			<section class="flex flex-col gap-8 lg:order-first lg:mt-30">
 				<h2 class="text-sat-h1">Les thèmes de
 					<br>
 					<span class="text-gradient">LaCerise</span>

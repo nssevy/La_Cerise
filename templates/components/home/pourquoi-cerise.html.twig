@@ -1,18 +1,32 @@
 {# Section "Pourquoi La Cerise ?" — 3 raisons #}
+{# Séparateurs courts et centrés : horizontaux (w-1/4) sur mobile, verticaux (h-1/4) dès md.
+   Le wrapper md:self-stretch donne une hauteur définie pour que le h-1/4 interne se résolve. #}
 
-<section class="flex flex-col items-center gap-5 text-center">
-	<h2 class="text-sat-h1 text-gradient">Pourquoi La Cerise ?</h2>
+	<section class="flex flex-col items-center gap-5 "> <div class="w-full">
+		<h2 class="text-sat-h1">Pourquoi
+			<br>
+			<span class="text-gradient">LaCerise ?</span>
+		</h2>
+	</div>
 
 	<div class="flex flex-col items-center md:flex-row w-full">
-		<p class="text-sat-base flex-1 px-6 py-8 md:py-2 md:px-10">
+		<p class="text-sat-base flex-1 py-8 md:py-2">
 			Comme le fruit qu'on met sur le gâteau : parce que le droit international, c'est souvent ce détail décisif qu'on oublie d'expliquer et qui change tout.
 		</p>
-		<hr class="w-1/4 border-0.5 border-neutral-300 md:hidden">
-		<p class="text-sat-base flex-1 px-6 py-8 md:py-2 md:px-10 md:border-l md:border-neutral-300">
+
+		<div class="shrink-0 self-center w-1/4 md:w-auto md:self-stretch md:flex md:items-center md:px-10">
+			<span class="block w-full h-px bg-neutral-300 md:w-px md:h-1/4 md:mx-auto"></span>
+		</div>
+
+		<p class="text-sat-base flex-1 py-8 md:py-2">
 			Comme une couleur qui ne passe pas inaperçue : parce que les crises qu'on traverse méritent une analyse qui tranche, qui prend position, qui ne se fond pas dans le bruit ambiant.
 		</p>
-		<hr class="w-1/4 border-0.5 border-neutral-300 md:hidden">
-		<p class="text-sat-base flex-1 px-6 py-8 md:py-2 md:px-10 md:border-l md:border-neutral-300">
+
+		<div class="shrink-0 self-center w-1/4 md:w-auto md:self-stretch md:flex md:items-center md:px-10">
+			<span class="block w-full h-px bg-neutral-300 md:w-px md:h-1/4 md:mx-auto"></span>
+		</div>
+
+		<p class="text-sat-base flex-1 py-8 md:py-2">
 			Comme quelque chose d'acide et de doux à la fois : parce qu'on croit qu'on peut parler de justice, de conflits et de droit humanitaire avec rigueur sans perdre l'envie de comprendre.
 		</p>
 	</div>
