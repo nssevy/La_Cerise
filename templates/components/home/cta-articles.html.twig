@@ -6,23 +6,24 @@
 
 	<section class="flex flex-col gap-8 rounded-md border border-cerise-special p-8 md:grid md:grid-cols-2 md:items-start md:gap-x-12 md:gap-y-6 md:p-12"> <h2 class="order-1 text-sat-h1 md:col-start-1 md:row-start-1">
 		Tu veux lire plus
+		<br/>
 		<span class="text-gradient">d'articles ?</span>
 	</h2>
 
-	{# Collage : bandes d'images, la survolée s'élargit légèrement (desktop) #}
-	<div class="order-2 flex h-44 gap-2 overflow-hidden md:col-start-2 md:row-start-1 md:row-span-2 md:h-auto md:self-stretch">
+	{# Collage : bandes d'images #}
+	<div class="order-2 flex gap-2 overflow-hidden md:col-start-2 md:row-start-1 md:row-span-2 md:h-auto md:self-stretch">
 		{% for img in images %}
 			<div class="relative overflow-hidden rounded-md transition-all duration-500 ease-out {{ loop.first ? 'flex-4 md:hover:flex-[4.6]' : 'flex-1 md:hover:flex-[1.6]' }} {{ loop.index > 4 ? 'hidden md:block' : '' }}">
 				<img src="{{ base }}/assets/images/{{ img }}" alt="" class="h-full w-full object-cover">
 			</div>
 		{% endfor %}
 	</div>
-	<div class="order-3 grid w-full items-end md:hidden">
-		{% include 'components/button-cta.html.twig' with { label: 'Clique ici !', href: base ~ '/articles' } %}
+	<div class="order-3 grid w-full justify-items-end md:hidden">
+		{% include 'components/button-cta.html.twig' with { label: 'Clique ici !', href: base ~ '/allArticles' } %}
 
 	</div>
 	{# Bouton #}
 	<div class="order-3 md:col-start-1 md:row-start-2 hidden md:block">
-		{% include 'components/button-cta.html.twig' with { label: 'Clique ici !', href: base ~ '/articles' } %}
+		{% include 'components/button-cta.html.twig' with { label: 'Clique ici !', href: base ~ '/allArticles' } %}
 	</div>
 </section>
