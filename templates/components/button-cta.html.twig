@@ -1,10 +1,19 @@
 {# Bouton CTA plein (cerise foncé) avec flèche #}
 {# Paramètres :
-   - label (string) : libellé
-   - href (string)  : lien #}
-<a href="{{ href }}" class="group inline-flex w-fit items-center gap-3 whitespace-nowrap rounded-full bg-cerise-special-dark px-6 py-3 text-sat-base text-white transition-colors hover:bg-cerise-special-mid">
-	{{ label }}
-	<svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-		<path d="M5 12h14M13 6l6 6-6 6" />
-	</svg>
-</a>
+   - label (string)  : libellé
+   - href (string)   : lien (utilisé si clickable)
+   - clickable (bool, défaut true) : false → rendu en <span>
+       (ex. à l'intérieur d'une carte déjà englobée dans un <a>) #}
+{% import 'macros/icons.html.twig' as icons %}
+{% set clickable = clickable|default(true) %}
+{% set classes = 'group inline-flex w-fit items-center gap-3 whitespace-nowrap rounded-full bg-cerise-special-dark px-6 py-3 text-sat-base text-white transition-colors hover:bg-cerise-special-mid group-hover:bg-cerise-special-mid' %}
+
+{% if clickable %}
+	<a href="{{ href }}" class="{{ classes }}">{{ label }}
+		{{ icons.icon('arrow-right', 'regular', 'w-5 h-5 text-cerise-10') }}
+	</a>
+{% else %}
+	<span class="{{ classes }}">{{ label }}
+		{{ icons.icon('arrow-right', 'regular', 'w-5 h-5 text-cerise-10') }}
+	</span>
+{% endif %}
