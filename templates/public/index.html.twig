@@ -17,19 +17,19 @@
 				<br>
 				<span class="text-gradient">de lexique</span>
 			</h2>
-			<div class="flex gap-6 md:gap-10 overflow-x-auto snap-x snap-mandatory pb-4">
+			<div class="flex gap-6 md:gap-10 overflow-x-auto snap-x snap-mandatory pb-4 -mr-3.5">
 				{% for item in lexique|slice(0, 4) %}
 					{% include 'components/home/lexique-definition.html.twig' with { item: item } %}
 				{% endfor %}
-				<div class="flex items-center">
-					{% include 'components/button-rounded.html.twig' with { label: "En savoir plus" } %}
+				<div class="flex items-center pr-8">
+					{% include 'components/button-rounded.html.twig' with { label: "En lire plus" } %}
 				</div>
 			</div>
 		</section>
 		{# Les Articles occupent 3/4 + La sidebar lexique 1/4 desktop uniquement #}
 		<div class="mt-10 lg:mt-20 lg:grid lg:grid-cols-4 lg:gap-8">
 			<section
-				class="flex flex-col gap-15 md:gap-20 lg:col-span-3">
+				class="flex flex-col gap-16 md:gap-20 lg:col-span-3">
 
 				{# Bloc 1 : 2 articles côte à côte #}
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-15">
@@ -116,7 +116,7 @@
 			{% include 'components/home/newsletter.html.twig' %}
 
 			{# Citation #}
-			<section class="flex items-center text-sat-base text-center h-[60dvh] mx-auto max-w-2xl">
+			<section class="flex items-center text-sat-base text-center h-dvh md:h-[60dvh] mx-auto max-w-2xl">
 				<p data-typed-target>Notre objectif n'est pas de rendre le droit neutre. C'est de le rendre lisible, pour ceux qui veulent comprendre le monde tel qu'il est.</p>
 			</section>
 

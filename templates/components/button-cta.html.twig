@@ -5,7 +5,7 @@
    - clickable (bool, défaut true) : false → rendu en <span>
        (ex. à l'intérieur d'une carte déjà englobée dans un <a>) #}
 {% import 'macros/icons.html.twig' as icons %}
-{% set clickable = clickable|default(true) %}
+{% set clickable = clickable is defined ? clickable : true %}
 {% set classes = 'group inline-flex w-fit items-center gap-3 whitespace-nowrap rounded-full bg-cerise-special-dark px-6 py-3 text-sat-base text-white transition-colors hover:bg-cerise-special-mid group-hover:bg-cerise-special-mid' %}
 
 	{% if clickable %}<a href="{{ href }}" class="{{ classes }}"> {{ label|raw }}
