@@ -26,6 +26,8 @@ if ($hero)
 $gridArticles = $articleRepo->findExcluding($excludeIds);
 $ctaImages = $articleRepo->findRandomImages(7);
 $rubriques = $articleRepo->findRubriques();
+$heroExtra = $articleRepo->findRandom(1, $hero['id'] ?? 0);
+$heroSlides = $hero ? array_merge([$hero], $heroExtra) : $heroExtra;
 
 
 $newsletterMessage = $_SESSION['newsletter'] ?? null;
@@ -37,6 +39,7 @@ echo $twig->render('public/index.html.twig', [
     'gridArticles' => $gridArticles,
     'ctaImages' => $ctaImages,
     'rubriques' => $rubriques,
+    'heroSlides' => $heroSlides,
     'lexique' => $lexique,
     'lectureHero' => $lectureHero,
     'articleAVenir' => $articleAVenir,

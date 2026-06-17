@@ -9,8 +9,8 @@
 
 	{% block content %}
 		{% import 'macros/icons.html.twig' as icons %}
-		{# Section Header #}
-		{% include 'components/home/hero.html.twig' with { hero: hero } %}
+		{# Section Header — slider hero (2 articles max) #}
+		{% include 'components/home/hero-slider.html.twig' with { slides: heroSlides } %}
 		{# Sections Quelque termes #}
 		<section class="flex flex-col gap-5 lg:hidden">
 			<h2 class="text-sat-h1">Quelques termes
@@ -139,6 +139,7 @@
 		</div>
 
 
+		<script src="{{ base }}/assets/js/hero-slider.js" defer></script>
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
 		<script src="{{ base }}/assets/js/lexique-sidebar.js" defer></script>
 		<script src="{{ base }}/assets/js/typed.umd.js" defer></script>

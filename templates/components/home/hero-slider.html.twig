@@ -1,0 +1,31 @@
+{# Slider hero — 2 articles max, navigation par boutons (pas de drag) #}
+{# Paramètres : slides (array d'articles, 2 max) #}
+{# Mobile/tablette : "Articles Récents" + pilule 2 flèches. Desktop : à compléter. #}
+{% import 'macros/icons.html.twig' as icons %}
+
+	{% if slides is defined and slides is not empty %}
+		<section
+		data-hero-slider class="flex flex-col mb-10"> {# Piste : scroll programmatique uniquement (overflow caché → pas de drag) #}
+		<div data-hero-track class="flex gap-4 overflow-x-hidden snap-x snap-mandatory scroll-smooth -mr-3.5 lg:mr-0">
+			{% for slide in slides %}
+				<div class="shrink-0 w-[90%] md:w-[94%] lg:w-full snap-start">
+					{% include 'components/home/hero.html.twig' with { hero: slide } %}
+				</div>
+			{% endfor %}
+		</div>
+
+		{# Contrôles mobile/tablette #}
+		<div class="flex items-center justify-between lg:hidden">
+			<span class="text-sat-base text-neutral-300">Articles Récents</span>
+
+			<div class="flex items-center gap-1 rounded-full border border-neutral-300 p-1.5">
+				<button type="button" data-hero-prev aria-label="Article précédent" class="flex items-center justify-center w-10 h-7 rounded-full text-neutral-700 transition-colors hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent">
+					{{ icons.icon('arrow-left', 'bold', 'w-4 h-4') }}
+				</button>
+				<button type="button" data-hero-next aria-label="Article suivant" class="flex items-center justify-center w-10 h-7 rounded-full text-neutral-700 transition-colors hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent">
+					{{ icons.icon('arrow-right', 'bold', 'w-4 h-4') }}
+				</button>
+			</div>
+		</div>
+	</section>
+{% endif %}

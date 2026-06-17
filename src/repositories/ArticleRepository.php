@@ -244,4 +244,20 @@ class ArticleRepository
         );
         return array_column($stmt->fetchAll(), 'image_principale');
     }
+
+    /** Récupère N articles publiés au hasard, en excluant un id (slider hero) */
+    public function findRandom(int $limit = 1, int $excludeId = 0): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT a.*, r.nom AS rubrique, au.nom AS auteur
+            FROM articles a
+            LEFT JOIN rubriques r  ON a.rubrique_id = r.id
+            LEFT JOIN auteurs   au ON a.auteur_id   = au.id
+            WHERE a.statut = 'publie' AND a.id != :id
+            ORDER BY RAND()
+            LIMIT " . (int) $limit
+        );
+        $stmt->execute([':id' => $excludeId]);
+        return $stmt->fetchAll();
+    }
 }
