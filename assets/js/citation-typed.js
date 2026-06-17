@@ -12,12 +12,13 @@
 	const start = () => {
 		if (started) return;
 		started = true;
+		// Curseur géré en CSS (::after) pour qu'il suive le retour à la ligne
+		target.classList.add('typing');
 		new Typed(target, {
 			strings: [text],
 			typeSpeed: 30,
 			startDelay: 150,
-			showCursor: true,
-			cursorChar: '|',
+			showCursor: false,
 		});
 	};
 

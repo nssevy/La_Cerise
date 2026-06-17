@@ -112,6 +112,15 @@
 		{# Newsletter #}
 		{% include 'components/home/newsletter.html.twig' %}
 		{# Citation #}
+		<style>
+			[data-typed-target].typing::after {
+				content: '|';
+				margin-left: 0.08em;
+				font-weight: 300;
+				animation: cerise-caret 1s steps(1) infinite;
+			}
+			@keyframes cerise-caret { 50% { opacity: 0; } }
+		</style>
 		<section class="flex items-center text-sat-base text-center h-[60dvh] mx-auto max-w-2xl">
 			<p data-typed-target>Notre objectif n'est pas de rendre le droit neutre. C'est de le rendre lisible, pour ceux qui veulent comprendre le monde tel qu'il est.</p>
 		</section>
