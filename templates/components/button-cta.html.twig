@@ -8,9 +8,9 @@
 {% set clickable = clickable|default(true) %}
 {% set classes = 'group inline-flex w-fit items-center gap-3 whitespace-nowrap rounded-full bg-cerise-special-dark px-6 py-3 text-sat-base text-white transition-colors hover:bg-cerise-special-mid group-hover:bg-cerise-special-mid' %}
 
-	{% if clickable %}<a href="{{ href }}" class="{{ classes }}"> {{ label }}
+	{% if clickable %}<a href="{{ href }}" class="{{ classes }}"> {{ label|raw }}
 	</a>
 {% else %}
-	<span class="{{ classes }}">{{ label }}
+	<span class="{{ classes }}">{{ label|raw }}
 	</span>
 {% endif %}

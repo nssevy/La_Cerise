@@ -1,0 +1,21 @@
+{# Carte thème — section "Les thèmes de LaCerise" — carte entièrement cliquable #}
+{# Paramètres :
+   - title (string)       : nom du thème
+   - description (string) : description du thème
+   - href (string)        : lien vers les articles de la rubrique #}
+{% import 'macros/icons.html.twig' as icons %}
+
+<a href="{{ href }}" class="group block h-full md:flex-1">
+	<article class="flex h-full flex-col justify-between gap-10 rounded-lg border border-neutral-100 p-8 shadow-[0_4px_28px_0_rgba(0,0,0,0.05)]">
+		<div class="flex flex-col gap-3">
+			<h3 class="text-sat-h2 text-neutral-950">{{ title }}</h3>
+			<p class="text-sat-base text-neutral-500">{{ description }}</p>
+		</div>
+		<div class="flex justify-end">
+			{% include 'components/button-cta.html.twig' with {
+				label: icons.icon('arrow-right', 'regular', 'w-5 h-5 text-white'),
+				clickable: false
+			} %}
+		</div>
+	</article>
+</a>

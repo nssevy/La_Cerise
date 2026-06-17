@@ -25,6 +25,7 @@ if ($hero)
 
 $gridArticles = $articleRepo->findExcluding($excludeIds);
 $ctaImages = $articleRepo->findRandomImages(7);
+$rubriques = $articleRepo->findRubriques();
 
 
 $newsletterMessage = $_SESSION['newsletter'] ?? null;
@@ -35,6 +36,7 @@ echo $twig->render('public/index.html.twig', [
     'cards' => $cards,
     'gridArticles' => $gridArticles,
     'ctaImages' => $ctaImages,
+    'rubriques' => $rubriques,
     'lexique' => $lexique,
     'lectureHero' => $lectureHero,
     'articleAVenir' => $articleAVenir,
