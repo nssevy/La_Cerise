@@ -95,3 +95,17 @@
   color: var(--01);
   font-weight: bold;
 }
+
+/* Curseur machine à écrire — citation page d'accueil (Typed.js) */
+[data-typed-target].typing::after {
+  content: '|';
+  margin-left: 0.08em;
+  font-weight: 300;
+  animation: cerise-caret 1s steps(1) infinite;
+}
+
+@keyframes cerise-caret {
+  50% {
+    opacity: 0;
+  }
+}

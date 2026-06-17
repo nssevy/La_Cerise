@@ -109,41 +109,32 @@
 				</div>
 			</aside>
 		</div>
-		{# Newsletter #}
-		{% include 'components/home/newsletter.html.twig' %}
-		{# Citation #}
-		<style>
-			[data-typed-target].typing::after {
-				content: '|';
-				margin-left: 0.08em;
-				font-weight: 300;
-				animation: cerise-caret 1s steps(1) infinite;
-			}
-			@keyframes cerise-caret {
-				50% {
-					opacity: 0;
-				}
-			}
-		</style>
-		<section class="flex items-center text-sat-base text-center h-[60dvh] mx-auto max-w-2xl">
-			<p data-typed-target>Notre objectif n'est pas de rendre le droit neutre. C'est de le rendre lisible, pour ceux qui veulent comprendre le monde tel qu'il est.</p>
-		</section>
-		{# Les thèmes de LaCerise #}
-		<section class="mt-15 flex flex-col gap-8">
-			<h2 class="text-sat-h1">Les thèmes de
-				<br>
-				<span class="text-gradient">LaCerise</span>
-			</h2>
-			<div class="flex flex-col md:flex-row gap-8">
-				{% for rubrique in rubriques %}
-					{% include 'components/home/theme-card.html.twig' with {
+
+		<div
+			class="flex flex-col">
+			{# Newsletter #}
+			{% include 'components/home/newsletter.html.twig' %}
+			{# Citation #}
+			<section class="flex items-center text-sat-base text-center h-[60dvh] mx-auto max-w-2xl">
+				<p data-typed-target>Notre objectif n'est pas de rendre le droit neutre. C'est de le rendre lisible, pour ceux qui veulent comprendre le monde tel qu'il est.</p>
+			</section>
+			{# Les thèmes de LaCerise #}
+			<section class="flex flex-col gap-8 lg:order-first">
+				<h2 class="text-sat-h1">Les thèmes de
+					<br>
+					<span class="text-gradient">LaCerise</span>
+				</h2>
+				<div class="flex flex-col md:flex-row gap-8">
+					{% for rubrique in rubriques %}
+						{% include 'components/home/theme-card.html.twig' with {
 						title: rubrique.nom,
 						description: rubrique.description,
 						href: base ~ '/allArticles?rubrique=' ~ rubrique.id
 					} %}
-				{% endfor %}
-			</div>
-		</section>
+					{% endfor %}
+				</div>
+			</section>
+		</div>
 
 
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
