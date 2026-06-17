@@ -67,7 +67,8 @@
 
 				{# Bloc 4 : articles après "Pourquoi" — 2 sur mobile/tablette, 1 sur desktop #}
 				{% if gridArticles|length > 1 %}
-					<hr class="hidden lg:block border-neutral-300">
+					<hr
+					class="hidden lg:block border-neutral-300">
 					{# 1er article : déjà affiché en desktop (Bloc 2), donc mobile/tablette seulement #}
 					<div class="lg:hidden">
 						{% include 'components/cards-responsive.html.twig' with {
@@ -108,6 +109,9 @@
 				</div>
 			</aside>
 		</div>
+		{# Newsletter #}
+		{% include 'components/home/newsletter.html.twig' %}
+
 
 		<script src="{{ base }}/assets/js/stagger.js" defer></script>
 		<script src="{{ base }}/assets/js/lexique-sidebar.js" defer></script>

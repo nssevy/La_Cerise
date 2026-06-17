@@ -1,0 +1,35 @@
+<section aria-labelledby="newsletter-titre" class="flex flex-col gap-10 lg:gap-0 lg:flex-row lg:items-center lg:h-dvh my-20 lg:px-20">
+
+	{% if mediaNewsletter %}
+		<div class="flex flex-1 justify-center">
+			<img src="{{ base }}/assets/images/{{ mediaNewsletter.fichier }}" alt="{{ mediaNewsletter.alt }}" class="place-self-center h-1/2 object-contain lg:w-80 lg:h-80">
+		</div>
+	{% endif %}
+
+	<div class="place-self-center flex flex-col gap-10 w-full px-15 lg:px-0 md:w-1/2 lg:flex-1">
+		<div class="flex flex-col gap-5 text-center">
+			<h2 id="newsletter-titre" class="text-sat-h1">Newsletter</h2>
+			<small class="text-sat-base">Abonnez-vous à la newsletter de La Cerise et recevez nos articles en avant-première et toute l'actualité du site.</small>
+		</div>
+
+		<form action="{{ base }}/newsletter" method="post" class="flex flex-col gap-7 justify-center items-center">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+			{% include 'components/input.html.twig' with {
+                    type: 'email',
+                    id: 'email',
+                    name: 'email',
+                    placeholder: 'Adresse e-mail',
+                    required: true
+                } %}
+
+			{% include 'components/button.html.twig' with { label: "S'inscrire", type: 'submit' } %}
+
+			{% if newsletterMessage %}
+				<p class="text-sat-base {% if newsletterMessage.type == 'succes' %}text-cerise-01{% else %}text-cerise-special{% endif %}">
+					{{ newsletterMessage.texte }}
+				</p>
+			{% endif %}
+		</form>
+	</div>
+</section>
