@@ -1,0 +1,27 @@
+{# Carte héro — format MOBILE uniquement (empilé : image au-dessus, gradient en dessous). #}
+{# Paramètres : hero (article), badge (libellé optionnel). #}
+{% if hero is defined and hero is not empty %}
+	{% set badge = badge ?? 'Nouvel article !' %}
+
+	<a href="{{ base }}/article/{{ hero.slug }}" class="group flex w-full h-full">
+		<article class="flex flex-col gap-2 items-start w-full h-full overflow-hidden">
+
+			<img src="{{ base }}/assets/images/{{ hero.image_principale }}" alt="{{ hero.titre }}" class="w-full aspect-5/3 object-cover transition-transform duration-300 group-hover:scale-[1.02] rounded-t-sm">
+
+			<div class="cerise-gradient border border-cerise-special-dark flex flex-col flex-1 gap-5 p-10 w-full overflow-hidden rounded-b-sm">
+				<span class="bg-cerise-special-dark px-2 rounded-sm w-fit">
+					<p class="text-cerise-10 text-sat-label whitespace-nowrap">{{ badge }}</p>
+				</span>
+
+				<div class="flex flex-col gap-2 w-full">
+					<h1 class="text-cerise-10 text-sat-h2 line-clamp-4 group-hover:underline">
+						{{ hero.titre }}
+					</h1>
+					<p class="text-neutral-50/70 text-sat-base line-clamp-3">
+						{{ hero.chapeau | striptags }}
+					</p>
+				</div>
+			</div>
+		</article>
+	</a>
+{% endif %}

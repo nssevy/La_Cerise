@@ -1,0 +1,27 @@
+{# Carte héro — format TABLETTE / DESKTOP (côte à côte : gradient à gauche, image à droite). #}
+{# Paramètres : hero (article), badge (libellé optionnel). #}
+{% if hero is defined and hero is not empty %}
+	{% set badge = badge ?? 'Nouvel article !' %}
+
+	<a href="{{ base }}/article/{{ hero.slug }}" class="group flex w-full h-full">
+		<article class="flex flex-row-reverse justify-end gap-2 items-stretch w-full h-full">
+
+			<img src="{{ base }}/assets/images/{{ hero.image_principale }}" alt="{{ hero.titre }}" class="w-1/2 lg:w-2/3 h-full object-cover transition-transform duration-300 group-hover:scale-[1.02] rounded-sm">
+
+			<div class="cerise-gradient border border-cerise-special-dark flex flex-col justify-between gap-5 p-10 flex-1 max-w-sm lg:max-w-none h-full overflow-hidden rounded-sm">
+				<span class="bg-cerise-special-dark px-2 py-1 rounded-sm w-fit">
+					<p class="text-cerise-10 text-sat-label whitespace-nowrap">{{ badge }}</p>
+				</span>
+
+				<div class="flex flex-col gap-2 w-full">
+					<h1 class="text-cerise-10 text-sat-h2 line-clamp-6 group-hover:underline">
+						{{ hero.titre }}
+					</h1>
+					<p class="text-neutral-50/70 text-sat-base line-clamp-5">
+						{{ hero.chapeau | striptags }}
+					</p>
+				</div>
+			</div>
+		</article>
+	</a>
+{% endif %}
