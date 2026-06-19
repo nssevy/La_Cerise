@@ -21,8 +21,9 @@
 	</div>
 	<div class="flex flex-col gap-5 lg:gap-0 lg:justify-between lg:py-2 lg:flex-1 {{ mHoriz ? 'flex-1' : '' }} {{ tHoriz ? 'md:flex-1 md:gap-0 md:justify-between md:py-2' : 'md:flex-none' }}">
 		<div>
-			<p class="text-sat-info text-neutral-950 pb-2">{{ category }}</p>
-			<h3 class="text-sat-h3 text-neutral-950 group-hover:underline">{{ title }}</h3>
+			<p class="text-sat-info text-neutral-600 pb-2">{{ date_publication }}</p>
+			<p class="text-sat-info text-neutral-600 pb-2">{{ category }}</p>
+			<h3 class="text-sat-h3 text-neutral-950 group-hover:underline pb-2">{{ title }}</h3>
 		</div>
 		<p class="text-sat-base text-neutral-600 line-clamp-3">{{ description }}</p>
 	</div>

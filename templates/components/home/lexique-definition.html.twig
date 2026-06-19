@@ -7,7 +7,7 @@
 	<a href="{{ base }}/lexique#lettre-{{ item.terme|first|upper }}" class="group flex flex-col {{ variant|default('scroll') == 'sidebar' ? 'w-full' : 'shrink-0 w-72 md:w-80 snap-start' }}">
 		<article class="flex flex-col justify-between gap-3 flex-1">
 			<h3 class="text-sat-h3 line-clamp-2 lg:group-hover:underline">{{ item.terme }}</h3>
-			<p class="text-sat-base line-clamp-3 text-cerise-01">{{ item.definition | striptags }}</p>
+			<p class="text-sat-base text-cerise-01">{{ item.definition}}</p>
 		</article>
 	</a>
 {% endif %}

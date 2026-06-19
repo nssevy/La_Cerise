@@ -38,6 +38,7 @@
 						mobileLayout: loop.first ? 'normal' : 'horizontal',
 						href: base ~ '/article/' ~ card.slug,
 						image: card.image_principale,
+						date_publication: formatDateFr(card.date_publication),
 						category: card.rubrique,
 						title: card.titre,
 						description: card.chapeau|striptags
@@ -48,12 +49,13 @@
 				{# 3eme article horizontal desktop uniquement #}
 				{% if gridArticles is not empty %}
 					{% set a3 = gridArticles|first %}
-					<hr class="hidden lg:block border-neutral-300">
+					<hr class="hidden lg:block border-neutral-200">
 					<div class="hidden lg:block">
 						{% include 'components/cards-responsive.html.twig' with {
 						mobileLayout: 'horizontal',
 						href: base ~ '/article/' ~ a3.slug,
 						image: a3.image_principale,
+						date_publication: formatDateFr(a3.date_publication),
 						category: a3.rubrique,
 						title: a3.titre,
 						description: a3.chapeau|striptags
@@ -62,13 +64,13 @@
 				{% endif %}
 
 				{# Pourquoi La Cerise #}
-				<hr class="hidden lg:block border-neutral-300">
+				<hr class="hidden lg:block border-neutral-200">
 				{% include 'components/home/pourquoi-cerise.html.twig' %}
 
 				{# Articles 2 sur mobile/tablette, 1 sur desktop #}
 				{% if gridArticles|length > 1 %}
 					<hr
-					class="hidden lg:block border-neutral-300">
+					class="hidden lg:block border-neutral-200">
 					{# 1er article : déjà affiché en desktop (Bloc 2), donc mobile/tablette seulement #}
 					<div class="lg:hidden">
 						{% include 'components/cards-responsive.html.twig' with {
@@ -76,6 +78,7 @@
 						tabletHorizontal: true,
 						href: base ~ '/article/' ~ gridArticles[0].slug,
 						image: gridArticles[0].image_principale,
+						date_publication: formatDateFr(gridArticles[0].date_publication),
 						category: gridArticles[0].rubrique,
 						title: gridArticles[0].titre,
 						description: gridArticles[0].chapeau|striptags
@@ -89,6 +92,7 @@
 						largeImageDesktop: true,
 						href: base ~ '/article/' ~ gridArticles[1].slug,
 						image: gridArticles[1].image_principale,
+						date_publication: formatDateFr(gridArticles[1].date_publication),
 						category: gridArticles[1].rubrique,
 						title: gridArticles[1].titre,
 						description: gridArticles[1].chapeau|striptags
@@ -96,13 +100,13 @@
 				{% endif %}
 
 				{# CTA "Tu veux lire plus d'articles ?" #}
-				<hr class="hidden lg:block border-neutral-300">
+				<hr class="hidden lg:block border-neutral-200">
 				{% include 'components/home/cta-articles.html.twig' with { images: ctaImages } %}
 			</section>
 
 			{# Sidebar lexique #}
 			<aside class="hidden lg:block lg:col-span-1 relative">
-				<div data-lexique-fit class="absolute inset-0 overflow-hidden flex flex-col gap-8 border p-5 border-neutral-300">
+				<div data-lexique-fit class="absolute inset-0 overflow-hidden flex flex-col gap-8 border p-5 border-neutral-200">
 					{% for item in lexique %}
 						{% include 'components/home/lexique-definition.html.twig' with { item: item, variant: 'sidebar' } %}
 					{% endfor %}
