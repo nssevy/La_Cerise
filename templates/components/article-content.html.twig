@@ -8,8 +8,8 @@
 } %}
 
 <header class="flex flex-col gap-5">
-	<h1 class="font-serif text-3xl md:text-4xl text-gradient">{{ article.titre }}</h1>
-	<div class="grid grid-cols-2 grid-rows-2 gap-0 md:gap-4 text-cerise-04 font-serif text-sm">
+	<h1 class="text-sat-h1 md:text-4xl text-gradient">{{ article.titre }}</h1>
+	<div class="grid grid-cols-2 grid-rows-2 gap-0 md:gap-4 text-cerise-04 text-sm">
 		<span>Par :
 			{{ article.auteur_nom }}</span>
 		<span class="justify-self-end">{{ formatDateFr(article.date_publication) }}</span>
@@ -24,6 +24,6 @@
 
 <hr class="border-0.5 border-cerise-08 border-dashed">
 
-<div class="contenu prose max-w-none w-full text-body-serif">
+<div class="contenu prose max-w-none w-full">
 	{{ article.contenu | raw }}
 </div>
