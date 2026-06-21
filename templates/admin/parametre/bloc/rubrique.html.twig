@@ -1,0 +1,27 @@
+<section>
+	<h2 class="text-4xl mb-8 text-gradient">Thèmes</h2>
+
+	{% if rubriques|length > 0 %}
+
+		<ul class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+			{% for rubrique in rubriques %}
+				<li class="flex">
+					{% include 'admin/partials/cards-parametre.html.twig' with {
+						href: base ~ '/admin/parametre/rubrique/edit?id=' ~ rubrique.id,
+						type: rubrique.description,
+						label: rubrique.nom
+					} only %}
+				</li>
+			{% endfor %}
+		</ul>
+
+	{% else %}
+		<p class="text-sm text-cerise-04 mb-6">Aucun thème pour le moment.</p>
+	{% endif %}
+
+	{% include 'components/button.html.twig' with {
+                label: "Ajouter un thème",
+                href: base ~ "/admin/parametre/rubrique/create",
+                class: "w-full"
+            } %}
+</section>
