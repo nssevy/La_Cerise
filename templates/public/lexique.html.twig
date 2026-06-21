@@ -18,7 +18,7 @@
 	</div>
 
 	{# Navigation alphabétique #}
-	<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-wrap gap-2 justify-center pb-4 z-40 w-full backdrop-blur-[5px]">
+	<nav id="lexique-alphabet" class="fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-wrap gap-2 justify-center pb-4 z-40 w-full backdrop-blur-[5px] transition-opacity duration-300">
 		{% for lettre, termes in termesParLettre %}
 			<a href="#lettre-{{ lettre }}" class="group relative flex items-center justify-center w-10 h-10 overflow-hidden border border-(--09) text-(--10) font-serif text-[15px] bg-cerise-01 transition-colors">
 				<span class="inline-flex translate-y-0 items-center justify-center transition duration-300 group-hover:-translate-y-[150%]">{{ lettre }}</span>
@@ -52,5 +52,7 @@
 			</section>
 		{% endfor %}
 	</div>
+
+	<script src="{{ base }}/assets/js/lexique-alphabet.js" defer></script>
 
 {% endblock %}
