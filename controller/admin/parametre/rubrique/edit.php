@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Le nom est obligatoire.';
 
     if (empty($errors)) {
-        $rubriqueRepo->update((int) $id, $nom, slugify($nom), $description ?: null);
+        $rubriqueRepo->update((int) $id, $nom, $rubriqueRepo->generateUniqueSlug($nom, (int) $id), $description ?: null);
         flash_success('Thème mis à jour.');
         redirect('/admin/parametre');
     }

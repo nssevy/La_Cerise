@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Le nom est obligatoire.';
 
     if (empty($errors)) {
-        $rubriqueRepo->insert($nom, slugify($nom), $description ?: null);
+        $rubriqueRepo->insert($nom, $rubriqueRepo->generateUniqueSlug($nom), $description ?: null);
         flash_success('Thème ajouté.');
         redirect('/admin/parametre');
     }

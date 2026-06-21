@@ -30,9 +30,9 @@
   --color-neutral-800: #262626;
   --color-neutral-950: #0a0a0a;
 
-  /* Satoshi (Fontshare) — police globale, remplace DejaVu */
-  --font-sans: "Satoshi", "DejaVu Sans Condensed", sans-serif;
-  --font-serif: "Satoshi", "DejaVu Serif Condensed", serif;
+  /* Satoshi (Fontshare) — police globale */
+  --font-sans: "Satoshi", sans-serif;
+  --font-serif: "Satoshi", serif;
 }
 
 @utility cerise-gradient {
@@ -73,26 +73,3 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "DejaVu Sans";
-  src: url("../fonts/DejaVuSans.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "DejaVu Sans Condensed";
-  src: url("../fonts/DejaVuSansCondensed.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "DejaVu Serif Condensed";
-  src: url("../fonts/DejaVuSerifCondensed.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}

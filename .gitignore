@@ -1,13 +1,20 @@
-.env
-.env.production
+# Dépendances
 vendor/
 node_modules/
+
+# Environnement
+.env
+.env.production
+
+# CSS généré (build Tailwind)
 assets/css/output.css
+
+# Divers
 images/
-.claude
 cache/
-.DS_Store
-.DS_Store
+.claude
 generate_hash.php
 .prettierignore
+
+# Fichiers système macOS
 **/.DS_Store
