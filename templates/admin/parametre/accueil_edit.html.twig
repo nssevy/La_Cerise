@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+{% import 'macros/icons.html.twig' as icons %}
+
+{% block titre %}Pourquoi La Cerise — La Cerise
+{% endblock %}
+
+{% block content %}
+	<nav>
+		{% include 'components/breadcrumb.html.twig' with {
+            'breadcrumb': [
+                {'label': 'Paramètres', 'url': base ~ '/admin/parametre'},
+                {'label': 'Pourquoi La Cerise', 'url': null}
+            ]
+        } %}
+	</nav>
+
+	<div class="mt-10 md:max-w-2xl md:mx-auto">
+
+		<div class="flex flex-col gap-2 mb-30">
+			<p class="text-center text-cerise-05">Vous êtes en train de modifier :</p>
+			<h1 class="text-3xl text-center text-gradient">Pourquoi La Cerise</h1>
+		</div>
+
+		<form class="flex flex-col gap-10" method="POST" action="{{ base }}/admin/parametre/accueil/edit" novalidate>
+			<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+			<fieldset class="grid gap-10">
+
+				{% for bloc in blocs %}
+					{% include 'admin/partials/contenteditable-field.html.twig' with {
+                        label: 'Bloc ' ~ bloc.position,
+                        name: 'bloc_' ~ bloc.id,
+                        value: bloc.contenu ?? '',
+                        required: false,
+                        class: 'text-lg'
+                    } only %}
+				{% endfor %}
+
+			</fieldset>
+
+			<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
+				{% include 'components/button.html.twig' with {
+					label: "Enregistrer les modifications",
+					type: "submit",
+					class: "w-full md:order-last"
+				} %}
+				{% include 'components/button.html.twig' with {
+					label: "Retour",
+					href: base ~ "/admin/parametre",
+					class: "w-full md:order-first"
+				} %}
+			</div>
+
+		</form>
+
+	</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+<section>
+	<h2 class="text-4xl mb-8 text-gradient">Page d'accueil</h2>
+
+	<ul class="grid grid-cols-1 md:grid-cols-3 gap-3">
+		<li class="flex">
+			{% include 'admin/partials/cards-parametre.html.twig' with {
+				href: base ~ '/admin/parametre/accueil/edit',
+				label: 'Pourquoi La Cerise',
+				type: 'Les 3 blocs de texte'
+			} only %}
+		</li>
+	</ul>
+</section>
