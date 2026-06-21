@@ -26,6 +26,10 @@ require_once __DIR__ . '/../src/repositories/BlocAccueilRepository.php';
 $blocAccueilRepoGlobal = new BlocAccueilRepository($pdo);
 $twig->addGlobal('blocsAccueil', $blocAccueilRepoGlobal->findAll());
 
+require_once __DIR__ . '/../src/repositories/CitationRepository.php';
+$citationRepoGlobal = new CitationRepository($pdo);
+$twig->addGlobal('citationAccueil', $citationRepoGlobal->find()['contenu'] ?? '');
+
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);
 }));

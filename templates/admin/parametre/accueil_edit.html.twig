@@ -36,6 +36,14 @@
                     } only %}
 				{% endfor %}
 
+				{% include 'admin/partials/contenteditable-field.html.twig' with {
+                    label: 'Citation animée (bas de page)',
+                    name: 'citation',
+                    value: citation.contenu ?? '',
+                    required: false,
+                    class: 'text-lg'
+                } only %}
+
 			</fieldset>
 
 			<div class="mt-20 w-full flex flex-col md:flex-row gap-5">
