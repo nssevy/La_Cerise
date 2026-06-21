@@ -19,7 +19,7 @@ require_once __DIR__ . '/../src/repositories/RubriqueRepository.php';
 $rubriqueRepo = new RubriqueRepository($pdo);
 $twig->addGlobal('rubriquesNav', $rubriqueRepo->findAll());
 
-$infosStmt = $pdo->query('SELECT id, type FROM pages_legales ORDER BY type');
+$infosStmt = $pdo->query('SELECT id, type, titre FROM pages_legales ORDER BY type');
 $twig->addGlobal('infosNav', $infosStmt->fetchAll());
 
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
