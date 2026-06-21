@@ -93,7 +93,6 @@
 /* État actif dans la table des matières */
 .toc-link.toc-active {
   color: var(--01);
-  font-weight: bold;
 }
 
 /* Curseur machine à écrire — citation page d'accueil (Typed.js) */

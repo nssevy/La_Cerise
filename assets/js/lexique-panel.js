@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const label = document.createElement("span");
     // Force la majuscule sur le premier caractère
     label.textContent = mot.charAt(0).toUpperCase() + mot.slice(1);
-    label.className = "text-small font-bold text-cerise-03";
+    label.className = "font-medium text-cerise-03";
 
     const desc = document.createElement("p");
     desc.textContent = definition;
