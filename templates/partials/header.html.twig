@@ -10,8 +10,8 @@
 		</a>
 
 		<nav class="hidden md:flex items-center gap-8 text-body uppercase text-(--01) whitespace-nowrap">
-			<a href="{{ base }}/allArticles" class="hocus:text-(--special) transition-colors">Articles</a>
-			<a href="{{ base }}/lexique" class="hocus:text-(--special) transition-colors">Lexique</a>
+			<a href="{{ base }}/allArticles" class="transition-colors {{ 'allArticles' in current_path ? 'text-(--special)' : 'hocus:text-(--special)' }}">Articles</a>
+			<a href="{{ base }}/lexique" class="transition-colors {{ 'lexique' in current_path ? 'text-(--special)' : 'hocus:text-(--special)' }}">Lexique</a>
 		</nav>
 
 
