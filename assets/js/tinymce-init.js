@@ -4,7 +4,7 @@ tinymce.init({
   selector: "#contenu",
   language: "fr_FR",
   toolbar:
-    "undo redo | bold italic | h2 | bullist numlist | blockquote | credit | code",
+    "undo redo | bold italic cerise | h2 | bullist numlist | blockquote | credit | code",
   menubar: false,
   plugins: "autoresize lists link image code",
   autoresize_bottom_margin: 0,
@@ -27,6 +27,9 @@ tinymce.init({
       margin: 16px 40px 16px 24px !important;
       font-style: italic;
     }
+    .cerise-text {
+      color: #d01152;
+    }
   `,
 
   formats: {
@@ -35,9 +38,26 @@ tinymce.init({
       classes: "citation-credit",
       exact: true,
     },
+    cerise_text: {
+      inline: "span",
+      classes: "cerise-text",
+    },
   },
 
   setup: (editor) => {
+    editor.ui.registry.addToggleButton("cerise", {
+      text: "Rose",
+      tooltip: "Texte en rose cerise",
+      onAction: () =>
+        editor.execCommand("mceToggleFormat", false, "cerise_text"),
+      onSetup: (api) => {
+        const changed = editor.formatter.formatChanged("cerise_text", (state) => {
+          api.setActive(state);
+        });
+        return () => changed.unbind();
+      },
+    });
+
     editor.ui.registry.addToggleButton("credit", {
       text: "crédit",
       tooltip: "Crédit de citation",

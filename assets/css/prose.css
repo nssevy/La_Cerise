@@ -40,9 +40,14 @@
   list-style-type: decimal;
 }
 
+.prose .cerise-text {
+  color: var(--special);
+}
+
 .prose blockquote {
   padding-left: 1rem;
-  color: var(--color-pink-900);
+  color: var(--color-neutral-800);
+  font-weight: 400;
   border-left: none !important;
 }
 
