@@ -32,31 +32,33 @@ jobs:
       - name: Build CSS (Tailwind)
         run: npm run build
 
-      - name: Deploy via rsync/SSH
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: >-
-            -avzr
-            --exclude=.git/
-            --exclude=.github/
-            --exclude=.gitignore
-            --exclude=node_modules/
-            --exclude=.env
-            --exclude=.env.*
-            --exclude=.htaccess
-            --exclude=.htaccess.dist
-            --exclude=cache/
-            --exclude=.DS_Store
-            --exclude=docker/
-            --exclude=database/
-            --exclude=README.md
-            --exclude=License
-            --exclude=package.json
-            --exclude=package-lock.json
-            --exclude=.prettierignore
-          path: ./
-          remote_path: ${{ secrets.DEPLOY_PATH }}
-          remote_host: ${{ secrets.DEPLOY_HOST }}
-          remote_port: ${{ secrets.DEPLOY_PORT }}
-          remote_user: ${{ secrets.DEPLOY_USER }}
-          remote_key: ${{ secrets.DEPLOY_SSH_KEY }}
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${{ secrets.DEPLOY_PORT }}" "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy via rsync/SSH (avec retries)
+        run: |
+          for attempt in 1 2 3 4 5; do
+            echo "::group::Tentative $attempt/5"
+            if rsync -avzr \
+              -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }} -o ConnectTimeout=15 -o StrictHostKeyChecking=yes" \
+              --exclude=.git/ --exclude=.github/ --exclude=.gitignore --exclude=node_modules/ \
+              --exclude=.env --exclude='.env.*' --exclude=.htaccess --exclude=.htaccess.dist \
+              --exclude=cache/ --exclude=.DS_Store --exclude=docker/ --exclude=database/ \
+              --exclude=README.md --exclude=License --exclude=package.json --exclude=package-lock.json \
+              --exclude=.prettierignore \
+              ./ "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/"; then
+              echo "::endgroup::"
+              echo "Déploiement réussi (tentative $attempt)"
+              exit 0
+            fi
+            echo "::endgroup::"
+            if [ "$attempt" -eq 5 ]; then
+              echo "Échec après 5 tentatives"
+              exit 1
+            fi
+            sleep 20
+          done
