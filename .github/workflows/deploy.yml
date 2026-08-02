@@ -1,0 +1,62 @@
+name: Deploy prod
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer
+
+      - name: Install PHP dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build CSS (Tailwind)
+        run: npm run build
+
+      - name: Deploy via rsync/SSH
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr
+          exclude: |
+            .git/
+            .github/
+            .gitignore
+            node_modules/
+            .env
+            .env.*
+            .htaccess
+            .htaccess.dist
+            cache/
+            .DS_Store
+            docker/
+            database/
+            README.md
+            License
+            package.json
+            package-lock.json
+            .prettierignore
+          path: ./
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_SSH_KEY }}

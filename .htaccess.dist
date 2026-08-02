@@ -1,3 +1,9 @@
+# Template de référence — .htaccess n'est plus tracké (voir .gitignore).
+# Copier ce fichier vers .htaccess et adapter RewriteBase / ErrorDocument selon l'environnement :
+#   - Local (XAMPP, sous-dossier)  : RewriteBase /La_Cerise/   |  ErrorDocument 404 /La_Cerise/404.php
+#   - Production (racine du domaine lacerise.blog) : RewriteBase /   |  ErrorDocument 404 /404.php
+# Le fichier réel en production est géré manuellement sur le serveur et n'est jamais écrasé par un déploiement automatique.
+
 RewriteEngine On
 RewriteBase /La_Cerise/
 
@@ -42,5 +48,3 @@ RewriteRule ^admin/(.+?)(?:\.php)?$ controller/admin/$1.php [L]
 
 # Page 404
 ErrorDocument 404 /La_Cerise/404.php
-
-

@@ -5,6 +5,7 @@ node_modules/
 # Environnement
 .env
 .env.production
+.htaccess
 
 # CSS généré (build Tailwind)
 assets/css/output.css
