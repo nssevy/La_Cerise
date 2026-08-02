@@ -35,25 +35,25 @@ jobs:
       - name: Deploy via rsync/SSH
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr
-          exclude: |
-            .git/
-            .github/
-            .gitignore
-            node_modules/
-            .env
-            .env.*
-            .htaccess
-            .htaccess.dist
-            cache/
-            .DS_Store
-            docker/
-            database/
-            README.md
-            License
-            package.json
-            package-lock.json
-            .prettierignore
+          switches: >-
+            -avzr
+            --exclude=.git/
+            --exclude=.github/
+            --exclude=.gitignore
+            --exclude=node_modules/
+            --exclude=.env
+            --exclude=.env.*
+            --exclude=.htaccess
+            --exclude=.htaccess.dist
+            --exclude=cache/
+            --exclude=.DS_Store
+            --exclude=docker/
+            --exclude=database/
+            --exclude=README.md
+            --exclude=License
+            --exclude=package.json
+            --exclude=package-lock.json
+            --exclude=.prettierignore
           path: ./
           remote_path: ${{ secrets.DEPLOY_PATH }}
           remote_host: ${{ secrets.DEPLOY_HOST }}
