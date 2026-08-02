@@ -15,7 +15,7 @@
 		<section class="flex flex-col gap-5 lg:hidden">
 			<h2 class="text-sat-h1">Quelques termes
 				<br>
-				<span class="text-gradient">de lexique</span>
+				<span class="text-gradient">de vocabulaire</span>
 			</h2>
 			<div class="flex gap-6 md:gap-10 overflow-x-auto snap-x snap-mandatory pb-4 -mr-3.5">
 				{% for item in lexique|slice(0, 4) %}
@@ -64,14 +64,13 @@
 				{% endif %}
 
 				{# Pourquoi La Cerise #}
-				<hr class="hidden lg:block border-neutral-200">
-				{% include 'components/home/pourquoi-cerise.html.twig' %}
+				{# <hr class="hidden lg:block border-neutral-200">
+								{% include 'components/home/pourquoi-cerise.html.twig' %} #}
 
 				{# Articles 2 sur mobile/tablette, 1 sur desktop #}
-				{% if gridArticles|length > 1 %}
+					{% if gridArticles|length > 1 %}
 					<hr
-					class="hidden lg:block border-neutral-200">
-					{# 1er article : déjà affiché en desktop (Bloc 2), donc mobile/tablette seulement #}
+					class="hidden lg:block border-neutral-200"> {# 1er article : déjà affiché en desktop (Bloc 2), donc mobile/tablette seulement #}
 					<div class="lg:hidden">
 						{% include 'components/cards-responsive.html.twig' with {
 						mobileLayout: 'horizontal',
