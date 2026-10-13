@@ -1,25 +1,25 @@
 .prose h2 {
   font-size: 1.25rem;
-  font-weight: 400;
+  font-weight: 550;
   line-height: 1.2;
   letter-spacing: -0.45px;
-  color: var(--03);
+  color: var(--02);
 
   @media (min-width: 768px) {
     font-size: 1.375rem;
   }
   @media (min-width: 1024px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 
 .prose p,
 .prose li {
   font-size: 1.0625rem;
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.55;
   letter-spacing: -0.48px;
-  color: var(--03);
+  color: var(--02);
 
   @media (min-width: 768px) {
     font-size: 1.125rem;
