@@ -35,6 +35,22 @@
 			<meta name="twitter:image" content="{{ block('og_image') }}">
 		{% endblock %}
 
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "La Cerise",
+				"url": {{ (site_url ~ base ~ '/')|json_encode(15)|raw }},
+				"logo": {{ (site_url ~ base ~ '/assets/images/Logo.png')|json_encode(15)|raw }},
+				"sameAs": [
+					"https://www.instagram.com/revue.cerise/",
+					"https://www.tiktok.com/@revue.cerise"
+				]
+			}
+		</script>
+
+		{% block extra_head %}{% endblock %}
+
 		<script src="{{ base }}/assets/js/page-loader.js"></script>
 		<link rel="stylesheet" href="{{ base }}/assets/css/output.css">
 		<link rel="icon" type="image/x-icon" href="{{ base }}/assets/images/favicon/favicon.ico">

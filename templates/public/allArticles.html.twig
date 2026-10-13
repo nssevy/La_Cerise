@@ -9,6 +9,11 @@
 {% block og_title %}Les Articles La Cerise{% endblock %}
 {% block og_description %}Tous les articles de La Cerise, enquêtes, reportages et décryptages sur les droits humains.{% endblock %}
 
+{% block extra_head %}
+	{% import 'macros/breadcrumb-jsonld.html.twig' as bc %}
+	{{ bc.schema([{'label': 'Articles', 'url': null}], site_url, base, canonical_url) }}
+{% endblock %}
+
 {% block content %}
 	{% import 'macros/icons.html.twig' as icons %}
 

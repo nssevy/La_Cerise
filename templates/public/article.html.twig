@@ -15,6 +15,41 @@
 {% block og_description %}{{ chapeau_court }}{% endblock %}
 {% block og_image %}{% if article.image_principale %}{{ site_url }}{{ base }}/assets/images/{{ article.image_principale }}{% else %}{{ parent() }}{% endif %}{% endblock %}
 
+{% block extra_head %}
+	{% import 'macros/breadcrumb-jsonld.html.twig' as bc %}
+	{{ bc.schema([
+		{'label': article.rubrique_nom, 'url': base ~ '/allArticles?rubrique=' ~ article.rubrique_id},
+		{'label': article.titre, 'url': null}
+	], site_url, base, canonical_url) }}
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "NewsArticle",
+			"headline": {{ article.titre|json_encode(15)|raw }},
+			"description": {{ chapeau_court|json_encode(15)|raw }},
+			{% if article.image_principale %}
+			"image": [{{ (site_url ~ base ~ '/assets/images/' ~ article.image_principale)|json_encode(15)|raw }}],
+			{% endif %}
+			{% if article.date_publication %}
+			"datePublished": {{ article.date_publication|date('c')|json_encode(15)|raw }},
+			{% endif %}
+			"author": {
+				"@type": "Person",
+				"name": {{ (article.auteur_nom ?? 'La Cerise')|json_encode(15)|raw }}
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "La Cerise",
+				"logo": {
+					"@type": "ImageObject",
+					"url": {{ (site_url ~ base ~ '/assets/images/Logo.png')|json_encode(15)|raw }}
+				}
+			},
+			"mainEntityOfPage": {{ canonical_url|json_encode(15)|raw }}
+		}
+	</script>
+{% endblock %}
+
 {% block main_class %}
 	<main>
 	{% endblock %}

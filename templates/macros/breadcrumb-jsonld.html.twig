@@ -1,0 +1,22 @@
+{% macro schema(breadcrumb, site_url, base, canonical_url) %}
+	{% set items = [{'name': 'Accueil', 'url': site_url ~ base ~ '/'}] %}
+	{% for item in breadcrumb %}
+		{% set items = items|merge([{'name': item.label, 'url': item.url ? site_url ~ item.url : canonical_url}]) %}
+	{% endfor %}
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{% for b in items %}
+				{
+					"@type": "ListItem",
+					"position": {{ loop.index }},
+					"name": {{ b.name|json_encode(15)|raw }},
+					"item": {{ b.url|json_encode(15)|raw }}
+				}{% if not loop.last %},{% endif %}
+				{% endfor %}
+			]
+		}
+	</script>
+{% endmacro %}
