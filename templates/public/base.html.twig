@@ -9,6 +9,32 @@
 			{% block titre %}La Cerise
 			{% endblock %}
 		</title>
+
+		{% block meta_description %}
+			<meta name="description" content="La Cerise, média indépendant d'investigation et de vulgarisation sur les droits humains.">
+		{% endblock %}
+
+		{% block robots %}{% endblock %}
+
+		{% set canonical_url = site_url ~ (current_path|split('?'))[0] %}
+		<link rel="canonical" href="{% block canonical %}{{ canonical_url }}{% endblock %}">
+
+		{% block og_tags %}
+			<meta property="og:site_name" content="La Cerise">
+			<meta property="og:type" content="{% block og_type %}website{% endblock %}">
+			<meta property="og:title" content="{% block og_title %}La Cerise{% endblock %}">
+			<meta property="og:description" content="{% block og_description %}La Cerise — média indépendant d'investigation et de vulgarisation sur les droits humains.{% endblock %}">
+			<meta property="og:url" content="{{ canonical_url }}">
+			<meta property="og:image" content="{% block og_image %}{{ site_url }}{{ base }}/assets/images/Logo.png{% endblock %}">
+		{% endblock %}
+
+		{% block twitter_tags %}
+			<meta name="twitter:card" content="summary_large_image">
+			<meta name="twitter:title" content="{{ block('og_title') }}">
+			<meta name="twitter:description" content="{{ block('og_description') }}">
+			<meta name="twitter:image" content="{{ block('og_image') }}">
+		{% endblock %}
+
 		<script src="{{ base }}/assets/js/page-loader.js"></script>
 		<link rel="stylesheet" href="{{ base }}/assets/css/output.css">
 		<link rel="icon" type="image/x-icon" href="{{ base }}/assets/images/favicon/favicon.ico">

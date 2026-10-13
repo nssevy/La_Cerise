@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /controller/
+Disallow: /src/
+
+Sitemap: https://lacerise.blog/sitemap.xml

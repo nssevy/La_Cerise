@@ -3,6 +3,10 @@
 {% block titre %}Page introuvable - La Cerise
 {% endblock %}
 
+{% block robots %}
+	<meta name="robots" content="noindex, follow">
+{% endblock %}
+
 {% block content %}
 	<div class="flex flex-col items-center justify-center min-h-[60vh] gap-8 px-4 text-center">
 		<h1 class="text-5xl md:text-7xl uppercase text-cerise-02">Page introuvable</h1>

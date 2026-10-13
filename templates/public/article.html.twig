@@ -5,6 +5,16 @@
 	- La Cerise
 {% endblock %}
 
+{% set chapeau_court = article.chapeau|striptags %}
+{% set chapeau_court = chapeau_court|length > 160 ? chapeau_court|slice(0, 159) ~ '…' : chapeau_court %}
+{% block meta_description %}
+	<meta name="description" content="{{ chapeau_court }}">
+{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ article.titre }}{% endblock %}
+{% block og_description %}{{ chapeau_court }}{% endblock %}
+{% block og_image %}{% if article.image_principale %}{{ site_url }}{{ base }}/assets/images/{{ article.image_principale }}{% else %}{{ parent() }}{% endif %}{% endblock %}
+
 {% block main_class %}
 	<main>
 	{% endblock %}
