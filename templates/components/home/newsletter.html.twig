@@ -2,7 +2,7 @@
 
 	{% if mediaNewsletter %}
 		<div class="flex flex-1 justify-center">
-			<img src="{{ base }}/assets/images/{{ mediaNewsletter.fichier }}" alt="{{ mediaNewsletter.alt }}" class="place-self-center h-1/2 object-contain lg:w-80 lg:h-80">
+			<img src="{{ base }}/assets/images/{{ mediaNewsletter.fichier }}" alt="{{ mediaNewsletter.alt }}" loading="lazy" class="place-self-center h-1/2 object-contain lg:w-80 lg:h-80">
 		</div>
 	{% endif %}
 
