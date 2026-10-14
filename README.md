@@ -1,49 +1,28 @@
-# La Cerise
-> Média journalistique francophone indépendant, centré sur les droits humains, la justice sociale et les conflits internationaux.
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.png">
+    <img src=".github/assets/logo-light.png" alt="La Cerise" width="300">
+  </picture>
+</p>
 
-🔗 [lacerise.blog](https://lacerise.blog)
+<h3 align="center">Le média indépendant des droits humains, de la justice sociale et des conflits internationaux</h3>
 
----
+<p align="center">
+  <a href="https://lacerise.blog"><img src="https://img.shields.io/website?url=https%3A%2F%2Flacerise.blog&label=lacerise.blog&up_message=en%20ligne&down_message=hors%20ligne" alt="lacerise.blog"></a>
+</p>
 
-## Présentation
+<br>
 
-La Cerise est un projet de presse en ligne développé de façon indépendante.
-Le projet est développé en solo et sert également de vitrine dans le cadre d'une formation en développement web.
+La Cerise est un média journalistique francophone en ligne. Il publie des articles d'analyse et de terrain sur les sujets que l'actualité traite trop vite.
 
----
+<p align="center">
+  <a href="https://lacerise.blog"><strong>Lire La Cerise</strong></a>
+</p>
 
-## Stack technique
-
-- **Backend** : PHP 8.2 + PDO
-- **Architecture** : Controllers, Repositories (POO), Services
-- **Base de données** : MySQL / MariaDB
-- **Templating** : Twig
-- **CSS** : Tailwind CSS v4 (CLI)
-- **Hébergement** : Hostinger (shared hosting)
-- **Environnement local** : XAMPP
-- **Gestion des dépendances** : Composer
-- **Versioning** : Git / GitHub
-
----
-
-## Conventions Git
-
-- `main` — branche de production
-- `develop` — branche de travail quotidien
-- `feature/xxx` — nouvelle fonctionnalité
-- `fix/xxx` — correction de bug
-- `refactor/xxx` — refactoring sans ajout de fonctionnalité
+<p align="center">
+  <img src=".github/assets/apercu.jpg" alt="Aperçu du site La Cerise" width="100%">
+</p>
 
 ---
 
-## Versions
-
-- `v1.0.0` — Version initiale
-- `v1.1.0` — Refactoring architecture : repositories POO, services, protection CSRF, migration src/
-
-
----
-
-## Licence
-
-Projet personnel — tous droits réservés.
+<p align="center"><sub>Conçu et développé par <a href="https://sevyns.fr">Yves Nsabimana</a></sub></p>
