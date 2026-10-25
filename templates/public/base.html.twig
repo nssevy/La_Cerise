@@ -52,6 +52,11 @@
 
 		{% block extra_head %}{% endblock %}
 
+		{% if ga_measurement_id %}
+			<script>window.GA_MEASUREMENT_ID = {{ ga_measurement_id|json_encode|raw }};</script>
+			<script src="{{ base }}/assets/js/cookie-consent.js" defer></script>
+		{% endif %}
+
 		<link rel="stylesheet" href="{{ base }}/assets/css/output.css">
 		<link rel="icon" type="image/x-icon" href="{{ base }}/assets/images/favicon/favicon.ico">
 		<link rel="icon" type="image/png" sizes="32x32" href="{{ base }}/assets/images/favicon/favicon-32x32.png">
@@ -60,6 +65,10 @@
 	</head>
 
 	<body>
+
+		{% if ga_measurement_id %}
+			{% include 'partials/cookie-banner.html.twig' %}
+		{% endif %}
 
 		{% include 'partials/header.html.twig' %}
 		{% include 'partials/nav-mobile.html.twig' %}
