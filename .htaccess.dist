@@ -7,6 +7,12 @@
 RewriteEngine On
 RewriteBase /La_Cerise/
 
+# Bloque l'accès direct aux fichiers/dossiers cachés (.env, .git, ...) et composer.*
+RewriteRule (^|/)\. - [F,L]
+<FilesMatch "^composer\.(json|lock)$">
+	Require all denied
+</FilesMatch>
+
 # Page d'accueil
 RewriteRule ^$ controller/public/index.php [L]
 
