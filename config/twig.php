@@ -12,6 +12,7 @@ $twig = new \Twig\Environment($loader, [
 $twig->addGlobal('base', $_ENV['BASE_URL'] ?? '');
 $twig->addGlobal('current_path', $_SERVER['REQUEST_URI'] ?? '');
 $twig->addGlobal('site_url', rtrim($_ENV['APP_URL'] ?? 'https://lacerise.blog', '/'));
+$twig->addGlobal('ga_measurement_id', $_ENV['GA_MEASUREMENT_ID'] ?? '');
 $twig->addGlobal('user_nom', $_SESSION['user_nom'] ?? '');
 $twig->addGlobal('csrf_token', csrf_generate());
 
@@ -33,4 +34,8 @@ $twig->addGlobal('citationAccueil', $citationRepoGlobal->find()['contenu'] ?? ''
 
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);
+}));
+
+$twig->addFunction(new \Twig\TwigFunction('formatDuree', function ($secondes) {
+    return formatDuree((int) $secondes);
 }));

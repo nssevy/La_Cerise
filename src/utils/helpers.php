@@ -52,6 +52,13 @@ function formatLecture(int $minutes): string
     return $minutes . ' minutes de lecture';
 }
 
+function formatDuree(int $secondes): string
+{
+    $minutes = intdiv($secondes, 60);
+    $reste = $secondes % 60;
+    return $minutes . ' min ' . str_pad((string) $reste, 2, '0', STR_PAD_LEFT) . 's';
+}
+
 /** Génère un token CSRF et le stocke en session */
 function csrf_generate(): string
 {

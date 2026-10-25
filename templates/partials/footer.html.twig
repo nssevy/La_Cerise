@@ -40,8 +40,14 @@
 
 
 	<div class="flex justify-between text-cerise-07 text-sm font-light my-15">
+		<div class="flex gap-6">
 		<p class="whitespace-nowrap">© La Cerise, 2026</p>
-		<a href="{{ base }}/admin/login" class="hocus:text-(--special) transition-colors whitespace-nowrap">Admin</a>
+			{% if ga_measurement_id %}
+				<button type="button" onclick="cerise_openConsent()" class="hocus:text-(--special) transition-colors whitespace-nowrap cursor-pointer">Gérer les cookies</button>
+			{% endif %}
+		</div>
+			<a href="{{ base }}/admin/login" class="hocus:text-(--special) transition-colors whitespace-nowrap">Admin</a>
+
 	</div>
 
 	<div class="relative w-full h-auto">
