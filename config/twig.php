@@ -35,3 +35,7 @@ $twig->addGlobal('citationAccueil', $citationRepoGlobal->find()['contenu'] ?? ''
 $twig->addFunction(new \Twig\TwigFunction('formatDateFr', function ($date) {
     return formatDateFr($date);
 }));
+
+$twig->addFunction(new \Twig\TwigFunction('formatDuree', function ($secondes) {
+    return formatDuree((int) $secondes);
+}));

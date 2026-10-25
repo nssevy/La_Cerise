@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block titre %}Données
+{% endblock %}
+
+{% block content %}
+	<div class="mt-10 md:max-w-4xl md:mx-auto flex flex-col gap-10">
+
+		<div>
+			<h1 class="text-h2-section">Audience du site</h1>
+			<p class="text-cerise-04 mt-2">Chiffres des 28 derniers jours, via Google Analytics.</p>
+		</div>
+
+		{% if not ga_configure %}
+			<div class="border border-cerise-09 p-8 text-cerise-04">
+				Google Analytics pas encore configuré. Ajoute
+				<code class="text-cerise-01">GA_PROPERTY_ID</code>, <code class="text-cerise-01">GA_SA_CLIENT_EMAIL</code>
+				et
+				<code class="text-cerise-01">GA_SA_PRIVATE_KEY</code>
+				dans le fichier <code class="text-cerise-01">.env</code>.
+			</div>
+		{% elseif apercu is null %}
+			<div class="border border-cerise-09 p-8 text-cerise-04">
+				Impossible de récupérer les données pour l'instant. Réessaie dans quelques minutes.
+			</div>
+		{% else %}
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-cerise-09 border border-cerise-09">
+
+				<div class="bg-white p-6 flex flex-col gap-2">
+					<span class="text-cerise-04 text-sm">Visiteurs</span>
+					<span class="text-3xl text-cerise-01">{{ apercu.visiteurs }}</span>
+				</div>
+
+				<div class="bg-white p-6 flex flex-col gap-2">
+					<span class="text-cerise-04 text-sm">Vues</span>
+					<span class="text-3xl text-cerise-01">{{ apercu.vues }}</span>
+				</div>
+
+				<div class="bg-white p-6 flex flex-col gap-2">
+					<span class="text-cerise-04 text-sm">Temps moyen</span>
+					<span class="text-3xl text-cerise-01">{{ formatDuree(apercu.duree_moyenne_secondes) }}</span>
+				</div>
+
+				<div class="bg-white p-6 flex flex-col gap-2">
+					<span class="text-cerise-04 text-sm">Nouveaux / Récurrents</span>
+					<span class="text-3xl text-cerise-01">{{ apercu.nouveaux }} / {{ apercu.recurrents }}</span>
+				</div>
+
+			</div>
+
+			<p class="text-cerise-07 text-sm">
+				"Nouveaux" = visiteurs jamais venus avant. "Récurrents" = déjà venus sur le site (même navigateur).
+			</p>
+		{% endif %}
+
+	</div>
+{% endblock %}
