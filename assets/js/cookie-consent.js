@@ -1,5 +1,6 @@
 const COOKIE_NAME = "cerise_consent";
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 390; // 13 mois, max recommandé CNIL
+const COOKIE_MAX_AGE_ACCEPTED = 60 * 60 * 24 * 390; // 13 mois, max recommandé CNIL
+const COOKIE_MAX_AGE_REFUSED = 60 * 60 * 24 * 182; // 6 mois, redemande périodique raisonnable
 
 function getConsent() {
   const match = document.cookie.match(new RegExp("(?:^|; )" + COOKIE_NAME + "=([^;]*)"));
@@ -7,7 +8,8 @@ function getConsent() {
 }
 
 function setConsent(value) {
-  document.cookie = COOKIE_NAME + "=" + value + "; max-age=" + COOKIE_MAX_AGE + "; path=/; SameSite=Lax";
+  const maxAge = value === "accepted" ? COOKIE_MAX_AGE_ACCEPTED : COOKIE_MAX_AGE_REFUSED;
+  document.cookie = COOKIE_NAME + "=" + value + "; max-age=" + maxAge + "; path=/; SameSite=Lax";
 }
 
 function loadGtag() {
